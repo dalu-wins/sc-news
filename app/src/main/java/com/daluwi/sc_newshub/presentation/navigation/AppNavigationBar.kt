@@ -1,6 +1,5 @@
 package com.daluwi.sc_newshub.presentation.navigation
 
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarDefaults
@@ -44,7 +43,7 @@ fun AppNavigationBar(modifier: Modifier = Modifier) {
             }
         }
     ) { contentPadding ->
-        AppNavHost(navController, startAppDestinations, modifier = Modifier.padding(contentPadding))
+        AppNavHost(navController, startAppDestinations)
     }
 }
 

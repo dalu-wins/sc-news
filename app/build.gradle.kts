@@ -55,7 +55,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
 
     // Custom additions
-    implementation("androidx.compose.material:material-icons-extended")
+    implementation(libs.androidx.material.icons.extended)
 
     testImplementation(libs.junit)
 
