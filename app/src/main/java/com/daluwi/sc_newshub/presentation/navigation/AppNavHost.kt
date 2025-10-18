@@ -5,8 +5,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.daluwi.sc_newshub.presentation.screens.LiveScreen
-import com.daluwi.sc_newshub.presentation.screens.SettingsScreen
+import com.daluwi.sc_newshub.presentation.live_builds.LiveBuildsScreen
+import com.daluwi.sc_newshub.presentation.settings.SettingsScreen
 
 @Composable
 fun AppNavHost(
@@ -22,7 +22,7 @@ fun AppNavHost(
         AppDestinations.entries.forEach { destination ->
             composable(destination.route) {
                 when (destination) {
-                    AppDestinations.Live -> LiveScreen()
+                    AppDestinations.Live -> LiveBuildsScreen()
                     AppDestinations.Settings -> SettingsScreen()
                 }
             }
