@@ -18,7 +18,7 @@ import androidx.navigation.compose.rememberNavController
 @Composable
 fun AppNavigationBar(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
-    val startAppDestinations = AppDestinations.SONGS
+    val startAppDestinations = AppDestinations.One
     var selectedDestination by rememberSaveable { mutableIntStateOf(startAppDestinations.ordinal) }
 
     Scaffold(
