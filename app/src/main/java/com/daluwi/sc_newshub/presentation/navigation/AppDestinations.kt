@@ -1,9 +1,8 @@
 package com.daluwi.sc_newshub.presentation.navigation
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Looks3
-import androidx.compose.material.icons.filled.LooksOne
-import androidx.compose.material.icons.filled.LooksTwo
+import androidx.compose.material.icons.filled.Gamepad
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 
 enum class AppDestinations(
@@ -12,7 +11,6 @@ enum class AppDestinations(
     val icon: ImageVector,
     val contentDescription: String
 ) {
-    One("one", "One", Icons.Default.LooksOne, "One"),
-    Two("two", "Two", Icons.Default.LooksTwo, "Two"),
-    Three("three", "Three", Icons.Default.Looks3, "Three")
+    Live("live", "Live", Icons.Default.Gamepad, "Game builds that are currently online."),
+    Settings("settings", "Settings", Icons.Default.Settings, "Application settings."),
 }
