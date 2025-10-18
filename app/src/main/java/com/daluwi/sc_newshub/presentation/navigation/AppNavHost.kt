@@ -15,7 +15,8 @@ fun AppNavHost(
 ) {
     NavHost(
         navController,
-        startDestination = startAppDestinations.route
+        startDestination = startAppDestinations.route,
+        modifier = modifier
     ) {
         AppDestinations.entries.forEach { destination ->
             composable(destination.route) {
