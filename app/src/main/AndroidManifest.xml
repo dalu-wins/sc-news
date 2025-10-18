@@ -12,8 +12,7 @@
         android:theme="@style/Theme.SCNewsHub">
         <activity
             android:name=".app.MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.SCNewsHub">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
