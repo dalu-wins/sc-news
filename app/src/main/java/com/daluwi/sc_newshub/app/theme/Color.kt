@@ -1,4 +1,4 @@
-package com.daluwi.sc_newshub.core.theme
+package com.daluwi.sc_newshub.app.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,4 +1,4 @@
-package com.daluwi.sc_newshub.core.theme
+package com.daluwi.sc_newshub.app.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
