@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Public
+import androidx.compose.material.icons.automirrored.filled.Notes
 import androidx.compose.material3.Card
 import androidx.compose.material3.FilledTonalIconButton
 import androidx.compose.material3.Icon
@@ -49,7 +49,7 @@ fun BuildCard(
             FilledTonalIconButton(
                 onClick = { /***/ }
             ) {
-                Icon(Icons.Default.Public, "Visit spectrum for official patch notes.")
+                Icon(Icons.AutoMirrored.Filled.Notes, "Visit spectrum for official patch notes.")
             }
         }
     }
