@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun AppNavigationBar(modifier: Modifier = Modifier) {
+fun AppNavigation(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
     val startAppDestinations = AppDestinations.Builds
     var selectedDestination by rememberSaveable { mutableIntStateOf(startAppDestinations.ordinal) }
@@ -34,7 +34,11 @@ fun AppNavigationBar(modifier: Modifier = Modifier) {
                         },
                         icon = {
                             Icon(
-                                destination.icon,
+                                imageVector = if (selectedDestination == index) {
+                                    destination.selectedIcon
+                                } else {
+                                    destination.unselectedIcon
+                                },
                                 contentDescription = destination.contentDescription
                             )
                         },
