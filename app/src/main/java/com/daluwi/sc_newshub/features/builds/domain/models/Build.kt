@@ -7,5 +7,5 @@ import androidx.room.PrimaryKey
 data class Build (
     @PrimaryKey val channel: Channel,
     val version: Version,
-    val build: String
+    val build: String,
 )

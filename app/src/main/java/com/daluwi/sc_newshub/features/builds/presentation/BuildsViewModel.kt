@@ -1,7 +1,7 @@
 package com.daluwi.sc_newshub.features.builds.presentation
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.daluwi.sc_newshub.features.builds.domain.use_case.BuildUseCases
@@ -30,9 +30,8 @@ class BuildsViewModel @Inject constructor(
     private fun getLiveBuilds() {
         getLiveBuildsJob?.cancel()
         getLiveBuildsJob = buildUseCases.getBuildsUseCase().onEach { builds ->
-                _state.value = state.value.copy(builds = builds)
-            }
-            .launchIn(viewModelScope)
+            _state.value = state.value.copy(builds = builds)
+        }.launchIn(viewModelScope)
     }
 
     private fun prepopulateDB() {

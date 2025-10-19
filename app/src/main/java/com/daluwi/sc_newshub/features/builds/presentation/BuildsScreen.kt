@@ -1,18 +1,34 @@
 package com.daluwi.sc_newshub.features.builds.presentation
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material3.Button
+import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.daluwi.sc_newshub.features.builds.domain.models.Build
+import com.daluwi.sc_newshub.features.builds.presentation.components.BuildCard
+import com.daluwi.sc_newshub.features.builds.presentation.components.BuildTopBar
+
+private const val SMALL_RADIUS: Int = 8
+private const val BIG_RADIUS: Int = 24
+private const val SPACING: Int = 6
+private const val HORIZONTAL_PADDING: Int = 12
+private const val VERTICAL_PADDING: Int = 12
 
 @Composable
 fun BuildsScreen(
@@ -20,55 +36,76 @@ fun BuildsScreen(
 ) {
     val state = viewModel.state.value
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        topBar = { BuildTopBar() },
+        floatingActionButton = {
+            ExtendedFloatingActionButton(
+                text = { Text("Refresh") },
+                icon = { Icon(Icons.Default.Refresh, "Update list of currently live builds.") },
+                onClick = { /***/ },
+            )
+        }
+    ) { contentPadding ->
         if (state.builds.isEmpty()) {
             Text(
                 "Keine Builds gefunden.",
                 style = MaterialTheme.typography.bodyLarge,
-                modifier = Modifier.align(Alignment.Center)
+                modifier = Modifier
+                    .padding(contentPadding)
+                    .padding(HORIZONTAL_PADDING.dp)
             )
         } else {
             LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(12.dp)
+                horizontalAlignment = Alignment.End,
+                verticalArrangement = Arrangement.spacedBy(SPACING.dp),
+                contentPadding = PaddingValues(
+                    top = contentPadding.calculateTopPadding() + VERTICAL_PADDING.dp,
+                    bottom = contentPadding.calculateBottomPadding() + VERTICAL_PADDING.dp,
+                    start = HORIZONTAL_PADDING.dp,
+                    end = HORIZONTAL_PADDING.dp,
+                )
             ) {
-                items(state.builds) { build ->
-                    BuildCard(build)
+                itemsIndexed(state.builds) { index, build ->
+                    val shape = when (index) {
+                        0 -> RoundedCornerShape(
+                            topStart = BIG_RADIUS.dp,
+                            topEnd = BIG_RADIUS.dp,
+                            bottomStart = SMALL_RADIUS.dp,
+                            bottomEnd = SMALL_RADIUS.dp
+                        )
+
+                        state.builds.lastIndex -> RoundedCornerShape(
+                            topStart = SMALL_RADIUS.dp,
+                            topEnd = SMALL_RADIUS.dp,
+                            bottomStart = BIG_RADIUS.dp,
+                            bottomEnd = SMALL_RADIUS.dp
+                        )
+
+                        else -> RoundedCornerShape(SMALL_RADIUS.dp)
+                    }
+
+                    BuildCard(
+                        build = build,
+                        shape = shape
+                    )
+                }
+                item {
+                    Button(
+                        modifier = Modifier
+                            .offset(y = (-4).dp),
+                        onClick = { /***/ },
+                        shape = RoundedCornerShape(
+                            topStart = SMALL_RADIUS.dp,
+                            topEnd = SMALL_RADIUS.dp,
+                            bottomStart = BIG_RADIUS.dp,
+                            bottomEnd = BIG_RADIUS.dp
+                        )
+                    ) {
+                        Text("All patch notes on Spectrum")
+                    }
                 }
             }
-        }
-    }
-}
-
-@Composable
-fun BuildCard(build: Build) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainer
-        ),
-        elevation = CardDefaults.cardElevation(4.dp)
-    ) {
-        Column(
-            modifier = Modifier
-                .padding(16.dp)
-        ) {
-            Text(
-                text = build.channel.name,
-                style = MaterialTheme.typography.titleMedium
-            )
-            Text(
-                text = "Version: ${build.version.mainVersion}.${build.version.subVersion}.${build.version.patch}",
-                style = MaterialTheme.typography.bodyMedium
-            )
-            Text(
-                text = "Build: ${build.build}",
-                style = MaterialTheme.typography.bodySmall
-            )
         }
     }
 }
