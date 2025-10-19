@@ -3,16 +3,11 @@ package com.daluwi.sc_newshub.features.builds.presentation
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.Button
-import androidx.compose.material3.ExtendedFloatingActionButton
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -22,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.daluwi.sc_newshub.features.builds.presentation.components.BuildCard
+import com.daluwi.sc_newshub.features.builds.presentation.components.BuildFAB
 import com.daluwi.sc_newshub.features.builds.presentation.components.BuildTopBar
 
 private const val SMALL_RADIUS: Int = 8
@@ -39,13 +35,7 @@ fun BuildsScreen(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = { BuildTopBar() },
-        floatingActionButton = {
-            ExtendedFloatingActionButton(
-                text = { Text("Refresh") },
-                icon = { Icon(Icons.Default.Refresh, "Update list of currently live builds.") },
-                onClick = { /***/ },
-            )
-        }
+        floatingActionButton = { BuildFAB() }
     ) { contentPadding ->
         if (state.builds.isEmpty()) {
             Text(
@@ -92,8 +82,6 @@ fun BuildsScreen(
                 }
                 item {
                     Button(
-                        modifier = Modifier
-                            .offset(y = (-4).dp),
                         onClick = { /***/ },
                         shape = RoundedCornerShape(
                             topStart = SMALL_RADIUS.dp,
