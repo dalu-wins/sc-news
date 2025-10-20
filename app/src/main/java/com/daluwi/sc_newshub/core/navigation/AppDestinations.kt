@@ -1,9 +1,9 @@
 package com.daluwi.sc_newshub.core.navigation
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Gamepad
+import androidx.compose.material.icons.automirrored.filled.Notes
+import androidx.compose.material.icons.automirrored.outlined.Notes
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.outlined.Gamepad
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 
@@ -17,8 +17,8 @@ enum class AppDestinations(
     Patches(
         "patches",
         "Patch Notes",
-        Icons.Filled.Gamepad,
-        Icons.Outlined.Gamepad,
+        Icons.AutoMirrored.Filled.Notes,
+        Icons.AutoMirrored.Outlined.Notes,
         "List of latest patches."
     ),
     Settings(
