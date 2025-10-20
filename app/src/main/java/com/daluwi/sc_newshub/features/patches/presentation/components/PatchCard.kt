@@ -27,7 +27,7 @@ import com.daluwi.sc_newshub.features.patches.domain.models.Wave
 import com.daluwi.sc_newshub.features.patches.presentation.PatchEvent
 
 
-private const val WAVE_BADGE_SPACING: Int = 8
+private const val WAVE_BADGE_SPACING: Int = 12
 
 @Composable
 fun PatchCard(
@@ -77,15 +77,15 @@ fun PatchCard(
                     Box(
                         modifier = Modifier
                             .background(
-                                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
+                                color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.1f),
                                 shape = RoundedCornerShape(16.dp)
                             )
-                            .padding(horizontal = 12.dp, vertical = 4.dp), // Padding in der Pille
+                            .padding(horizontal = 12.dp, vertical = 4.dp),
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
                             text = waveText,
-                            color = MaterialTheme.colorScheme.primary,
+                            color = MaterialTheme.colorScheme.tertiary,
                             fontSize = 14.sp
                         )
                     }

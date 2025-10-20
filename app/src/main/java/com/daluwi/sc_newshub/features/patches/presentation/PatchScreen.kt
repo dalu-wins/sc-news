@@ -133,7 +133,7 @@ fun PatchScreen(
                         ),
                         modifier = Modifier.fillMaxWidth(),
                     ) {
-                        Text("All patch notes on Spectrum")
+                        Text("More on Spectrum")
                     }
                 }
                 item {
