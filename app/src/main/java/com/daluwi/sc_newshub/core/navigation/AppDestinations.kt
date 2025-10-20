@@ -16,7 +16,7 @@ enum class AppDestinations(
 ) {
     Patches(
         "patches",
-        "Patches",
+        "Patch Notes",
         Icons.Filled.Gamepad,
         Icons.Outlined.Gamepad,
         "List of latest patches."
