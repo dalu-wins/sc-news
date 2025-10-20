@@ -52,10 +52,8 @@ fun PatchScreen(
             LazyColumn(
                 verticalArrangement = Arrangement.spacedBy(ITEM_SPACING.dp),
                 contentPadding = PaddingValues(
-                    top = VERTICAL_PADDING.dp,
-                    bottom = VERTICAL_PADDING.dp,
-                    start = HORIZONTAL_PADDING.dp,
-                    end = HORIZONTAL_PADDING.dp,
+                    vertical = VERTICAL_PADDING.dp,
+                    horizontal = HORIZONTAL_PADDING.dp,
                 )
             ) {
 
@@ -63,6 +61,10 @@ fun PatchScreen(
                     patches = pinnedPatches,
                     onEvent = { event -> viewModel.onEvent(event) },
                 )
+
+                item {
+                    Spacer(Modifier.height(ITEM_SPACING.dp))
+                }
 
                 otherSection(
                     patches = otherPatches,

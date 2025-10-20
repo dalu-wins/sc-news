@@ -13,7 +13,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.daluwi.sc_newshub.core.theme.HORIZONTAL_PADDING
 import com.daluwi.sc_newshub.core.theme.VERTICAL_PADDING
-import com.daluwi.sc_newshub.features.settings.domain.models.Category
 import com.daluwi.sc_newshub.features.settings.presentation.components.displaySection
 
 private const val ITEM_SPACING: Int = 6
@@ -25,8 +24,6 @@ fun SettingsScreen(
 ) {
     val state = viewModel.state.value
 
-    val displaySettings = state.settings.filter { it.category == Category.Display }
-
     Scaffold(
         modifier = Modifier
             .fillMaxSize(),
@@ -35,17 +32,15 @@ fun SettingsScreen(
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(ITEM_SPACING.dp),
             contentPadding = PaddingValues(
-                top = VERTICAL_PADDING.dp,
-                bottom = VERTICAL_PADDING.dp,
-                start = HORIZONTAL_PADDING.dp,
-                end = HORIZONTAL_PADDING.dp,
+                vertical = VERTICAL_PADDING.dp,
+                horizontal = HORIZONTAL_PADDING.dp
             )
         ) {
 
             // TODO noticeSection()
 
             displaySection(
-                settings = displaySettings,
+                state = state,
                 onEvent = { event -> viewModel.onEvent(event) },
             )
 

@@ -14,13 +14,12 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 import com.daluwi.sc_newshub.core.theme.CARD_HORIZONTAL_PADDING
 import com.daluwi.sc_newshub.core.theme.CARD_VERTICAL_PADDING
-import com.daluwi.sc_newshub.features.settings.domain.models.Setting
-import com.daluwi.sc_newshub.features.settings.presentation.SettingsEvent
 
 @Composable
 fun SwitchCard(
-    setting: Setting.SwitchSetting,
-    onEvent: (SettingsEvent) -> Unit,
+    name: String,
+    checked: Boolean,
+    setSwitch: (Boolean) -> Unit,
     shape: Shape,
 ) {
     Card(
@@ -38,10 +37,10 @@ fun SwitchCard(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text(setting.name)
+            Text(name)
             Switch(
-                checked = setting.isSet,
-                onCheckedChange = { isSet -> onEvent(SettingsEvent.SetDynamicColors(isSet)) })
+                checked = checked,
+                onCheckedChange = { isSet -> setSwitch(isSet) })
         }
     }
 }

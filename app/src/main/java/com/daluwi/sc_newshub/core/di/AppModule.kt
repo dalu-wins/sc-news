@@ -5,9 +5,12 @@ import androidx.room.Room
 import com.daluwi.sc_newshub.features.patches.data.repository.PatchRepositoryImpl
 import com.daluwi.sc_newshub.features.patches.data.source.BuildDatabase
 import com.daluwi.sc_newshub.features.patches.domain.repository.PatchRepository
-import com.daluwi.sc_newshub.features.patches.domain.use_case.PatchUseCases
 import com.daluwi.sc_newshub.features.patches.domain.use_case.GetPatchesUseCase
+import com.daluwi.sc_newshub.features.patches.domain.use_case.PatchUseCases
 import com.daluwi.sc_newshub.features.patches.domain.use_case.PrepopulateDBUseCase
+import com.daluwi.sc_newshub.features.settings.data.repository.SettingsRepositoryImpl
+import com.daluwi.sc_newshub.features.settings.data.source.SettingsDataStore
+import com.daluwi.sc_newshub.features.settings.domain.repository.SettingsRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -43,4 +46,16 @@ object AppModule {
         )
     }
 
+    @Provides
+    @Singleton
+    fun provideSettingsDataStore(app: Application): SettingsDataStore {
+        return SettingsDataStore(app)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSettingsRepository(ds: SettingsDataStore): SettingsRepository {
+        return SettingsRepositoryImpl(ds)
+    }
+    
 }
