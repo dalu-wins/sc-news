@@ -18,18 +18,18 @@ import com.daluwi.sc_newshub.features.patches.domain.models.Patch
 import com.daluwi.sc_newshub.features.patches.presentation.PatchEvent
 
 fun LazyListScope.otherSection(
-    otherPatches: List<Patch>,
+    patches: List<Patch>,
     onEvent: (PatchEvent) -> Unit
 ) {
     item {
         Text(
-            "Other",
+            text = "Other",
             modifier = Modifier.padding(vertical = VERTICAL_PADDING.dp),
             style = MaterialTheme.typography.titleMedium,
         )
     }
 
-    itemsIndexed(otherPatches) { index, patch ->
+    itemsIndexed(items = patches) { index, patch ->
         val shape = when (index) {
             0 -> RoundedCornerShape(
                 topStart = CORNER_RADIUS_BIG.dp,
@@ -38,7 +38,7 @@ fun LazyListScope.otherSection(
                 bottomEnd = CORNER_RADIUS_SMALL.dp
             )
 
-            else -> RoundedCornerShape(CORNER_RADIUS_SMALL.dp)
+            else -> RoundedCornerShape(size = CORNER_RADIUS_SMALL.dp)
         }
 
         PatchCard(
@@ -47,7 +47,7 @@ fun LazyListScope.otherSection(
             shape = shape,
         )
     }
-    
+
     item {
         val uriHandler = LocalUriHandler.current
         Button(
@@ -60,7 +60,7 @@ fun LazyListScope.otherSection(
             ),
             modifier = Modifier.fillMaxWidth(),
         ) {
-            Text("More on Spectrum")
+            Text(text = "More on Spectrum")
         }
     }
 }

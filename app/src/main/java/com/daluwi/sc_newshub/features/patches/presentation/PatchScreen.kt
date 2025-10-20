@@ -14,7 +14,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.daluwi.sc_newshub.core.theme.FAB_SPACING
@@ -32,7 +31,6 @@ fun PatchScreen(
     viewModel: PatchViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
-    LocalUriHandler.current
 
     val pinnedPatches = state.patches.filter { it.pinned }
     val otherPatches = state.patches.filter { !it.pinned }
@@ -44,7 +42,7 @@ fun PatchScreen(
     ) { contentPadding ->
         if (state.patches.isEmpty()) {
             Text(
-                "No patches found.",
+                text = "No patches found.",
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier
                     .padding(contentPadding)
@@ -62,12 +60,12 @@ fun PatchScreen(
             ) {
 
                 pinnedSection(
-                    pinnedPatches,
+                    patches = pinnedPatches,
                     onEvent = { event -> viewModel.onEvent(event) },
                 )
 
                 otherSection(
-                    otherPatches,
+                    patches = otherPatches,
                     onEvent = { event -> viewModel.onEvent(event) }
                 )
 

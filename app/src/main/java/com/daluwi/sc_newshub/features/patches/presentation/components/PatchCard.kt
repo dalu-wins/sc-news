@@ -55,7 +55,8 @@ fun PatchCard(
                     horizontal = CARD_HORIZONTAL_PADDING.dp,
                     vertical = CARD_VERTICAL_PADDING.dp
                 ),
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
         ) {
 
             Column {
