@@ -21,13 +21,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.daluwi.sc_newshub.core.theme.CARD_HORIZONTAL_PADDING
+import com.daluwi.sc_newshub.core.theme.CARD_VERTICAL_PADDING
 import com.daluwi.sc_newshub.features.patches.domain.models.Channel
 import com.daluwi.sc_newshub.features.patches.domain.models.Patch
 import com.daluwi.sc_newshub.features.patches.domain.models.Wave
 import com.daluwi.sc_newshub.features.patches.presentation.PatchEvent
 
-
 private const val WAVE_BADGE_SPACING: Int = 12
+private const val WAVE_BADGE_CORNER_RADIUS: Int = 16
+private const val WAVE_BADGE_HORIZONTAL_PADDING: Int = 12
+private const val WAVE_BADGE_VERTICAL_PADDING: Int = 4
+private const val WAVE_BADGE_FONT_SIZE: Int = 14
+private const val WAVE_BADGE_BACKGROUND_ALPHA: Float = 0.1f
 
 @Composable
 fun PatchCard(
@@ -45,7 +51,10 @@ fun PatchCard(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 24.dp, vertical = 16.dp),
+                .padding(
+                    horizontal = CARD_HORIZONTAL_PADDING.dp,
+                    vertical = CARD_VERTICAL_PADDING.dp
+                ),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
 
@@ -77,16 +86,19 @@ fun PatchCard(
                     Box(
                         modifier = Modifier
                             .background(
-                                color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.1f),
-                                shape = RoundedCornerShape(16.dp)
+                                color = MaterialTheme.colorScheme.tertiary.copy(alpha = WAVE_BADGE_BACKGROUND_ALPHA),
+                                shape = RoundedCornerShape(WAVE_BADGE_CORNER_RADIUS.dp)
                             )
-                            .padding(horizontal = 12.dp, vertical = 4.dp),
+                            .padding(
+                                horizontal = WAVE_BADGE_HORIZONTAL_PADDING.dp,
+                                vertical = WAVE_BADGE_VERTICAL_PADDING.dp
+                            ),
                         contentAlignment = Alignment.Center
                     ) {
                         Text(
                             text = waveText,
                             color = MaterialTheme.colorScheme.tertiary,
-                            fontSize = 14.sp
+                            fontSize = WAVE_BADGE_FONT_SIZE.sp
                         )
                     }
                 }

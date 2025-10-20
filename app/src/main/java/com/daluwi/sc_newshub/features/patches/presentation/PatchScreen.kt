@@ -4,13 +4,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.MaterialTheme
@@ -21,15 +17,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.daluwi.sc_newshub.features.patches.presentation.components.PatchCard
+import com.daluwi.sc_newshub.core.theme.FAB_SPACING
+import com.daluwi.sc_newshub.core.theme.HORIZONTAL_PADDING
+import com.daluwi.sc_newshub.core.theme.VERTICAL_PADDING
 import com.daluwi.sc_newshub.features.patches.presentation.components.PatchFAB
+import com.daluwi.sc_newshub.features.patches.presentation.components.otherSection
+import com.daluwi.sc_newshub.features.patches.presentation.components.pinnedSection
 
-private const val SMALL_RADIUS: Int = 8
-private const val BIG_RADIUS: Int = 24
-private const val SPACING: Int = 6
-private const val HORIZONTAL_PADDING: Int = 12
-private const val VERTICAL_PADDING: Int = 12
-private const val FAB_SPACING: Int = 64
+private const val ITEM_SPACING: Int = 6
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class, ExperimentalMaterial3Api::class)
 @Composable
@@ -37,7 +32,7 @@ fun PatchScreen(
     viewModel: PatchViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
-    val uriHandler = LocalUriHandler.current
+    LocalUriHandler.current
 
     val pinnedPatches = state.patches.filter { it.pinned }
     val otherPatches = state.patches.filter { !it.pinned }
@@ -45,11 +40,11 @@ fun PatchScreen(
     Scaffold(
         modifier = Modifier
             .fillMaxSize(),
-        floatingActionButton = { PatchFAB() }
+        floatingActionButton = { PatchFAB { event -> viewModel.onEvent(event) } }
     ) { contentPadding ->
         if (state.patches.isEmpty()) {
             Text(
-                "Keine Builds gefunden.",
+                "No patches found.",
                 style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier
                     .padding(contentPadding)
@@ -57,7 +52,7 @@ fun PatchScreen(
             )
         } else {
             LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(SPACING.dp),
+                verticalArrangement = Arrangement.spacedBy(ITEM_SPACING.dp),
                 contentPadding = PaddingValues(
                     top = VERTICAL_PADDING.dp,
                     bottom = VERTICAL_PADDING.dp,
@@ -65,77 +60,17 @@ fun PatchScreen(
                     end = HORIZONTAL_PADDING.dp,
                 )
             ) {
-                item {
-                    Text(
-                        "Pinned",
-                        modifier = Modifier.padding(vertical = VERTICAL_PADDING.dp),
-                        style = MaterialTheme.typography.titleMedium,
-                    )
-                }
-                itemsIndexed(pinnedPatches) { index, build ->
-                    val shape = when (index) {
-                        0 -> RoundedCornerShape(
-                            topStart = BIG_RADIUS.dp,
-                            topEnd = BIG_RADIUS.dp,
-                            bottomStart = SMALL_RADIUS.dp,
-                            bottomEnd = SMALL_RADIUS.dp
-                        )
 
-                        pinnedPatches.lastIndex -> RoundedCornerShape(
-                            topStart = SMALL_RADIUS.dp,
-                            topEnd = SMALL_RADIUS.dp,
-                            bottomStart = BIG_RADIUS.dp,
-                            bottomEnd = BIG_RADIUS.dp
-                        )
+                pinnedSection(
+                    pinnedPatches,
+                    onEvent = { event -> viewModel.onEvent(event) },
+                )
 
-                        else -> RoundedCornerShape(SMALL_RADIUS.dp)
-                    }
+                otherSection(
+                    otherPatches,
+                    onEvent = { event -> viewModel.onEvent(event) }
+                )
 
-                    PatchCard(
-                        patch = build,
-                        onEvent = { event: PatchEvent -> viewModel.onEvent(event) },
-                        shape = shape,
-                    )
-                }
-                item {
-                    Text(
-                        "Other",
-                        modifier = Modifier.padding(vertical = VERTICAL_PADDING.dp),
-                        style = MaterialTheme.typography.titleMedium,
-                    )
-                }
-                itemsIndexed(otherPatches) { index, patch ->
-                    val shape = when (index) {
-                        0 -> RoundedCornerShape(
-                            topStart = BIG_RADIUS.dp,
-                            topEnd = BIG_RADIUS.dp,
-                            bottomStart = SMALL_RADIUS.dp,
-                            bottomEnd = SMALL_RADIUS.dp
-                        )
-
-                        else -> RoundedCornerShape(SMALL_RADIUS.dp)
-                    }
-
-                    PatchCard(
-                        patch = patch,
-                        onEvent = { event: PatchEvent -> viewModel.onEvent(event) },
-                        shape = shape,
-                    )
-                }
-                item {
-                    Button(
-                        onClick = { viewModel.onEvent(PatchEvent.VisitSpectrum(uriHandler)) },
-                        shape = RoundedCornerShape(
-                            topStart = SMALL_RADIUS.dp,
-                            topEnd = SMALL_RADIUS.dp,
-                            bottomStart = BIG_RADIUS.dp,
-                            bottomEnd = BIG_RADIUS.dp
-                        ),
-                        modifier = Modifier.fillMaxWidth(),
-                    ) {
-                        Text("More on Spectrum")
-                    }
-                }
                 item {
                     Spacer(Modifier.height(FAB_SPACING.dp))
                 }

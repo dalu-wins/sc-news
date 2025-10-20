@@ -6,9 +6,12 @@ import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import com.daluwi.sc_newshub.features.patches.presentation.PatchEvent
 
 @Composable
-fun PatchFAB() {
+fun PatchFAB(
+    onEvent: (PatchEvent) -> Unit // TODO: Impl functionality to refresh
+) {
     ExtendedFloatingActionButton(
         text = { Text("Refresh") },
         icon = { Icon(Icons.Default.Refresh, "Update list of currently live patches.") },
