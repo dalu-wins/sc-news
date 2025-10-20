@@ -14,6 +14,18 @@ enum class AppDestinations(
     val unselectedIcon: ImageVector,
     val contentDescription: String
 ) {
-    Builds("builds", "Builds", Icons.Filled.Gamepad, Icons.Outlined.Gamepad, "Game builds that are currently online."),
-    Settings("settings", "Settings", Icons.Filled.Settings, Icons.Outlined.Settings,"Application settings."),
+    Patches(
+        "patches",
+        "Patches",
+        Icons.Filled.Gamepad,
+        Icons.Outlined.Gamepad,
+        "List of latest patches."
+    ),
+    Settings(
+        "settings",
+        "Settings",
+        Icons.Filled.Settings,
+        Icons.Outlined.Settings,
+        "Application settings."
+    ),
 }

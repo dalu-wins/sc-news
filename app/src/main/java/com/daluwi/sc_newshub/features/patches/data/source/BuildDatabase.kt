@@ -1,12 +1,12 @@
-package com.daluwi.sc_newshub.features.builds.data.source
+package com.daluwi.sc_newshub.features.patches.data.source
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.daluwi.sc_newshub.features.builds.domain.models.Build
+import com.daluwi.sc_newshub.features.patches.domain.models.Patch
 
 @Database(
-    entities = [Build::class],
+    entities = [Patch::class],
     version = 1
 )
 @TypeConverters(Converters::class)

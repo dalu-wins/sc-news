@@ -2,12 +2,12 @@ package com.daluwi.sc_newshub.core.di
 
 import android.app.Application
 import androidx.room.Room
-import com.daluwi.sc_newshub.features.builds.data.repository.BuildRepositoryImpl
-import com.daluwi.sc_newshub.features.builds.data.source.BuildDatabase
-import com.daluwi.sc_newshub.features.builds.domain.repository.BuildRepository
-import com.daluwi.sc_newshub.features.builds.domain.use_case.BuildUseCases
-import com.daluwi.sc_newshub.features.builds.domain.use_case.GetBuildsUseCase
-import com.daluwi.sc_newshub.features.builds.domain.use_case.PrepopulateDBUseCase
+import com.daluwi.sc_newshub.features.patches.data.repository.PatchRepositoryImpl
+import com.daluwi.sc_newshub.features.patches.data.source.BuildDatabase
+import com.daluwi.sc_newshub.features.patches.domain.repository.PatchRepository
+import com.daluwi.sc_newshub.features.patches.domain.use_case.PatchUseCases
+import com.daluwi.sc_newshub.features.patches.domain.use_case.GetPatchesUseCase
+import com.daluwi.sc_newshub.features.patches.domain.use_case.PrepopulateDBUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,15 +30,15 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideLiveBuildRepository(db: BuildDatabase): BuildRepository {
-        return BuildRepositoryImpl(db.buildDAO)
+    fun provideLiveBuildRepository(db: BuildDatabase): PatchRepository {
+        return PatchRepositoryImpl(db.buildDAO)
     }
 
     @Provides
     @Singleton
-    fun provideLiveBuildUseCases(repository: BuildRepository): BuildUseCases {
-        return BuildUseCases(
-            getBuildsUseCase = GetBuildsUseCase(repository),
+    fun provideLiveBuildUseCases(repository: PatchRepository): PatchUseCases {
+        return PatchUseCases(
+            getPatchesUseCase = GetPatchesUseCase(repository),
             prepopulateDBUseCase = PrepopulateDBUseCase(repository),
         )
     }

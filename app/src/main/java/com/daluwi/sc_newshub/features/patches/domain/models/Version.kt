@@ -1,4 +1,4 @@
-package com.daluwi.sc_newshub.features.builds.domain.models
+package com.daluwi.sc_newshub.features.patches.domain.models
 
 data class Version(
     val mainVersion: Int,

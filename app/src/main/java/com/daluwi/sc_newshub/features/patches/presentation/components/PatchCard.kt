@@ -1,4 +1,4 @@
-package com.daluwi.sc_newshub.features.builds.presentation.components
+package com.daluwi.sc_newshub.features.patches.presentation.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,14 +15,19 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
-import com.daluwi.sc_newshub.features.builds.domain.models.Build
+import com.daluwi.sc_newshub.features.patches.domain.models.Patch
+import com.daluwi.sc_newshub.features.patches.presentation.PatchEvent
 
 @Composable
-fun BuildCard(
-    build: Build,
+fun PatchCard(
+    patch: Patch,
+    onEvent: (PatchEvent) -> Unit,
     shape: RoundedCornerShape,
 ) {
+    val uriHandler = LocalUriHandler.current
+
     Card(
         modifier = Modifier
             .fillMaxWidth(),
@@ -37,17 +42,18 @@ fun BuildCard(
 
             Column {
                 Text(
-                    text = build.channel.name,
+                    text = patch.channel.toString(),
                     style = MaterialTheme.typography.titleMedium
                 )
                 Text(
-                    text = "${build.version.mainVersion}.${build.version.subVersion}.${build.version.patch}-${build.channel.name.lowercase()}.${build.build}",
+                    text = "${patch.version.mainVersion}.${patch.version.subVersion}.${patch.version.patch}-${
+                        patch.channel.toString().lowercase()
+                    }.${patch.build}",
                     style = MaterialTheme.typography.bodyMedium
                 )
             }
-
             FilledTonalIconButton(
-                onClick = { /***/ }
+                onClick = { onEvent(PatchEvent.VisitThread(uriHandler, patch.sourceUrl)) },
             ) {
                 Icon(Icons.AutoMirrored.Filled.Notes, "Visit spectrum for official patch notes.")
             }
