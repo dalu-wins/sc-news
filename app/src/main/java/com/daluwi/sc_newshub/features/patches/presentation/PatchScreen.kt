@@ -72,7 +72,7 @@ fun PatchScreen(
                 )
 
                 item {
-                    Spacer(Modifier.height(FAB_SPACING.dp))
+                    Spacer(Modifier.height(FAB_SPACING.dp + contentPadding.calculateBottomPadding()))
                 }
             }
 
