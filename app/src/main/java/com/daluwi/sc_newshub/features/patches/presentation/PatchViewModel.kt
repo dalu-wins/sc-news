@@ -48,7 +48,7 @@ class PatchViewModel @Inject constructor(
     fun onEvent(event: PatchEvent) {
         when (event) {
             is PatchEvent.Refresh -> {
-
+                // TODO: Add refresh functionality
             }
 
             is PatchEvent.VisitSpectrum -> {

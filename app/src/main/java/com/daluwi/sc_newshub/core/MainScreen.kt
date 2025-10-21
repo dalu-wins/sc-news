@@ -10,7 +10,7 @@ import com.daluwi.sc_newshub.features.settings.presentation.SettingsViewModel
 @Composable
 fun MainScreen(viewModel: SettingsViewModel = hiltViewModel()) {
     val state by viewModel.state
-    SCNewsHubTheme(dynamicColor = state.useDynamicColors) {
+    SCNewsHubTheme(dynamicColor = state.dynamicColors) {
         AppNavigation()
     }
 }

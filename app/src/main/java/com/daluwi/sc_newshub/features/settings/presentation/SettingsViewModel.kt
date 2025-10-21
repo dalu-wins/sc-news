@@ -19,8 +19,8 @@ class SettingsViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            useCases.getDynamicColorUseCase().collect { isSet ->
-                _state.value = state.value.copy(useDynamicColors = isSet)
+            useCases.getDynamicColorUseCase().collect { dynamicColor ->
+                _state.value = _state.value.copy(dynamicColors = dynamicColor)
             }
         }
     }
@@ -30,7 +30,7 @@ class SettingsViewModel @Inject constructor(
             is SettingsEvent.UseDynamicColors -> {
                 viewModelScope.launch {
                     useCases.setDynamicColorUseCase(event.dynamicColors)
-                    _state.value = state.value.copy(useDynamicColors = event.dynamicColors)
+                    _state.value = state.value.copy(dynamicColors = event.dynamicColors)
                 }
             }
         }

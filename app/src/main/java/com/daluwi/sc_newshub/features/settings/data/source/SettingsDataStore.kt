@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
+import com.daluwi.sc_newshub.features.settings.domain.models.Settings
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -20,17 +21,13 @@ class SettingsDataStore @Inject constructor(
         private val DYNAMIC_COLORS = booleanPreferencesKey("dynamic_colors")
     }
 
-    private val useDynamicColors = context.dataStore.data.map { prefs ->
-        prefs[DYNAMIC_COLORS] ?: true
+    val settingsFlow: Flow<Settings> = context.dataStore.data.map { prefs ->
+        Settings(dynamicColors = prefs[DYNAMIC_COLORS] ?: true)
     }
 
     suspend fun setDynamicColors(enabled: Boolean) {
         context.dataStore.edit { prefs ->
             prefs[DYNAMIC_COLORS] = enabled
         }
-    }
-
-    fun getDynamicColors(): Flow<Boolean> {
-        return useDynamicColors
     }
 }

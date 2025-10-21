@@ -30,7 +30,7 @@ fun LazyListScope.displaySection(
     item {
         SwitchCard(
             name = "Use Dynamic Colors",
-            checked = state.useDynamicColors,
+            checked = state.dynamicColors,
             setSwitch = { useDynamicColors ->
                 onEvent(
                     SettingsEvent.UseDynamicColors(
