@@ -66,6 +66,7 @@ dependencies {
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.material)
+    implementation(libs.material.kolor)
     ksp(libs.hilt.compiler)
     ksp(libs.androidx.room.compiler)
 
