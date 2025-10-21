@@ -10,9 +10,11 @@ import javax.inject.Singleton
 class SettingsRepositoryImpl @Inject constructor(
     private val dataStore: SettingsDataStore
 ) : SettingsRepository {
-    override val useDynamicColors: Flow<Boolean> = dataStore.useDynamicColors
+    override suspend fun setDynamicColors(enabled: Boolean) {
+        dataStore.setDynamicColors(enabled)
+    }
 
-    override suspend fun updateUseDynamicColors(enabled: Boolean) {
-        dataStore.setUseDynamicColors(enabled)
+    override suspend fun getDynamicColors(): Flow<Boolean> {
+        return dataStore.getDynamicColors()
     }
 }

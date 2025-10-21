@@ -11,6 +11,9 @@ import com.daluwi.sc_newshub.features.patches.domain.use_case.PrepopulateDBUseCa
 import com.daluwi.sc_newshub.features.settings.data.repository.SettingsRepositoryImpl
 import com.daluwi.sc_newshub.features.settings.data.source.SettingsDataStore
 import com.daluwi.sc_newshub.features.settings.domain.repository.SettingsRepository
+import com.daluwi.sc_newshub.features.settings.domain.use_case.GetDynamicColorUseCase
+import com.daluwi.sc_newshub.features.settings.domain.use_case.SetDynamicColorUseCase
+import com.daluwi.sc_newshub.features.settings.domain.use_case.SettingsUseCases
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,7 +26,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideLiveBuildDatabase(app: Application): BuildDatabase {
+    fun providePatchDatabase(app: Application): BuildDatabase {
         return Room.databaseBuilder(
             app,
             BuildDatabase::class.java,
@@ -33,13 +36,13 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideLiveBuildRepository(db: BuildDatabase): PatchRepository {
+    fun providePatchRepository(db: BuildDatabase): PatchRepository {
         return PatchRepositoryImpl(db.buildDAO)
     }
 
     @Provides
     @Singleton
-    fun provideLiveBuildUseCases(repository: PatchRepository): PatchUseCases {
+    fun providePatchUseCases(repository: PatchRepository): PatchUseCases {
         return PatchUseCases(
             getPatchesUseCase = GetPatchesUseCase(repository),
             prepopulateDBUseCase = PrepopulateDBUseCase(repository),
@@ -57,5 +60,14 @@ object AppModule {
     fun provideSettingsRepository(ds: SettingsDataStore): SettingsRepository {
         return SettingsRepositoryImpl(ds)
     }
-    
+
+    @Provides
+    @Singleton
+    fun provideSettingsUseCases(repository: SettingsRepository): SettingsUseCases {
+        return SettingsUseCases(
+            setDynamicColorUseCase = SetDynamicColorUseCase(repository),
+            getDynamicColorUseCase = GetDynamicColorUseCase(repository),
+        )
+    }
+
 }

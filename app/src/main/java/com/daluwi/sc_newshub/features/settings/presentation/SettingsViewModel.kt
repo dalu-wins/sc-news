@@ -4,14 +4,14 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.daluwi.sc_newshub.features.settings.domain.repository.SettingsRepository
+import com.daluwi.sc_newshub.features.settings.domain.use_case.SettingsUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
-    private val repository: SettingsRepository
+    private val useCases: SettingsUseCases
 ) : ViewModel() {
 
     private val _state = mutableStateOf(SettingsState())
@@ -19,8 +19,8 @@ class SettingsViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            repository.useDynamicColors.collect { enabled ->
-                _state.value = state.value.copy(useDynamicColors = enabled)
+            useCases.getDynamicColorUseCase().collect { isSet ->
+                _state.value = state.value.copy(useDynamicColors = isSet)
             }
         }
     }
@@ -29,7 +29,8 @@ class SettingsViewModel @Inject constructor(
         when (event) {
             is SettingsEvent.UseDynamicColors -> {
                 viewModelScope.launch {
-                    repository.updateUseDynamicColors(event.useDynamicColors)
+                    useCases.setDynamicColorUseCase(event.dynamicColors)
+                    _state.value = state.value.copy(useDynamicColors = event.dynamicColors)
                 }
             }
         }

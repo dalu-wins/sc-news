@@ -8,6 +8,6 @@ class GetPatchesUseCase(
     private val repository: PatchRepository
 ) {
     operator fun invoke(): Flow<List<Patch>> {
-        return repository.getBuilds()
+        return repository.getPatches()
     }
 }

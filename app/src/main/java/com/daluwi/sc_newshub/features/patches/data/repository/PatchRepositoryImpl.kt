@@ -9,15 +9,15 @@ import kotlinx.coroutines.flow.Flow
 class PatchRepositoryImpl(
     private val dao: BuildDAO
 ) : PatchRepository {
-    override fun getBuilds(): Flow<List<Patch>> {
+    override fun getPatches(): Flow<List<Patch>> {
         return dao.getBuilds()
     }
 
-    override suspend fun getBuildByChannel(channel: Channel): Patch? {
+    override suspend fun getPatchByChannel(channel: Channel): Patch? {
         return dao.getBuildByChannel(channel)
     }
 
-    override suspend fun insertBuild(patch: Patch) {
+    override suspend fun insertPatch(patch: Patch) {
         dao.insertBuild(patch)
     }
 
@@ -25,7 +25,7 @@ class PatchRepositoryImpl(
         dao.insertAll(patches)
     }
 
-    override suspend fun deleteBuild(patch: Patch) {
+    override suspend fun deletePatch(patch: Patch) {
         dao.deleteBuild(patch)
     }
 
