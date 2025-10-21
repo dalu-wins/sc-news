@@ -1,5 +1,5 @@
 # Star Citizen News Hub
-An app to bundle all star citizen news in one place.
+An app to bundle all Star Citizen news in one place.
 
 ## Planned integrations
 - live versions w/ patch notes
