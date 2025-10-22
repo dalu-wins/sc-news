@@ -21,8 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.daluwi.sc_newshub.core.theme.CARD_HORIZONTAL_PADDING
-import com.daluwi.sc_newshub.core.theme.CARD_VERTICAL_PADDING
+import com.daluwi.sc_newshub.core.theme.Shapes
 import com.daluwi.sc_newshub.features.patches.domain.models.Channel
 import com.daluwi.sc_newshub.features.patches.domain.models.Patch
 import com.daluwi.sc_newshub.features.patches.domain.models.Wave
@@ -52,8 +51,8 @@ fun PatchCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
-                    horizontal = CARD_HORIZONTAL_PADDING.dp,
-                    vertical = CARD_VERTICAL_PADDING.dp
+                    horizontal = Shapes.Card.HORIZONTAL_PADDING.dp,
+                    vertical = Shapes.Card.VERTICAL_PADDING.dp
                 ),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,

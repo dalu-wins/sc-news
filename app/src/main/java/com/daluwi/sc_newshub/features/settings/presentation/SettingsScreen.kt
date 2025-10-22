@@ -11,8 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.daluwi.sc_newshub.core.theme.HORIZONTAL_PADDING
-import com.daluwi.sc_newshub.core.theme.VERTICAL_PADDING
+import androidx.navigation.NavBackStackEntry
+import com.daluwi.sc_newshub.core.theme.Dimensions
 import com.daluwi.sc_newshub.features.settings.presentation.components.displaySection
 
 private const val ITEM_SPACING: Int = 6
@@ -20,8 +20,14 @@ private const val ITEM_SPACING: Int = 6
 @OptIn(ExperimentalMaterial3ExpressiveApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
-    viewModel: SettingsViewModel = hiltViewModel()
+    parentEntry: NavBackStackEntry? = null
 ) {
+    val viewModel: SettingsViewModel = if (parentEntry != null) {
+        hiltViewModel(parentEntry)
+    } else {
+        hiltViewModel()
+    }
+
     val state = viewModel.state.value
 
     Scaffold(
@@ -32,8 +38,8 @@ fun SettingsScreen(
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(ITEM_SPACING.dp),
             contentPadding = PaddingValues(
-                vertical = VERTICAL_PADDING.dp,
-                horizontal = HORIZONTAL_PADDING.dp
+                vertical = Dimensions.VERTICAL_PADDING.dp,
+                horizontal = Dimensions.HORIZONTAL_PADDING.dp
             )
         ) {
 

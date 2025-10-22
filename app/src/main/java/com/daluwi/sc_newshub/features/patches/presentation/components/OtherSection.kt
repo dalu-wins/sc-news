@@ -10,11 +10,8 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
-import com.daluwi.sc_newshub.core.theme.HORIZONTAL_PADDING
-import com.daluwi.sc_newshub.core.theme.VERTICAL_PADDING
-import com.daluwi.sc_newshub.core.theme.cardShapeEnd
-import com.daluwi.sc_newshub.core.theme.cardShapeMiddle
-import com.daluwi.sc_newshub.core.theme.cardShapeStart
+import com.daluwi.sc_newshub.core.theme.Dimensions
+import com.daluwi.sc_newshub.core.theme.Shapes
 import com.daluwi.sc_newshub.features.patches.domain.models.Patch
 import com.daluwi.sc_newshub.features.patches.presentation.PatchEvent
 
@@ -26,32 +23,40 @@ fun LazyListScope.otherSection(
         Text(
             text = "Other",
             modifier = Modifier.padding(
-                vertical = VERTICAL_PADDING.dp,
-                horizontal = HORIZONTAL_PADDING.dp
+                vertical = Dimensions.VERTICAL_PADDING.dp,
+                horizontal = Dimensions.HORIZONTAL_PADDING.dp
             ),
             style = MaterialTheme.typography.titleMedium,
         )
     }
 
-    itemsIndexed(items = patches) { index, patch ->
-        val shape = when (index) {
-            0 -> cardShapeStart
+    if (patches.isEmpty()) {
 
-            else -> cardShapeMiddle
+        item { NoPatchesCard(shape = Shapes.Card.Start) }
+
+    } else {
+
+        itemsIndexed(items = patches) { index, patch ->
+            val shape = when (index) {
+                0 -> Shapes.Card.Start
+
+                else -> Shapes.Card.Middle
+            }
+
+            PatchCard(
+                patch = patch,
+                onEvent = { event: PatchEvent -> onEvent(event) },
+                shape = shape,
+            )
         }
 
-        PatchCard(
-            patch = patch,
-            onEvent = { event: PatchEvent -> onEvent(event) },
-            shape = shape,
-        )
     }
 
     item {
         val uriHandler = LocalUriHandler.current
         Button(
             onClick = { onEvent(PatchEvent.VisitSpectrum(uriHandler)) },
-            shape = cardShapeEnd,
+            shape = Shapes.Card.End,
             modifier = Modifier.fillMaxWidth(),
         ) {
             Text(text = "More on Spectrum")
