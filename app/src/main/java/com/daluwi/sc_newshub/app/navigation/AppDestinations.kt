@@ -1,4 +1,4 @@
-package com.daluwi.sc_newshub.core.navigation
+package com.daluwi.sc_newshub.app.navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Notes

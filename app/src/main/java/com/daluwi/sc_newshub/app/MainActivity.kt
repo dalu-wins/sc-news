@@ -1,5 +1,6 @@
-package com.daluwi.sc_newshub.core
+package com.daluwi.sc_newshub.app
 
+import android.content.res.Configuration
 import android.graphics.Color.TRANSPARENT
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -24,11 +25,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val nightModeFlags = resources.configuration.uiMode and
-                android.content.res.Configuration.UI_MODE_NIGHT_MASK
+                Configuration.UI_MODE_NIGHT_MASK
 
         val isDarkTheme = when (nightModeFlags) {
-            android.content.res.Configuration.UI_MODE_NIGHT_YES -> true
-            android.content.res.Configuration.UI_MODE_NIGHT_NO -> false
+            Configuration.UI_MODE_NIGHT_YES -> true
+            Configuration.UI_MODE_NIGHT_NO -> false
             else -> false
         }
 

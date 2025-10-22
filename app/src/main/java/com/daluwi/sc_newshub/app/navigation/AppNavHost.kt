@@ -1,4 +1,4 @@
-package com.daluwi.sc_newshub.core.navigation
+package com.daluwi.sc_newshub.app.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
