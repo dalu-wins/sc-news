@@ -7,9 +7,9 @@ import com.daluwi.sc_newshub.features.patches.domain.models.Wave
 import com.daluwi.sc_newshub.features.patches.domain.repository.PatchRepository
 
 /**
- * TODO For testing purposes only. Delete after implementing proper loading of live patches from official sources
+ * TODO Populate DB for testing purposes on refresh. Rework later
  */
-class PrepopulateDBUseCase(
+class RefreshUseCase(
     private val repository: PatchRepository
 ) {
     suspend operator fun invoke() {

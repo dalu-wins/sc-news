@@ -25,30 +25,29 @@ class PatchViewModel @Inject constructor(
     private val _state = mutableStateOf(PatchState())
     val state: State<PatchState> = _state
 
-    private var getLiveBuildsJob: Job? = null
+    private var getPatchesJob: Job? = null
+    private var refreshJob: Job? = null
 
     init {
-        prepopulateDB()
-        getLiveBuilds()
+        getPatches()
     }
 
-    private fun getLiveBuilds() {
-        getLiveBuildsJob?.cancel()
-        getLiveBuildsJob = patchUseCases.getPatchesUseCase().onEach { builds ->
+    private fun getPatches() {
+        getPatchesJob?.cancel()
+        getPatchesJob = patchUseCases.getPatchesUseCase().onEach { builds ->
             _state.value = state.value.copy(patches = builds)
         }.launchIn(viewModelScope)
     }
 
-    private fun prepopulateDB() {
-        viewModelScope.launch {
-            patchUseCases.prepopulateDBUseCase()
-        }
+    private fun refresh() {
+        refreshJob?.cancel()
+        refreshJob = viewModelScope.launch { patchUseCases.refreshUseCase() }
     }
 
     fun onEvent(event: PatchEvent) {
         when (event) {
             is PatchEvent.Refresh -> {
-                // TODO: Add refresh functionality
+                refresh()
             }
 
             is PatchEvent.VisitSpectrum -> {

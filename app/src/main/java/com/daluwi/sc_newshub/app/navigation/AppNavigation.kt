@@ -8,33 +8,42 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 
 @Composable
 fun AppNavigation(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
-    val startAppDestinations = AppDestinations.Patches
-    var selectedDestination by rememberSaveable { mutableIntStateOf(startAppDestinations.ordinal) }
+    val startAppDestination = AppDestinations.Patches
+
+    val currentDestination = navController.currentBackStackEntryAsState().value?.destination
+    val currentRoute = currentDestination?.route
 
     Scaffold(
         modifier = modifier,
         bottomBar = {
             NavigationBar(windowInsets = NavigationBarDefaults.windowInsets) {
-                AppDestinations.entries.forEachIndexed { index, destination ->
+                AppDestinations.entries.forEach { destination ->
+                    val selected = currentRoute == destination.route
+
                     NavigationBarItem(
-                        selected = selectedDestination == index,
+                        selected = selected,
                         onClick = {
-                            navController.navigate(route = destination.route)
-                            selectedDestination = index
+                            if (currentRoute != destination.route) {
+                                navController.navigate(destination.route) {
+                                    // PopUpTo prevents stack-trash from happening
+                                    popUpTo(startAppDestination.route) {
+                                        saveState = true
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
+                            }
                         },
                         icon = {
                             Icon(
-                                imageVector = if (selectedDestination == index) {
+                                imageVector = if (selected) {
                                     destination.selectedIcon
                                 } else {
                                     destination.unselectedIcon
@@ -48,7 +57,10 @@ fun AppNavigation(modifier: Modifier = Modifier) {
             }
         }
     ) { contentPadding ->
-        AppNavHost(navController, startAppDestinations, Modifier.padding(contentPadding))
+        AppNavHost(
+            navController = navController,
+            startAppDestinations = startAppDestination,
+            modifier = Modifier.padding(contentPadding)
+        )
     }
 }
-
