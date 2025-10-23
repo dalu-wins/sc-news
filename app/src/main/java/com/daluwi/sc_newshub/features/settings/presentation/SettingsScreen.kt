@@ -14,6 +14,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavBackStackEntry
 import com.daluwi.sc_newshub.core.theme.Dimensions
 import com.daluwi.sc_newshub.features.settings.presentation.components.displaySection
+import com.daluwi.sc_newshub.features.settings.presentation.components.noticeSection
 
 private const val ITEM_SPACING: Int = 6
 
@@ -43,12 +44,13 @@ fun SettingsScreen(
             )
         ) {
 
-            // TODO noticeSection()
+            noticeSection()
 
             displaySection(
                 state = state,
                 onEvent = { event -> viewModel.onEvent(event) },
             )
+
 
         }
     }
