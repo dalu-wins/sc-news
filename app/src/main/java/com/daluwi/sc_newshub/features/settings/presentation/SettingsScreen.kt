@@ -44,13 +44,12 @@ fun SettingsScreen(
             )
         ) {
 
-            noticeSection()
-
             displaySection(
                 state = state,
                 onEvent = { event -> viewModel.onEvent(event) },
             )
 
+            noticeSection()
 
         }
     }
