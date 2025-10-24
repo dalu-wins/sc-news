@@ -33,8 +33,17 @@ jobs:
       - name: Run Unit Tests
         run: ./gradlew test
 
+      - name: Decode keystore
+        run: |
+          echo "$APP_KEYSTORE_B64" | base64 --decode > sc_news_keystore.jks
+      
       - name: Build release APK
-        run: ./gradlew assembleRelease
+        run: ./gradlew assembleRelease \
+              -Pandroid.injected.signing.store.file=sc_news_keystore.jks \
+              -Pandroid.injected.signing.store.password=$APP_KEYSTORE_PASSWORD \
+              -Pandroid.injected.signing.key.alias=$APP_KEY_ALIAS \
+              -Pandroid.injected.signing.key.password=$APP_KEY_PASSWORD
+
 
       - name: Upload release artifact
         uses: actions/upload-artifact@v4
