@@ -1,4 +1,4 @@
-# Star Citizen News Hub
+# <img src="assets/app_icon.svg" alt="App Icon" height="32"> Star Citizen News 
 
 An app to bundle all Star Citizen news in one place.
 
@@ -18,7 +18,10 @@ Star Citizen®, Roberts Space Industries® and Cloud Imperium ® are registered 
 Imperium Rights LLC
 
 <p align="center">
-  <img src="assets/MadeByTheCommunity_White.png" alt="Made By The Community Banner" width="40%">
+  
+  <img src="assets/MadeByTheCommunity_White.png" alt="Made By The Community Banner" height="200">
 </p>
+
+
 
 
