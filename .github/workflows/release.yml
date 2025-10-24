@@ -1,7 +1,9 @@
 name: Build and Release Compose App
 
 on:
-  push: {}
+  push:
+    tags:
+      - "v*"
 
 jobs:
   build:
