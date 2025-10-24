@@ -1,4 +1,4 @@
-name: Build and Release Compose App
+name: Build and Release
 
 on:
   push:
@@ -7,6 +7,7 @@ on:
 
 jobs:
   build:
+    name: Build signed APK
     runs-on: ubuntu-latest
 
     steps:
@@ -46,23 +47,29 @@ jobs:
           path: app/build/outputs/apk/release/*.apk
 
   release:
-    name: Create Release-Please Release & Upload APK
+    name: Create GitHub Release
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
-      - uses: actions/checkout@v5
-
-      - name: Download APK
-        uses: actions/download-artifact@v4
+      - name: Download built artifact
+        uses: actions/download-artifact@v5
         with:
           name: app-release
           path: app-release
 
-      - name: Upload APK to GitHub Release
+      - name: List files to debug
+        run: |
+          echo "Files downloaded to app-release/:"
+          ls -R app-release
+
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: app-release/*.apk
+          files: |
+            app-release/**/*.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
