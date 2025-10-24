@@ -3,7 +3,7 @@ name: Build and Release Compose App
 on:
   push:
     tags:
-      - "v*" # z. B. v1.0.0, v2.3.4 etc.
+      - "v*"
 
 jobs:
   build:
@@ -11,68 +11,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v5
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v5
+      - uses: r0adkll/sign-android-release@v1
+        id: sign_app
         with:
-          distribution: "temurin"
-          java-version: "17"
-
-      - name: Cache Gradle packages
-        uses: actions/cache@v4
+          releaseDirectory: app/build/outputs/apk/release
+          signingKeyBase64: ${{ secrets.APP_KEYSTORE_B64 }}
+          alias: ${{ secrets.APP_KEY_ALIAS }}
+          keyStorePassword: ${{ secrets.APP_KEYSTORE_PASSWORD }}
+          keyPassword: ${{ secrets.APP_KEY_PASSWORD }}
+    
+      - name: Example Release
+        uses: "marvinpinto/action-automatic-releases@latest"
         with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-
-      - name: Run Unit Tests
-        run: ./gradlew test
-
-      - name: Decode keystore
-        run: |
-          echo "$APP_KEYSTORE_B64" | base64 --decode > sc_news_keystore.jks
-
-      - name: Build release APK
-        run: ./gradlew assembleRelease \
-          -Pandroid.injected.signing.store.file=sc_news_keystore.jks \
-          -Pandroid.injected.signing.store.password=${{ secrets.APP_KEYSTORE_PASSWORD }} \
-          -Pandroid.injected.signing.key.alias=${{ secrets.APP_KEY_ALIAS }} \
-          -Pandroid.injected.signing.key.password=${{ secrets.APP_KEY_PASSWORD }}
-      
-      - name: Upload release artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: app-release
-          path: app/build/outputs/apk/release/*.apk
-
-  release:
-    name: Create GitHub Release
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-
-    steps:
-      - name: Download built artifact
-        uses: actions/download-artifact@v5
-        with:
-          name: app-release
-          path: app-release
-
-      - name: List files to debug
-        run: |
-          echo "Files downloaded to app-release/:"
-          ls -R app-release
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Release"
           files: |
-            app-release/**/*.apk
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            ${{ steps.sign_app.signedReleaseFile0 }}
+            ${{ steps.sign_app.signedReleaseFile1 }}
+            ${{ steps.sign_app.signedReleaseFile2 }}
+            ${{ steps.sign_app.signedReleaseFile3 }}
+            ${{ steps.sign_app.signedReleaseFile4 }}
