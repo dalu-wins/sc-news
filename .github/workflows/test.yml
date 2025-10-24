@@ -1,4 +1,4 @@
-name: Android Compose Tests
+name: Tests
 
 on:
   push:
