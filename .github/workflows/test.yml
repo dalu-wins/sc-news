@@ -38,5 +38,9 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: unit-test-report.html
-          path: app/build/reports/tests/testDebugUnitTest/index.html
+          name: unit-test-report
+          path: app/build/reports/tests/testDebugUnitTest/
+
+      - name: Print Test HTML to log
+        if: always()
+        run: cat app/build/reports/tests/testDebugUnitTest/index.html
