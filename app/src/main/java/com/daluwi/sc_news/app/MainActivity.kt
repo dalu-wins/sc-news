@@ -11,7 +11,6 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.daluwi.sc_news.features.settings.domain.repository.SettingsRepository
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,6 +24,20 @@ class MainActivity : ComponentActivity() {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
 
+        transparentSystemUI()
+
+        var keepSplash = true
+        splashScreen.setKeepOnScreenCondition { keepSplash }
+
+        lifecycleScope.launch {
+            setContent {
+                MainScreen { keepSplash = false }
+            }
+        }
+
+    }
+
+    private fun transparentSystemUI() {
         val nightModeFlags = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
         val isDarkTheme = (nightModeFlags == Configuration.UI_MODE_NIGHT_YES)
 
@@ -34,16 +47,5 @@ class MainActivity : ComponentActivity() {
         val systemBarStyle = if (isDarkTheme) darkTransparentStyle else lightTransparentStyle
 
         enableEdgeToEdge(statusBarStyle = systemBarStyle, navigationBarStyle = systemBarStyle)
-
-        var keepSplash = true
-        splashScreen.setKeepOnScreenCondition { keepSplash }
-
-        lifecycleScope.launch {
-            settingsRepository.getSettings().first()
-            keepSplash = false
-            setContent {
-                MainScreen()
-            }
-        }
     }
 }

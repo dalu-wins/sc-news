@@ -1,24 +1,33 @@
 package com.daluwi.sc_news.app
 
+import android.util.Log
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.daluwi.sc_news.features.settings.domain.models.Settings
 import com.daluwi.sc_news.features.settings.domain.repository.SettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    repository: SettingsRepository
+    repository: SettingsRepository,
 ) : ViewModel() {
 
-    // Settings als StateFlow für Compose
-    val settings = repository.getSettings()
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = Settings()
-        )
+    private val _state = mutableStateOf(MainState())
+    val state: State<MainState> = _state
+
+    init {
+        viewModelScope.launch {
+            repository.getSettings().collect { settings ->
+                _state.value = state.value.copy(
+                    isLoadingSettings = false,
+                    dynamicColors = settings.dynamicColors
+                )
+            }
+            Log.d("UPDATED DC", state.value.dynamicColors.toString())
+        }
+    }
+
 }

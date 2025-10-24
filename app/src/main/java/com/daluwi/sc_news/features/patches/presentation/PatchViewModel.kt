@@ -35,7 +35,7 @@ class PatchViewModel @Inject constructor(
     private fun getPatches() {
         getPatchesJob?.cancel()
         getPatchesJob = patchUseCases.getPatchesUseCase().onEach { builds ->
-            _state.value = state.value.copy(patches = builds)
+            _state.value = state.value.copy(isLoading = false, patches = builds)
         }.launchIn(viewModelScope)
     }
 

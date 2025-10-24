@@ -60,7 +60,7 @@ fun AppNavigation(modifier: Modifier = Modifier) {
         AppNavHost(
             navController = navController,
             startAppDestinations = startAppDestination,
-            modifier = Modifier.padding(contentPadding)
+            modifier = Modifier.padding(contentPadding),
         )
     }
 }

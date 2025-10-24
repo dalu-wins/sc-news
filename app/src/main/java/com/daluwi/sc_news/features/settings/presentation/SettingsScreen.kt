@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.navigation.NavBackStackEntry
 import com.daluwi.sc_news.core.theme.Dimensions
 import com.daluwi.sc_news.features.settings.presentation.components.displaySection
 import com.daluwi.sc_news.features.settings.presentation.components.noticeSection
@@ -21,13 +20,8 @@ private const val ITEM_SPACING: Int = 6
 @OptIn(ExperimentalMaterial3ExpressiveApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
-    parentEntry: NavBackStackEntry? = null
+    viewModel: SettingsViewModel = hiltViewModel()
 ) {
-    val viewModel: SettingsViewModel = if (parentEntry != null) {
-        hiltViewModel(parentEntry)
-    } else {
-        hiltViewModel()
-    }
 
     val state = viewModel.state.value
 
