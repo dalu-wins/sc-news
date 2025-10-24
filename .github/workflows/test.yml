@@ -40,7 +40,3 @@ jobs:
         with:
           name: unit-test-report
           path: app/build/reports/tests/testDebugUnitTest/
-
-      - name: Print Test HTML to log
-        if: always()
-        run: cat app/build/reports/tests/testDebugUnitTest/index.html
