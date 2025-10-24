@@ -26,9 +26,9 @@ android {
         signingConfigs {
             create("release") {
                 storeFile = file("keystore.jks")
-                storePassword = System.getenv("APP_KEYSTORE_PASSWORD") ?: "placeholder"
-                keyAlias = System.getenv("APP_KEY_ALIAS") ?: "placeholder"
-                keyPassword = System.getenv("APP_KEY_PASSWORD") ?: "placeholder"
+                storePassword = System.getenv("APP_KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("APP_KEY_ALIAS")
+                keyPassword = System.getenv("APP_KEY_PASSWORD")
             }
         }
         buildTypes {
