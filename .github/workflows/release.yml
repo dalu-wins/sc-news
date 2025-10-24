@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
       - uses: r0adkll/sign-android-release@v1
         id: sign_app
         with:
