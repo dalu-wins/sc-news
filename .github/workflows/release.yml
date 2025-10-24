@@ -24,11 +24,13 @@ jobs:
       - name: Build release APK
         run: ./gradlew assembleRelease
 
+      # Set up Android SDK
       - name: Set up Android SDK
         uses: android-actions/setup-android@v2
         with:
           api-level: 36
           build-tools: 36.0.0
+          components: platform-tools
 
       # Sign the APKs
       - name: Sign APKs
