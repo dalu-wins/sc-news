@@ -1,4 +1,4 @@
-name: Build and Release Compose App
+name: Build and Release
 
 on:
   push:
@@ -7,6 +7,7 @@ on:
 
 jobs:
   build:
+    name: Build signed APK
     runs-on: ubuntu-latest
 
     steps:
