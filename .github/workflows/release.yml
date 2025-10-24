@@ -56,12 +56,15 @@ jobs:
           name: app-release
           path: app-release
 
-      - name: Verify artifact contents
-        run: ls -R app-release
+      - name: List files to debug
+        run: |
+          echo "Files downloaded to app-release/:"
+          ls -R app-release
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: app-release/*.apk
+          files: |
+            app-release/**/*.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
