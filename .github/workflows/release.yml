@@ -39,3 +39,37 @@ jobs:
           APP_KEY_ALIAS: ${{ secrets.APP_KEY_ALIAS }}
           APP_KEY_PASSWORD: ${{ secrets.APP_KEY_PASSWORD }}
         run: ./gradlew assembleRelease
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release
+          path: app/build/outputs/apk/release/*.apk
+
+  release:
+    name: Create Release-Please Release & Upload APK
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Download APK
+        uses: actions/download-artifact@v3
+        with:
+          name: app-release
+          path: app-release
+
+      - uses: google-github-actions/release-please-action@v3.1.2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          release-type: android
+          package-name: com.daluwi.sc_news
+
+      - name: Upload APK to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: app-release/*.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
