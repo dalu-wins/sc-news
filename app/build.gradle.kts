@@ -9,11 +9,11 @@ plugins {
 }
 
 android {
-    namespace = "com.daluwi.sc_newshub"
+    namespace = "com.daluwi.sc_news"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.daluwi.sc_newshub"
+        applicationId = "com.daluwi.sc_news"
         minSdk = 31
         targetSdk = 36
         versionCode = 1
