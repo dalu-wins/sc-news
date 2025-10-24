@@ -19,14 +19,6 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      # 3. Setup Android SDK Tools
-      - name: Setup Android SDK Tools
-        uses: android-actions/setup-android@v3.2.1
-        with:
-          accept-android-sdk-licenses: true
-          packages: |
-            build-tools;29.0.3
-
       # 4. Cache Gradle
       - name: Cache Gradle packages
         uses: actions/cache@v4
@@ -39,7 +31,7 @@ jobs:
             ${{ runner.os }}-gradle-
       
       - name: Decode Keystore
-        run: echo "${{ secrets.APP_KEYSTORE_B64 }}" | base64 --decode > keystore.jks
+        run: echo "${{ secrets.APP_KEYSTORE_B64 }}" | base64 --decode > app/keystore.jks
         
       - name: Build Release APK
         run: ./gradlew assembleRelease
