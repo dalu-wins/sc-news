@@ -4,8 +4,10 @@ An app to bundle all Star Citizen news in one place.
 
 ## ✅ Planned integrations
 
+```
 - Patch notes from Spectrum
 - Video uploads from YouTube
+```
 
 More features might be added down the line.
 
