@@ -2,13 +2,14 @@
 
 An app to bundle all Star Citizen news in one place.
 
-## Planned integrations
+## ✅ Planned integrations
 
-- live versions w/ patch notes
-- official YouTube uploads
-- dev-tracker
+- Patch notes from Spectrum
+- Video uploads from YouTube
 
-## Notice
+More features might be added down the line.
+
+## ℹ️ Notice & Disclaimers
 
 This is an unofficial Star Citizen fan project, not affiliated with the Cloud Imperium group of
 companies. All content on this app not authored by its developers or users are property of their
