@@ -2,7 +2,7 @@ name: Android Compose Tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
   workflow_dispatch:
 
