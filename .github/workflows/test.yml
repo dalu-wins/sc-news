@@ -34,11 +34,9 @@ jobs:
       - name: Run Unit Tests
         run: ./gradlew testDebugUnitTest --stacktrace
 
-      - name: Upload Unit Test Reports
+      - name: Upload Unit Test HTML report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: unit-test-results
-          path: |
-            **/build/reports/tests/testDebugUnitTest/
-            **/build/test-results/testDebugUnitTest/
+          name: unit-test-report.html
+          path: app/build/reports/tests/testDebugUnitTest/index.html
