@@ -1,5 +1,9 @@
-# <img src="assets/app_icon.svg" alt="App Icon" height="32"> Star Citizen News 
+<p align="right">
+  <img src="https://img.shields.io/github/check-runs/dalu-wins/sc-news/master" alt="GitHub branch check runs">
+  <img src="https://img.shields.io/github/v/release/dalu-wins/sc-news" alt="GitHub Release">
+</p>
 
+# <img src="assets/app_icon.svg" alt="App Icon" height="32"> Star Citizen News
 An app to bundle all Star Citizen news in one place.
 
 ## ✅ Planned integrations
@@ -24,7 +28,5 @@ Imperium Rights LLC
   
   <img src="assets/MadeByTheCommunity_White.png" alt="Made By The Community Banner" height="200">
 </p>
-
-
 
 
