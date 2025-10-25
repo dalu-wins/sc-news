@@ -4,17 +4,20 @@
 
 Top level packages include "app", "feature" & "core".
 
-![Alt text here](../assets/packages.svg)
+![Package Diagram](diagrams/packages.svg)
 
 app:
+
 - app activity
 - top level presentation
 - navigation setup
 
 features:
+
 - described in next chapeter
 
 core:
+
 - dependency injection (Hilt)
 - theme variables
 
