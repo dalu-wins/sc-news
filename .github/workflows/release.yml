@@ -6,12 +6,8 @@ on:
       - "v*"
 
 jobs:
-  test:
-    name: Run Tests
-    uses: ./.github/workflows/test.yaml
-
-  build:
-    name: Build signed APK
+  test_and_build:
+    name: Test & Build signed APK
     runs-on: ubuntu-latest
 
     steps:
@@ -34,6 +30,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
+      - name: Run Unit Tests
+        run: ./gradlew testDebugUnitTest --stacktrace
+
       - name: Decode Keystore
         run: echo "${{ secrets.APP_KEYSTORE_B64 }}" | base64 --decode > app/keystore.jks
 
@@ -52,7 +51,7 @@ jobs:
 
   release:
     name: Create GitHub Release
-    needs: [ build, test ]
+    needs: test_and_build
     runs-on: ubuntu-latest
     permissions:
       contents: write

@@ -9,7 +9,6 @@ on:
       - 'README.md'
   pull_request:
   workflow_dispatch:
-  workflow_call:
 
 jobs:
   test:
