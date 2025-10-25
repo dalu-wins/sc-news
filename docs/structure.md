@@ -8,7 +8,7 @@ Top level packages include "app", "feature" & "core".
 
 | **app** | **features** | **core** |
 |----------|--------------|----------|
-| `app activity`<br>`top-level presentation`<br>`navigation setup` | `presentation`<br>`domain`<br>`data` | `dependency injection (Hilt)`<br>`theme variables` |
+| `app activity`<br>`top-level presentation`<br>`navigation setup` | each:<br>- `presentation`<br>- `domain`<br>- `data` | `dependency injection`<br>`theme variables` |
 
 ## Features
 
