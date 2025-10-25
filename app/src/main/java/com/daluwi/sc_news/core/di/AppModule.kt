@@ -3,7 +3,7 @@ package com.daluwi.sc_news.core.di
 import android.app.Application
 import androidx.room.Room
 import com.daluwi.sc_news.features.patches.data.repository.PatchRepositoryImpl
-import com.daluwi.sc_news.features.patches.data.source.BuildDatabase
+import com.daluwi.sc_news.features.patches.data.source.PatchDatabase
 import com.daluwi.sc_news.features.patches.domain.repository.PatchRepository
 import com.daluwi.sc_news.features.patches.domain.use_case.GetPatchesUseCase
 import com.daluwi.sc_news.features.patches.domain.use_case.PatchUseCases
@@ -26,18 +26,18 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providePatchDatabase(app: Application): BuildDatabase {
+    fun providePatchDatabase(app: Application): PatchDatabase {
         return Room.databaseBuilder(
             app,
-            BuildDatabase::class.java,
-            BuildDatabase.DATABASE_NAME
+            PatchDatabase::class.java,
+            PatchDatabase.DATABASE_NAME
         ).build()
     }
 
     @Provides
     @Singleton
-    fun providePatchRepository(db: BuildDatabase): PatchRepository {
-        return PatchRepositoryImpl(db.buildDAO)
+    fun providePatchRepository(db: PatchDatabase): PatchRepository {
+        return PatchRepositoryImpl(db.patchDAO)
     }
 
     @Provides

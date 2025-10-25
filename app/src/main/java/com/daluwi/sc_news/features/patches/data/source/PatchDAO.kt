@@ -6,26 +6,25 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.daluwi.sc_news.features.patches.domain.models.Channel
-import com.daluwi.sc_news.features.patches.domain.models.Patch
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface BuildDAO {
-    @Query("SELECT * FROM Patch")
-    fun getBuilds(): Flow<List<Patch>>
+interface PatchDAO {
+    @Query("SELECT * FROM PatchEntity")
+    fun getBuilds(): Flow<List<PatchEntity>>
 
-    @Query("SELECT * FROM Patch WHERE channel = :channel")
-    suspend fun getBuildByChannel(channel: Channel): Patch?
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertBuild(patch: Patch)
+    @Query("SELECT * FROM PatchEntity WHERE channel = :channel")
+    suspend fun getBuildByChannel(channel: Channel): PatchEntity?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(patches: List<Patch>)
+    suspend fun insertBuild(patch: PatchEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(patches: List<PatchEntity>)
 
     @Delete
-    suspend fun deleteBuild(patch: Patch)
+    suspend fun deleteBuild(patch: PatchEntity)
 
-    @Query("DELETE FROM Patch")
+    @Query("DELETE FROM PatchEntity")
     suspend fun deleteAll()
 }
