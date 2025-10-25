@@ -6,10 +6,6 @@ on:
       - "v*"
 
 jobs:
-  test:
-    name: Run Tests
-    uses: ./.github/workflows/test.yaml
-    
   build:
     name: Build signed APK
     runs-on: ubuntu-latest
@@ -33,10 +29,13 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-      
+
+      - name: Run Tests
+        uses: ./.github/workflows/test.yaml
+
       - name: Decode Keystore
         run: echo "${{ secrets.APP_KEYSTORE_B64 }}" | base64 --decode > app/keystore.jks
-        
+
       - name: Build Release APK
         env:
           APP_KEYSTORE_PASSWORD: ${{ secrets.APP_KEYSTORE_PASSWORD }}

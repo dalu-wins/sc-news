@@ -9,12 +9,13 @@ on:
       - 'README.md'
   pull_request:
   workflow_dispatch:
+  workflow_call:
 
 jobs:
   test:
     name: Run Unit Tests
     runs-on: ubuntu-latest
-   
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v5
