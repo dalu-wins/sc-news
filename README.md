@@ -1,5 +1,5 @@
 <p align="right">
-  <img src="https://img.shields.io/github/check-runs/dalu-wins/sc-news/master" alt="GitHub branch check runs">
+  <img alt="Test.yml Workflow Status" src="https://img.shields.io/github/actions/workflow/status/dalu-wins/sc-news/test.yml?label=test.yml">
   <img src="https://img.shields.io/github/v/release/dalu-wins/sc-news" alt="GitHub Release">
 </p>
 
