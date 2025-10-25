@@ -26,9 +26,9 @@ Citizen’s official guidelines for fan-made content. Please ensure you are fami
 guidelines before using, distributing, or modifying any part of the code. Accordingly, this project
 is not licensed under any standard open-source license.
 
+Star Citizen®, Roberts Space Industries® and Cloud Imperium ® are registered trademarks of Cloud
+Imperium Rights LLC
+
 <p align="center">
   <img src="assets/MadeByTheCommunity_White.png" alt="Made By The Community Banner" height="200">
 </p>
-
-Star Citizen®, Roberts Space Industries® and Cloud Imperium ® are registered trademarks of Cloud
-Imperium Rights LLC
