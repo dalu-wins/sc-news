@@ -21,6 +21,11 @@ This is an unofficial Star Citizen fan project, not affiliated with the Cloud Im
 companies. All content on this app not authored by its developers or users are property of their
 respective owners.
 
+Any use of the source code of this project, including modifications, must fully comply with Star
+Citizen’s official guidelines for fan-made content. Please ensure you are familiar with these
+guidelines before using, distributing, or modifying any part of the code. Accordingly, this project
+is not licensed under any standard open-source license.
+
 <p align="center">
   <img src="assets/MadeByTheCommunity_White.png" alt="Made By The Community Banner" height="200">
 </p>
