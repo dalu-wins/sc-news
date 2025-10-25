@@ -1,4 +1,4 @@
-name: Build and Release
+name: Release
 
 on:
   push:
@@ -6,6 +6,10 @@ on:
       - "v*"
 
 jobs:
+  test:
+    name: Run Tests
+    uses: ./.github/workflows/test.yaml
+    
   build:
     name: Build signed APK
     runs-on: ubuntu-latest
@@ -48,7 +52,7 @@ jobs:
 
   release:
     name: Create GitHub Release
-    needs: build
+    needs: [ build, test ]
     runs-on: ubuntu-latest
     permissions:
       contents: write
