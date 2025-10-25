@@ -12,7 +12,7 @@ Top level packages include "app", "feature" & "core".
 
 ## Features
 
-Each feature contains a presentation, domain & data layer.
+Each feature contains a "presentation", "domain" & "data" layer.
 
 ![Feature Diagram](diagrams/feature-package.svg)
 
