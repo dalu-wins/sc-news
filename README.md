@@ -15,6 +15,12 @@ An app to bundle all Star Citizen news in one place.
 
 More features might be added down the line.
 
+## ✍ Documentation
+
+Learn more about this project:
+- [Project Structure](docs/structure.md)
+- [Project Board](https://github.com/users/dalu-wins/projects/3/views/1)
+
 ## ℹ️ Notice & Disclaimers
 
 This is an unofficial Star Citizen fan project, not affiliated with the Cloud Imperium group of
