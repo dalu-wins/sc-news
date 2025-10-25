@@ -7,6 +7,8 @@ on:
       - 'docs/**'
       - '.github/**'
       - 'README.md'
+    tags-ignore:
+      - "v*"
   pull_request:
   workflow_dispatch:
 
