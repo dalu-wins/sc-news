@@ -7,8 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.daluwi.sc_news.features.patches.domain.use_case.PatchUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -32,18 +30,6 @@ class PatchViewModel @Inject constructor(
         getPatches()
     }
 
-    private fun getPatches() {
-        getPatchesJob?.cancel()
-        getPatchesJob = patchUseCases.getPatchesUseCase().onEach { builds ->
-            _state.value = state.value.copy(isLoading = false, patches = builds)
-        }.launchIn(viewModelScope)
-    }
-
-    private fun refresh() {
-        refreshJob?.cancel()
-        refreshJob = viewModelScope.launch { patchUseCases.refreshUseCase() }
-    }
-
     fun onEvent(event: PatchEvent) {
         when (event) {
             is PatchEvent.Refresh -> {
@@ -58,6 +44,19 @@ class PatchViewModel @Inject constructor(
                 event.uriHandler.openUri(event.threadUrl)
             }
         }
+    }
+
+    private fun getPatches() {
+        getPatchesJob?.cancel()
+        getPatchesJob = viewModelScope.launch {
+            val patches = patchUseCases.getPatchesUseCase()
+            _state.value = state.value.copy(isLoading = false, patches = patches)
+        }
+    }
+
+    private fun refresh() {
+        refreshJob?.cancel()
+        refreshJob = viewModelScope.launch { patchUseCases.refreshUseCase() }
     }
 
 }

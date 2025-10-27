@@ -2,11 +2,10 @@ package com.daluwi.sc_news.features.patches.domain.repository
 
 import com.daluwi.sc_news.features.patches.domain.models.Channel
 import com.daluwi.sc_news.features.patches.domain.models.Patch
-import kotlinx.coroutines.flow.Flow
 
 interface PatchRepository {
 
-    fun getPatches(): Flow<List<Patch>>
+    suspend fun getPatches(): List<Patch>
 
     suspend fun getPatchByChannel(channel: Channel): Patch?
 

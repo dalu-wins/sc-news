@@ -79,6 +79,7 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.material)
     implementation(libs.material.kolor)
+    implementation(libs.jsoup)
     ksp(libs.hilt.compiler)
     ksp(libs.androidx.room.compiler)
 

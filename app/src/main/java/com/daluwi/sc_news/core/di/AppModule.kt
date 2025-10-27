@@ -3,7 +3,7 @@ package com.daluwi.sc_news.core.di
 import android.app.Application
 import androidx.room.Room
 import com.daluwi.sc_news.features.patches.data.repository.PatchRepositoryImpl
-import com.daluwi.sc_news.features.patches.data.source.PatchDatabase
+import com.daluwi.sc_news.features.patches.data.source.local.PatchDatabase
 import com.daluwi.sc_news.features.patches.domain.repository.PatchRepository
 import com.daluwi.sc_news.features.patches.domain.use_case.GetPatchesUseCase
 import com.daluwi.sc_news.features.patches.domain.use_case.PatchUseCases
