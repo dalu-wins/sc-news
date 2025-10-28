@@ -31,10 +31,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npx semantic-release --dry-run --branches master --ci false --stdout-json > semver.json
-          VERSION=$(node -pe "JSON.parse(require('fs').readFileSync('semver.json')).nextRelease.version")
+          npx semantic-release --dry-run --branches master > output.log
+          # Extrahiere klassische SemVer (Major.Minor.Patch)
+          VERSION=$(grep "The next release version is" output.log | grep -oE "[0-9]+\.[0-9]+\.[0-9]+")
           echo "nextRelease=$VERSION" >> $GITHUB_OUTPUT
           echo "Next release version: $VERSION"
+
 
       # 5️⃣ Update package.json version
       - name: Set version in package.json
