@@ -1,3 +1,10 @@
+## [0.1.3](https://github.com/dalu-wins/sc-news/compare/v0.1.2...v0.1.3) (2025-10-28)
+
+
+### Bug Fixes
+
+* remove package.json, directly inject version in build.gradle.kts ([bd17f9c](https://github.com/dalu-wins/sc-news/commit/bd17f9cb7324105907f64a396629f2a4fec64c6d))
+
 ## [0.1.2](https://github.com/dalu-wins/sc-news/compare/v0.1.1...v0.1.2) (2025-10-28)
 
 
