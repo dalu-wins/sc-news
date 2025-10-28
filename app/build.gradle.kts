@@ -1,3 +1,4 @@
+import groovy.json.JsonSlurper
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -12,12 +13,18 @@ android {
     namespace = "com.daluwi.sc_news"
     compileSdk = 36
 
+    val packageJsonFile = File(rootDir, "package.json")
+    val versionFromPackage = if (packageJsonFile.exists()) {
+        val json = JsonSlurper().parse(packageJsonFile) as Map<*, *>
+        json["version"] as String
+    } else "unknown"
+
     defaultConfig {
         applicationId = "com.daluwi.sc_news"
         minSdk = 31
         targetSdk = 36
         versionCode = 1
-        versionName = "0.1.0"
+        versionName = versionFromPackage
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
