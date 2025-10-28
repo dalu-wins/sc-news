@@ -43,7 +43,6 @@ object AppModule {
         return PatchApi()
     }
 
-
     @Provides
     @Singleton
     fun providePatchRepository(
