@@ -8,7 +8,7 @@ import androidx.room.TypeConverters
     entities = [PatchEntity::class],
     version = 1
 )
-@TypeConverters(Converters::class)
+@TypeConverters(PatchConverter::class)
 abstract class PatchDatabase : RoomDatabase() {
     abstract val patchDAO: PatchDAO
 

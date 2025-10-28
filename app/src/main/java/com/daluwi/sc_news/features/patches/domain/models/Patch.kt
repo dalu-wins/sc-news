@@ -5,5 +5,5 @@ data class Patch(
     val channel: Channel,
     val version: Version,
     val build: String,
-    val pinned: Boolean = false,
+    val pinned: Boolean,
 )

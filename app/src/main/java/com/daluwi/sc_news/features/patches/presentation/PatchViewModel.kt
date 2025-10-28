@@ -24,7 +24,7 @@ class PatchViewModel @Inject constructor(
     val state: State<PatchState> = _state
 
     private var getPatchesJob: Job? = null
-    private var refreshJob: Job? = null
+    private var getRefreshJob: Job? = null
 
     init {
         getPatches()
@@ -49,14 +49,19 @@ class PatchViewModel @Inject constructor(
     private fun getPatches() {
         getPatchesJob?.cancel()
         getPatchesJob = viewModelScope.launch {
+            _state.value = state.value.copy(isLoading = true)
             val patches = patchUseCases.getPatchesUseCase()
             _state.value = state.value.copy(isLoading = false, patches = patches)
         }
     }
 
     private fun refresh() {
-        refreshJob?.cancel()
-        refreshJob = viewModelScope.launch { patchUseCases.refreshUseCase() }
+        getRefreshJob?.cancel()
+        getRefreshJob = viewModelScope.launch {
+            _state.value = state.value.copy(isLoading = true)
+            val patches = patchUseCases.refreshUseCase()
+            _state.value = state.value.copy(isLoading = false, patches = patches)
+        }
     }
 
 }

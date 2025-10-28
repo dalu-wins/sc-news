@@ -2,8 +2,11 @@ package com.daluwi.sc_news.core.di
 
 import android.app.Application
 import androidx.room.Room
+import com.daluwi.sc_news.core.connectivity.NetworkChecker
+import com.daluwi.sc_news.core.connectivity.NetworkCheckerImpl
 import com.daluwi.sc_news.features.patches.data.repository.PatchRepositoryImpl
 import com.daluwi.sc_news.features.patches.data.source.local.PatchDatabase
+import com.daluwi.sc_news.features.patches.data.source.remote.PatchApi
 import com.daluwi.sc_news.features.patches.domain.repository.PatchRepository
 import com.daluwi.sc_news.features.patches.domain.use_case.GetPatchesUseCase
 import com.daluwi.sc_news.features.patches.domain.use_case.PatchUseCases
@@ -36,8 +39,19 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providePatchRepository(db: PatchDatabase): PatchRepository {
-        return PatchRepositoryImpl(db.patchDAO)
+    fun providePatchApi(): PatchApi {
+        return PatchApi()
+    }
+
+
+    @Provides
+    @Singleton
+    fun providePatchRepository(
+        db: PatchDatabase,
+        api: PatchApi,
+        networkChecker: NetworkChecker
+    ): PatchRepository {
+        return PatchRepositoryImpl(db.patchDAO, api, networkChecker)
     }
 
     @Provides
@@ -45,7 +59,7 @@ object AppModule {
     fun providePatchUseCases(repository: PatchRepository): PatchUseCases {
         return PatchUseCases(
             getPatchesUseCase = GetPatchesUseCase(repository),
-            refreshUseCase = RefreshUseCase(repository),
+            refreshUseCase = RefreshUseCase(repository)
         )
     }
 
@@ -68,6 +82,12 @@ object AppModule {
             setDynamicColorUseCase = SetDynamicColorUseCase(repository),
             getDynamicColorUseCase = GetDynamicColorUseCase(repository),
         )
+    }
+
+    @Provides
+    @Singleton
+    fun provideNetworkChecker(app: Application): NetworkChecker {
+        return NetworkCheckerImpl(app)
     }
 
 }

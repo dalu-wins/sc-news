@@ -5,7 +5,7 @@ import com.daluwi.sc_news.features.patches.domain.models.Channel
 import com.daluwi.sc_news.features.patches.domain.models.Version
 import com.daluwi.sc_news.features.patches.domain.models.Wave
 
-class Converters {
+class PatchConverter {
 
     // --- Channel ---
     @TypeConverter
@@ -19,30 +19,28 @@ class Converters {
 
     @TypeConverter
     fun toChannel(value: String): Channel {
-        return when {
-            value.startsWith("PTU:") -> {
-                val waveName = value.substringAfter("PTU:")
-                val wave = runCatching { Wave.valueOf(waveName) }.getOrDefault(Wave.One)
+        return when (value) {
+            "Live" -> Channel.Live
+            "EPTU" -> Channel.EPTU
+            "Hotfix" -> Channel.Hotfix
+            "Preview" -> Channel.Preview
+            else -> {
+                val wave =
+                    runCatching { Wave.valueOf(value.substringAfter("PTU:")) }.getOrDefault(Wave.One)
                 Channel.PTU(wave)
             }
-
-            value == "Live" -> Channel.Live
-            value == "EPTU" -> Channel.EPTU
-            value == "Hotfix" -> Channel.Hotfix
-            value == "Preview" -> Channel.Preview
-            else -> throw IllegalArgumentException("Unknown channel value: $value")
         }
     }
 
     // --- Version ---
     @TypeConverter
     fun fromVersion(version: Version): String =
-        "${version.mainVersion}.${version.subVersion}.${version.patch}"
+        "${version.major}.${version.minor}.${version.patch}"
 
     @TypeConverter
     fun toVersion(value: String): Version {
         val parts = value.split(".")
         return Version(parts[0].toInt(), parts[1].toInt(), parts[2].toInt())
     }
-    
+
 }

@@ -1,7 +1,7 @@
 package com.daluwi.sc_news.features.patches.domain.models
 
 data class Version(
-    val mainVersion: Int,
-    val subVersion: Int,
+    val major: Int,
+    val minor: Int,
     val patch: Int
 )
