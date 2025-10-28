@@ -1,4 +1,4 @@
-name: Manual Release
+name: Release
 
 on:
   push:
@@ -40,7 +40,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npx semantic-release --dry-run --branches master > output.log
+          npx semantic-release --dry-run --branches main > output.log
           
           # Extract classic SemVer (Major.Minor.Patch)
           VERSION=$(grep "The next release version is" output.log | grep -oE "[0-9]+\.[0-9]+\.[0-9]+")
@@ -99,4 +99,4 @@ jobs:
       - name: Run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-release --branches master --ci false
+        run: npx semantic-release --branches main --ci false
