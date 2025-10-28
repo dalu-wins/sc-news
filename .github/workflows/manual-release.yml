@@ -37,13 +37,19 @@ jobs:
           echo "nextRelease=$VERSION" >> $GITHUB_OUTPUT
           echo "Next release version: $VERSION"
 
-
       # 5️⃣ Update build.gradle.kts version
       - name: Update version in build.gradle.kts
         run: |
           VERSION=${{ steps.semver.outputs.nextRelease }}
           echo "Setting versionName and versionCode to $VERSION in build.gradle.kts"
+          
+          # VersionName ersetzen
           sed -i "s/versionName = \".*\"/versionName = \"$VERSION\"/" app/build.gradle.kts
+          
+          # VersionCode aus Major.Minor.Patch berechnen
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
+          VERSION_CODE=$((MAJOR*10000 + MINOR*100 + PATCH))
+          sed -i "s/versionCode = [0-9]\+/versionCode = $VERSION_CODE/" app/build.gradle.kts
 
       # 6️⃣ Setup JDK 17
       - name: Set up JDK 17
