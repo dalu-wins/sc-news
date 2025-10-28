@@ -1,6 +1,8 @@
 package com.daluwi.sc_news.features.patches.presentation.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -18,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.daluwi.sc_news.core.theme.Shapes
 import com.daluwi.sc_news.features.patches.domain.models.Channel
 import com.daluwi.sc_news.features.patches.domain.models.Patch
@@ -64,6 +67,21 @@ fun PatchCard(
             }
 
             Column {
+                Text(
+                    text = channelName,
+                    style = MaterialTheme.typography.titleMedium
+                )
+                Text(
+                    text = "${patch.version.major}.${patch.version.minor}.${patch.version.patch}-${
+                        channelName.uppercase()
+                    }.${patch.build}",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(WAVE_BADGE_SPACING.dp)
+            ) {
                 if (patch.channel is Channel.PTU) {
                     val waveText = when (patch.channel.wave) {
                         Wave.One -> "Wave 1"
@@ -72,31 +90,34 @@ fun PatchCard(
                         Wave.Four -> "Wave 4"
                         Wave.AllBackers -> "All Backers"
                     }
-                    Text(
-                        text = "$channelName - $waveText",
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                } else {
-                    Text(
-                        text = channelName,
-                        style = MaterialTheme.typography.titleMedium
+
+                    Box(
+                        modifier = Modifier
+                            .background(
+                                color = MaterialTheme.colorScheme.tertiary.copy(alpha = WAVE_BADGE_BACKGROUND_ALPHA),
+                                shape = RoundedCornerShape(WAVE_BADGE_CORNER_RADIUS.dp)
+                            )
+                            .padding(
+                                horizontal = WAVE_BADGE_HORIZONTAL_PADDING.dp,
+                                vertical = WAVE_BADGE_VERTICAL_PADDING.dp
+                            ),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = waveText,
+                            color = MaterialTheme.colorScheme.tertiary,
+                            fontSize = WAVE_BADGE_FONT_SIZE.sp
+                        )
+                    }
+                }
+                FilledTonalIconButton(
+                    onClick = { onEvent(PatchEvent.VisitThread(uriHandler, patch.sourceUrl)) },
+                ) {
+                    Icon(
+                        Icons.AutoMirrored.Filled.Notes,
+                        "Visit spectrum for official patch notes."
                     )
                 }
-                Text(
-                    text = "${patch.version.major}.${patch.version.minor}.${patch.version.patch}-${
-                        channelName.uppercase()
-                    }.${patch.build}",
-                    style = MaterialTheme.typography.bodyMedium
-                )
-            }
-
-            FilledTonalIconButton(
-                onClick = { onEvent(PatchEvent.VisitThread(uriHandler, patch.sourceUrl)) },
-            ) {
-                Icon(
-                    Icons.AutoMirrored.Filled.Notes,
-                    "Visit spectrum for official patch notes."
-                )
             }
 
         }
