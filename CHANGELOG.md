@@ -1,10 +1,3 @@
-## [0.1.5](https://github.com/dalu-wins/sc-news/compare/v0.1.4...v0.1.5) (2025-10-28)
-
-
-### Bug Fixes
-
-* release with verified status ([c877924](https://github.com/dalu-wins/sc-news/commit/c877924ad60b16b0def639ab02100ad6bbb79091))
-
 ## [0.1.4](https://github.com/dalu-wins/sc-news/compare/v0.1.3...v0.1.4) (2025-10-28)
 
 
