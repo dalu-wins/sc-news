@@ -2,7 +2,14 @@ name: Manual Release
 
 on:
   push:
-    branches: release
+    branches: main
+    paths-ignore:
+      - 'docs/**'
+      - '.github/**'
+      - 'README.md'
+      - 'package.json'
+      - '.releaserc'
+      - 'CHANGELOG.md'
   workflow_dispatch:
 
 jobs:
