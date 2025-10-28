@@ -4,7 +4,17 @@
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
     "@semantic-release/changelog",
-    "@semantic-release/github",
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          {
+            "path": "app/build/outputs/apk/release/*.apk",
+            "label": "Release APK"
+          }
+        ]
+      }
+    ],
     [
       "@semantic-release/git",
       {
