@@ -38,13 +38,12 @@ jobs:
           echo "Next release version: $VERSION"
 
 
-      # 5️⃣ Update package.json version
-      - name: Set version in package.json
+      # 5️⃣ Update build.gradle.kts version
+      - name: Update version in build.gradle.kts
         run: |
           VERSION=${{ steps.semver.outputs.nextRelease }}
-          echo "Setting package.json version to $VERSION"
-          # package.json direkt aktualisieren
-          node -e "let pkg=require('./package.json'); pkg.version='$VERSION'; require('fs').writeFileSync('package.json', JSON.stringify(pkg,null,2));"
+          echo "Setting versionName and versionCode to $VERSION in build.gradle.kts"
+          sed -i "s/versionName = \".*\"/versionName = \"$VERSION\"/" app/build.gradle.kts
 
       # 6️⃣ Setup JDK 17
       - name: Set up JDK 17
