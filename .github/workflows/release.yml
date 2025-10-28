@@ -1,6 +1,8 @@
 name: Manual Release
 
 on:
+  push:
+    branches: release
   workflow_dispatch:
 
 jobs:
