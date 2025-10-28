@@ -31,8 +31,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          npx semantic-release --dry-run --branches master > output.log
-          VERSION=$(grep "The next release version is" output.log | awk '{print $6}')
+          npx semantic-release --dry-run --branches master --ci false --stdout-json > semver.json
+          VERSION=$(node -pe "JSON.parse(require('fs').readFileSync('semver.json')).nextRelease.version")
           echo "nextRelease=$VERSION" >> $GITHUB_OUTPUT
           echo "Next release version: $VERSION"
 
