@@ -69,7 +69,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
 
-    // Custom additions
+    // Custom dependencies
     implementation(libs.androidx.material.icons.extended)
     implementation(libs.material3)
     implementation(libs.androidx.room.common.jvm)
