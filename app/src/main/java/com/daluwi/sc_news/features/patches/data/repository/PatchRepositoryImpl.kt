@@ -1,5 +1,6 @@
 package com.daluwi.sc_news.features.patches.data.repository
 
+import android.util.Log
 import com.daluwi.sc_news.core.connectivity.NetworkChecker
 import com.daluwi.sc_news.features.patches.data.source.local.PatchDAO
 import com.daluwi.sc_news.features.patches.data.source.local.toDomain
@@ -17,10 +18,17 @@ class PatchRepositoryImpl(
 ) : PatchRepository {
     override suspend fun getPatches(): List<Patch> {
         return if (networkChecker.isAvailable()) {
-            val patches = api.getPatches().map { it.toDomain() }
-            dao.deleteAll()
-            dao.insertAll(patches.map { it.toEntity() })
-            return patches
+            try {
+                val patches = api.getPatches().map { it.toDomain() }
+                dao.deleteAll()
+                dao.insertAll(patches.map { it.toEntity() })
+                return patches
+            } catch (e: Exception) {
+                // TODO Should implement a msg to show to the user
+                Log.d("FAILSAFE", "Error connecting to server. Using DB as fallback.")
+                Log.e("FAILSAFE", e.printStackTrace().toString())
+                return dao.getPatches().map { it.toDomain() }
+            }
         } else {
             dao.getPatches().map { it.toDomain() }
         }
