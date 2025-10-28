@@ -1,3 +1,11 @@
+## [0.1.4](https://github.com/dalu-wins/sc-news/compare/v0.1.3...v0.1.4) (2025-10-28)
+
+
+### Bug Fixes
+
+* commit app/build.gradle.kts instead of package.json ([e2882a0](https://github.com/dalu-wins/sc-news/commit/e2882a0e25bd927e84995ac7ce52003950ad45ee))
+* update versionCode as well ([a78311a](https://github.com/dalu-wins/sc-news/commit/a78311ad95acf4f4e7655c1f1f2cf85490d2065d))
+
 ## [0.1.3](https://github.com/dalu-wins/sc-news/compare/v0.1.2...v0.1.3) (2025-10-28)
 
 
