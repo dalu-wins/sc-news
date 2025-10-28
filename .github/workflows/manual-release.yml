@@ -72,7 +72,7 @@ jobs:
       - name: Decode Keystore
         run: echo "${{ secrets.APP_KEYSTORE_B64 }}" | base64 --decode > app/keystore.jks
 
-      # 🔟 Build APK → versionName kommt aus package.json
+      # 🔟 Build APK
       - name: Build Release APK
         env:
           APP_KEYSTORE_PASSWORD: ${{ secrets.APP_KEYSTORE_PASSWORD }}
