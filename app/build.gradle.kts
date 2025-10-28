@@ -16,9 +16,8 @@ android {
         applicationId = "com.daluwi.sc_news"
         minSdk = 31
         targetSdk = 36
-        versionCode = 104
-        versionName = "0.1.4"
-        versionCode = 104
+        versionCode = 1
+        versionName = "0.0.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
