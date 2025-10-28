@@ -1,6 +1,6 @@
 {
   "name": "sc-news",
-  "version": "0.0.0",
+  "version": "0.1.2",
   "devDependencies": {
     "semantic-release": "^23.0.0",
     "@semantic-release/git": "^10.0.0",
