@@ -1,9 +1,11 @@
 package com.daluwi.sc_news.features.patches.presentation
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -45,8 +47,10 @@ fun PatchScreen(
             )
         ) {
 
-            if (state.isLoading) {
-                item { LoadingIndicator(modifier = Modifier.fillMaxSize()) }
+            item {
+                AnimatedVisibility(state.isLoading, modifier = Modifier.fillMaxWidth()) {
+                    LoadingIndicator(modifier = Modifier.fillMaxSize())
+                }
             }
 
             pinnedSection(
