@@ -1,3 +1,10 @@
+## [0.1.7](https://github.com/dalu-wins/sc-news/compare/v0.1.6...v0.1.7) (2025-10-30)
+
+
+### Bug Fixes
+
+* move api under subdomain ([0d6211e](https://github.com/dalu-wins/sc-news/commit/0d6211e81c08d1a2694428671bbdae7f4a5a5130))
+
 ## [0.1.6](https://github.com/dalu-wins/sc-news/compare/v0.1.5...v0.1.6) (2025-10-30)
 
 
