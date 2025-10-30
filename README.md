@@ -20,6 +20,7 @@ More features might be added down the line.
 Learn more about this project:
 - [Project Structure](docs/structure.md)
 - [Project Board](https://github.com/users/dalu-wins/projects/3/views/1)
+- [SC News API](https://github.com/dalu-wins/sc-news-api)
 
 ## ℹ️ Notice & Disclaimers
 
