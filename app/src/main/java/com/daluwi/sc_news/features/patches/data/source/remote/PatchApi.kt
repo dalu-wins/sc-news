@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
 // TODO Let users put their own URL via settings
-private const val BASE_URL = "http://10.0.2.2:8000/"
+private const val BASE_URL = "https://dalu-wins.de/"
 
 class PatchApi {
 
