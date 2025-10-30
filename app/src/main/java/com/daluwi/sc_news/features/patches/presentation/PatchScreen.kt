@@ -36,6 +36,7 @@ fun PatchScreen(
             .fillMaxSize(),
         floatingActionButton = { PatchFAB { event -> viewModel.onEvent(event) } }
     ) { contentPadding ->
+
         LazyColumn(
             verticalArrangement = Arrangement.spacedBy(ITEM_SPACING.dp),
             contentPadding = PaddingValues(
@@ -46,33 +47,31 @@ fun PatchScreen(
 
             if (state.isLoading) {
                 item { LoadingIndicator(modifier = Modifier.fillMaxSize()) }
-            } else {
-
-                pinnedSection(
-                    patches = pinnedPatches,
-                    onEvent = { event -> viewModel.onEvent(event) },
-                )
-
-                item {
-                    Spacer(Modifier.height(ITEM_SPACING.dp))
-                }
-
-                otherSection(
-                    patches = otherPatches,
-                    onEvent = { event -> viewModel.onEvent(event) }
-                )
-
-                item {
-                    Spacer(
-                        modifier = Modifier
-                            .height(
-                                height = Dimensions.FAB_SPACER_HEIGHT.dp +
-                                        contentPadding.calculateBottomPadding()
-                            )
-                    )
-                }
             }
 
+            pinnedSection(
+                patches = pinnedPatches,
+                onEvent = { event -> viewModel.onEvent(event) },
+            )
+
+            item {
+                Spacer(Modifier.height(ITEM_SPACING.dp))
+            }
+
+            otherSection(
+                patches = otherPatches,
+                onEvent = { event -> viewModel.onEvent(event) }
+            )
+
+            item {
+                Spacer(
+                    modifier = Modifier
+                        .height(
+                            height = Dimensions.FAB_SPACER_HEIGHT.dp +
+                                    contentPadding.calculateBottomPadding()
+                        )
+                )
+            }
         }
 
     }

@@ -18,21 +18,30 @@ class PatchRepositoryImpl(
 ) : PatchRepository {
     override suspend fun getPatches(): List<Patch> {
         return if (networkChecker.isAvailable()) {
-            try {
-                val patches = api.getPatches().map { it.toDomain() }
-                dao.deleteAll()
-                dao.insertAll(patches.map { it.toEntity() })
-                return patches
-            } catch (e: Exception) {
-                // TODO Should implement a msg to show to the user
-                Log.d("FAILSAFE", "Error connecting to server. Using DB as fallback.")
-                Log.e("FAILSAFE", e.printStackTrace().toString())
-                return dao.getPatches().map { it.toDomain() }
-            }
+            getRemotePatches()
         } else {
-            dao.getPatches().map { it.toDomain() }
+            getLocalPatches()
         }
     }
+
+    override suspend fun getLocalPatches(): List<Patch> {
+        return dao.getPatches().map { it.toDomain() }
+    }
+
+    override suspend fun getRemotePatches(): List<Patch> {
+        try {
+            val patches = api.getPatches().map { it.toDomain() }
+            dao.deleteAll()
+            dao.insertAll(patches.map { it.toEntity() })
+            return patches
+        } catch (e: Exception) {
+            // TODO Should implement a msg to show to the user
+            Log.d("FAILSAFE", "Error connecting to server. Using DB as fallback.")
+            Log.e("FAILSAFE", e.printStackTrace().toString())
+            return getLocalPatches()
+        }
+    }
+
 
     override suspend fun getPatchByChannel(channel: Channel): Patch? {
         val entity = dao.getPatchByChannel(channel) ?: return null

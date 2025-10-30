@@ -27,7 +27,8 @@ class PatchViewModel @Inject constructor(
     private var getRefreshJob: Job? = null
 
     init {
-        getPatches()
+        initPatchList()
+        getUpToDatePatches()
     }
 
     fun onEvent(event: PatchEvent) {
@@ -46,11 +47,18 @@ class PatchViewModel @Inject constructor(
         }
     }
 
-    private fun getPatches() {
+    private fun initPatchList() {
+        viewModelScope.launch {
+            val patches = patchUseCases.getLocalPatches()
+            _state.value = state.value.copy(patches = patches)
+        }
+    }
+
+    private fun getUpToDatePatches() {
         getPatchesJob?.cancel()
         getPatchesJob = viewModelScope.launch {
             _state.value = state.value.copy(isLoading = true)
-            val patches = patchUseCases.getPatchesUseCase()
+            val patches = patchUseCases.getUpToDatePatches()
             _state.value = state.value.copy(isLoading = false, patches = patches)
         }
     }
@@ -59,7 +67,7 @@ class PatchViewModel @Inject constructor(
         getRefreshJob?.cancel()
         getRefreshJob = viewModelScope.launch {
             _state.value = state.value.copy(isLoading = true)
-            val patches = patchUseCases.refreshUseCase()
+            val patches = patchUseCases.refreshPatches()
             _state.value = state.value.copy(isLoading = false, patches = patches)
         }
     }

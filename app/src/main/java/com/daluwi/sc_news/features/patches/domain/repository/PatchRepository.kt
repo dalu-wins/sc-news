@@ -7,6 +7,10 @@ interface PatchRepository {
 
     suspend fun getPatches(): List<Patch>
 
+    suspend fun getLocalPatches(): List<Patch>
+
+    suspend fun getRemotePatches(): List<Patch>
+
     suspend fun getPatchByChannel(channel: Channel): Patch?
 
     suspend fun insertPatch(patch: Patch)

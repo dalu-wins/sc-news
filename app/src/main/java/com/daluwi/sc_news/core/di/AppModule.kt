@@ -8,9 +8,10 @@ import com.daluwi.sc_news.features.patches.data.repository.PatchRepositoryImpl
 import com.daluwi.sc_news.features.patches.data.source.local.PatchDatabase
 import com.daluwi.sc_news.features.patches.data.source.remote.PatchApi
 import com.daluwi.sc_news.features.patches.domain.repository.PatchRepository
-import com.daluwi.sc_news.features.patches.domain.use_case.GetPatchesUseCase
+import com.daluwi.sc_news.features.patches.domain.use_case.GetLocalPatches
+import com.daluwi.sc_news.features.patches.domain.use_case.GetUpToDatePatches
 import com.daluwi.sc_news.features.patches.domain.use_case.PatchUseCases
-import com.daluwi.sc_news.features.patches.domain.use_case.RefreshUseCase
+import com.daluwi.sc_news.features.patches.domain.use_case.RefreshPatches
 import com.daluwi.sc_news.features.settings.data.repository.SettingsRepositoryImpl
 import com.daluwi.sc_news.features.settings.data.source.SettingsDataStore
 import com.daluwi.sc_news.features.settings.domain.repository.SettingsRepository
@@ -57,8 +58,9 @@ object AppModule {
     @Singleton
     fun providePatchUseCases(repository: PatchRepository): PatchUseCases {
         return PatchUseCases(
-            getPatchesUseCase = GetPatchesUseCase(repository),
-            refreshUseCase = RefreshUseCase(repository)
+            getUpToDatePatches = GetUpToDatePatches(repository),
+            refreshPatches = RefreshPatches(repository),
+            getLocalPatches = GetLocalPatches(repository)
         )
     }
 
