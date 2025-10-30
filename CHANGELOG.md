@@ -1,3 +1,10 @@
+## [0.1.8](https://github.com/dalu-wins/sc-news/compare/v0.1.7...v0.1.8) (2025-10-30)
+
+
+### Bug Fixes
+
+* show room notes on startup, before loading from api ([17761b7](https://github.com/dalu-wins/sc-news/commit/17761b7b1ce714d6df88a7c2ceb4d657a9b123f4))
+
 ## [0.1.7](https://github.com/dalu-wins/sc-news/compare/v0.1.6...v0.1.7) (2025-10-30)
 
 
