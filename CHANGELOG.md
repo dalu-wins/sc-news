@@ -1,3 +1,10 @@
+## [0.1.6](https://github.com/dalu-wins/sc-news/compare/v0.1.5...v0.1.6) (2025-10-30)
+
+
+### Bug Fixes
+
+* connect to api ([fbdd4be](https://github.com/dalu-wins/sc-news/commit/fbdd4beb0be32ac5dbf7f2259546e6e89ec6aa9f))
+
 ## [0.1.5](https://github.com/dalu-wins/sc-news/compare/v0.1.4...v0.1.5) (2025-10-28)
 
 
