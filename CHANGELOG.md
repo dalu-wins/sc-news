@@ -1,3 +1,10 @@
+## [0.1.10](https://github.com/dalu-wins/sc-news/compare/v0.1.9...v0.1.10) (2025-10-31)
+
+
+### Bug Fixes
+
+* load from remote on startup ([73240a3](https://github.com/dalu-wins/sc-news/commit/73240a3c7e5e568ee055c2263658d6dc95615238))
+
 ## [0.1.9](https://github.com/dalu-wins/sc-news/compare/v0.1.8...v0.1.9) (2025-10-31)
 
 
