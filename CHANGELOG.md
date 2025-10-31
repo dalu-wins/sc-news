@@ -1,3 +1,12 @@
+## [0.1.9](https://github.com/dalu-wins/sc-news/compare/v0.1.8...v0.1.9) (2025-10-31)
+
+
+### Bug Fixes
+
+* add error handling for patch feature ([62c9865](https://github.com/dalu-wins/sc-news/commit/62c98653b6fbf402d8f197f96beb825977588b5e))
+* animate loading indicator, fade-in fade-out ([f219fb9](https://github.com/dalu-wins/sc-news/commit/f219fb91c38ce5d38335ed9d2318a586c2950a76))
+* incorporate error handling for patch feature into PatchEvent.kt ([bf370ca](https://github.com/dalu-wins/sc-news/commit/bf370ca68efde012c80934b37194da7db27eedab))
+
 ## [0.1.8](https://github.com/dalu-wins/sc-news/compare/v0.1.7...v0.1.8) (2025-10-30)
 
 
