@@ -28,8 +28,8 @@ class PatchViewModel @Inject constructor(
     private val _state = mutableStateOf(PatchState())
     val state: State<PatchState> = _state
 
-    private val eventChannel = Channel<PatchEvent.Error>()
-    val events = eventChannel.receiveAsFlow()
+    private val errorChannel = Channel<PatchEvent.Error>()
+    val errors = errorChannel.receiveAsFlow()
 
     init {
         loadLocal()
@@ -52,7 +52,7 @@ class PatchViewModel @Inject constructor(
 
             is PatchEvent.Error -> {
                 viewModelScope.launch {
-                    eventChannel.send(PatchEvent.Error(event.message))
+                    errorChannel.send(PatchEvent.Error(event.message))
                 }
             }
         }

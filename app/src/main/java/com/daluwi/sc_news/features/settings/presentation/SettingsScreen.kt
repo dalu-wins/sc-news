@@ -12,8 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.daluwi.sc_news.core.theme.Dimensions
-import com.daluwi.sc_news.features.settings.presentation.components.displaySection
 import com.daluwi.sc_news.features.settings.presentation.components.noticeSection
+import com.daluwi.sc_news.features.settings.presentation.components.settingsSection
 
 private const val ITEM_SPACING: Int = 6
 
@@ -38,7 +38,7 @@ fun SettingsScreen(
             )
         ) {
 
-            displaySection(
+            settingsSection(
                 state = state,
                 onEvent = { event -> viewModel.onEvent(event) },
             )

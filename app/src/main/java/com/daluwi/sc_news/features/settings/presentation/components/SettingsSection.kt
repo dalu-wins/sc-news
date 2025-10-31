@@ -11,13 +11,13 @@ import com.daluwi.sc_news.core.theme.Shapes
 import com.daluwi.sc_news.features.settings.presentation.SettingsEvent
 import com.daluwi.sc_news.features.settings.presentation.SettingsState
 
-fun LazyListScope.displaySection(
+fun LazyListScope.settingsSection(
     state: SettingsState,
     onEvent: (SettingsEvent) -> Unit
 ) {
     item {
         Text(
-            text = "Display",
+            text = "Settings",
             modifier = Modifier.padding(
                 vertical = Dimensions.VERTICAL_PADDING.dp,
                 horizontal = Dimensions.HORIZONTAL_PADDING.dp
