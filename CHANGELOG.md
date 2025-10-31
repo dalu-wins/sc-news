@@ -1,3 +1,15 @@
+# [0.2.0](https://github.com/dalu-wins/sc-news/compare/v0.1.10...v0.2.0) (2025-10-31)
+
+
+### Bug Fixes
+
+* race condition in isLoading UI var by loadLocal() vs loadRemote(). make isLoading a loadRemote() indicator only ([cb09e7d](https://github.com/dalu-wins/sc-news/commit/cb09e7d54cdf7e055df5dd5724582b211e8ca7ad))
+
+
+### Features
+
+* language support german, fix: infinite snackbar queue ([bf85d46](https://github.com/dalu-wins/sc-news/commit/bf85d46bd1b84eae4fc89731a741bb7aab719b71))
+
 ## [0.1.10](https://github.com/dalu-wins/sc-news/compare/v0.1.9...v0.1.10) (2025-10-31)
 
 
