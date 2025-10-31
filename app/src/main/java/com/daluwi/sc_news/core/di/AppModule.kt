@@ -50,7 +50,7 @@ object AppModule {
         api: PatchApi,
         networkChecker: NetworkChecker
     ): PatchRepository {
-        return PatchRepositoryImpl(db, db.patchDAO, api, networkChecker)
+        return PatchRepositoryImpl(db, api, networkChecker)
     }
 
     @Provides

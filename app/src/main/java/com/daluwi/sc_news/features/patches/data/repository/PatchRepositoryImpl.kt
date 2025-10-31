@@ -17,10 +17,12 @@ import com.daluwi.sc_news.features.patches.domain.repository.PatchRepository
 
 class PatchRepositoryImpl(
     private val db: PatchDatabase,
-    private val dao: PatchDAO,
     private val api: PatchApi,
     private val networkChecker: NetworkChecker
 ) : PatchRepository {
+
+    private val dao: PatchDAO = db.patchDAO
+
     override suspend fun getPatches(): Result<List<Patch>, RepositoryError> {
         return if (networkChecker.isAvailable()) {
             getRemotePatches()
@@ -37,7 +39,6 @@ class PatchRepositoryImpl(
             Log.e("LOCAL", "Error loading local patches", e)
             Result.Error(RepositoryError.LOCAL_FAILED)
         }
-
     }
 
     override suspend fun getRemotePatches(): Result<List<Patch>, RepositoryError> {
