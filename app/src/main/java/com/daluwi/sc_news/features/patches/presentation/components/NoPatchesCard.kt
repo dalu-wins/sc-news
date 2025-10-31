@@ -11,7 +11,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
+import com.daluwi.sc_news.R
 import com.daluwi.sc_news.core.theme.Shapes
+import com.daluwi.sc_news.core.theme.UiText
 
 @Composable
 fun NoPatchesCard(shape: Shape) {
@@ -30,7 +32,7 @@ fun NoPatchesCard(shape: Shape) {
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = "No patch notes found",
+                text = UiText.StringResource(R.string.empty_patch_list).asString(),
                 style = MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.outline),
             )
         }

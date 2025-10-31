@@ -10,7 +10,9 @@ import com.daluwi.sc_news.features.patches.domain.error_handling.asUiText
 import com.daluwi.sc_news.features.patches.domain.models.Patch
 import com.daluwi.sc_news.features.patches.domain.use_case.PatchUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -28,7 +30,10 @@ class PatchViewModel @Inject constructor(
     private val _state = mutableStateOf(PatchState())
     val state: State<PatchState> = _state
 
-    private val errorChannel = Channel<PatchEvent.Error>()
+    private val errorChannel = Channel<PatchEvent.Error>(
+        capacity = 3, // Prevent infinitely long queues blocking the screen
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
     val errors = errorChannel.receiveAsFlow()
 
     init {
@@ -75,6 +80,7 @@ class PatchViewModel @Inject constructor(
             val result = patchUseCases.getRemotePatches()
             processPatchesResult(result)
 
+            delay(300)
             setLoading(false)
 
         }

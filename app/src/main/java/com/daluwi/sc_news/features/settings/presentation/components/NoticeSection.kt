@@ -17,6 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.daluwi.sc_news.R
 import com.daluwi.sc_news.core.theme.Dimensions
+import com.daluwi.sc_news.core.theme.UiText
 
 private const val SPACING: Int = 16
 
@@ -28,7 +29,7 @@ private const val HORIZONTAL_PADDING: Int = 8
 fun LazyListScope.noticeSection() {
     item {
         Text(
-            text = "Notice & Disclaimers",
+            text = UiText.StringResource(R.string.notice_section).asString(),
             modifier = Modifier.padding(
                 vertical = Dimensions.VERTICAL_PADDING.dp,
                 horizontal = Dimensions.HORIZONTAL_PADDING.dp
@@ -57,16 +58,13 @@ fun LazyListScope.noticeSection() {
                         .size(size = IMAGE_SIZE.dp)
                         .padding(all = IMAGE_PADDING.dp),
                     painter = painterResource(id = R.drawable.community_badge),
-                    contentDescription = "'Made by the Community' - icon",
+                    contentDescription = "Made by the Community - icon",
                     colorFilter = ColorFilter.tint(
                         MaterialTheme.colorScheme.outline
                     )
                 )
                 Text(
-                    text = "This is an unofficial Star Citizen fan project, " +
-                            "not affiliated with the Cloud Imperium group of companies. " +
-                            "All content on this app not authored by its developers or " +
-                            "users are property of their respective owners.",
+                    text = UiText.StringResource(R.string.fan_project_notice).asString(),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.outline,
                 )
@@ -74,7 +72,7 @@ fun LazyListScope.noticeSection() {
             }
 
             Text(
-                text = "Star Citizen®, Roberts Space Industries® and Cloud Imperium ® are registered trademarks of Cloud Imperium Rights LLC",
+                text = UiText.StringResource(R.string.branding_notice).asString(),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.outline,
             )

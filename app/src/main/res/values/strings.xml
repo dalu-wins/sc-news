@@ -4,5 +4,27 @@
     <string name="remote_failed">Failed to fetch remote data</string>
     <string name="local_failed">Failed to fetch local data</string>
     <string name="no_internet">You are currently offline</string>
+    <string name="other_section">Other</string>
+    <string name="spectrum_button">More on Spectrum</string>
+    <string name="empty_patch_list">No patch notes found</string>
+    <string name="channel_live">Live</string>
+    <string name="channel_eptu">EPTU</string>
+    <string name="channel_ptu">PTU</string>
+    <string name="channel_hotfix">Hotfix</string>
+    <string name="channel_preview">Preview</string>
+    <string name="ptu_wave_1">Wave 1</string>
+    <string name="ptu_wave_2">Wave 2</string>
+    <string name="ptu_wave_3">Wave 3</string>
+    <string name="ptu_wave_4">Wave 4</string>
+    <string name="ptu_all_backers">All Backers</string>
+    <string name="refresh_fab">Refresh</string>
+    <string name="pinned_section">Pinned</string>
+    <string name="settings_section">Settings</string>
+    <string name="setting_dynamic_colors">Use dynamic colors</string>
+    <string name="notice_section"><![CDATA[Notice & Disclaimers]]></string>
+    <string name="fan_project_notice">This is an unofficial Star Citizen fan project, not affiliated with the Cloud Imperium group of companies. All content on this app not authored by its developers or are property of their respective owners.</string>
+    <string name="branding_notice">Star Citizen®, Roberts Space Industries® and Cloud Imperium ® are registered trademarks of Cloud Imperium Rights LLC</string>
+    <string name="nav_patch_notes">Patch Notes</string>
+    <string name="nav_settings">Settings</string>
 
 </resources>

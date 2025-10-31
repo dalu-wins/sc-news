@@ -21,7 +21,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.daluwi.sc_news.R
 import com.daluwi.sc_news.core.theme.Shapes
+import com.daluwi.sc_news.core.theme.UiText
 import com.daluwi.sc_news.features.patches.domain.models.Channel
 import com.daluwi.sc_news.features.patches.domain.models.Patch
 import com.daluwi.sc_news.features.patches.domain.models.Wave
@@ -59,11 +61,11 @@ fun PatchCard(
         ) {
 
             val channelName = when (patch.channel) {
-                is Channel.Live -> "Live"
-                is Channel.EPTU -> "EPTU"
-                is Channel.PTU -> "PTU"
-                is Channel.Hotfix -> "Hotfix"
-                is Channel.Preview -> "Preview"
+                is Channel.Live -> UiText.StringResource(R.string.channel_live).asString()
+                is Channel.EPTU -> UiText.StringResource(R.string.channel_eptu).asString()
+                is Channel.PTU -> UiText.StringResource(R.string.channel_ptu).asString()
+                is Channel.Hotfix -> UiText.StringResource(R.string.channel_hotfix).asString()
+                is Channel.Preview -> UiText.StringResource(R.string.channel_preview).asString()
             }
 
             Column {
@@ -84,11 +86,12 @@ fun PatchCard(
             ) {
                 if (patch.channel is Channel.PTU) {
                     val waveText = when (patch.channel.wave) {
-                        Wave.One -> "Wave 1"
-                        Wave.Two -> "Wave 2"
-                        Wave.Three -> "Wave 3"
-                        Wave.Four -> "Wave 4"
-                        Wave.AllBackers -> "All Backers"
+                        Wave.One -> UiText.StringResource(R.string.ptu_wave_1).asString()
+                        Wave.Two -> UiText.StringResource(R.string.ptu_wave_2).asString()
+                        Wave.Three -> UiText.StringResource(R.string.ptu_wave_3).asString()
+                        Wave.Four -> UiText.StringResource(R.string.ptu_wave_4).asString()
+                        Wave.AllBackers -> UiText.StringResource(R.string.ptu_all_backers)
+                            .asString()
                     }
 
                     Box(
