@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="remote_failed">Fehler beim Laden aus externer Quelle</string>
+    <string name="local_failed">Fehler beim Laden aus lokaler Quelle</string>
+    <string name="no_internet">Kein Internet</string>
+</resources>

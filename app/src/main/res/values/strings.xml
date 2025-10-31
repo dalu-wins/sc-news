@@ -1,5 +1,8 @@
 <resources>
 
-    <string name="app_name">SC News</string>
-    
+    <string name="app_name" translatable="false">SC News</string>
+    <string name="remote_failed">Failed to fetch remote data</string>
+    <string name="local_failed">Failed to fetch local data</string>
+    <string name="no_internet">You are currently offline</string>
+
 </resources>

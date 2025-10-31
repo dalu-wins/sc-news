@@ -4,9 +4,16 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.daluwi.sc_news.core.error_handling.RepositoryError
+import com.daluwi.sc_news.core.error_handling.Result
+import com.daluwi.sc_news.core.error_handling.UserEvent
+import com.daluwi.sc_news.core.error_handling.UserEvent.Error
+import com.daluwi.sc_news.core.error_handling.asUiText
+import com.daluwi.sc_news.features.patches.domain.models.Patch
 import com.daluwi.sc_news.features.patches.domain.use_case.PatchUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -23,18 +30,18 @@ class PatchViewModel @Inject constructor(
     private val _state = mutableStateOf(PatchState())
     val state: State<PatchState> = _state
 
-    private var getPatchesJob: Job? = null
-    private var getRefreshJob: Job? = null
+    private val eventChannel = Channel<UserEvent>()
+    val events = eventChannel.receiveAsFlow()
 
     init {
-        initPatchList()
-        getUpToDatePatches()
+        loadLocal()
+        loadRemote()
     }
 
     fun onEvent(event: PatchEvent) {
         when (event) {
             is PatchEvent.Refresh -> {
-                refresh()
+                loadRemote()
             }
 
             is PatchEvent.VisitSpectrum -> {
@@ -47,29 +54,44 @@ class PatchViewModel @Inject constructor(
         }
     }
 
-    private fun initPatchList() {
+    private fun loadLocal() {
         viewModelScope.launch {
-            val patches = patchUseCases.getLocalPatches()
-            _state.value = state.value.copy(patches = patches)
+            val result = patchUseCases.getLocalPatches()
+            processPatchesResult(result)
         }
     }
 
-    private fun getUpToDatePatches() {
-        getPatchesJob?.cancel()
-        getPatchesJob = viewModelScope.launch {
+    private fun loadRemote() {
+        if (_state.value.isLoading) return
+        viewModelScope.launch {
             _state.value = state.value.copy(isLoading = true)
-            val patches = patchUseCases.getUpToDatePatches()
-            _state.value = state.value.copy(isLoading = false, patches = patches)
+            val result = patchUseCases.getRemotePatches()
+            processPatchesResult(result)
         }
     }
 
-    private fun refresh() {
-        getRefreshJob?.cancel()
-        getRefreshJob = viewModelScope.launch {
-            _state.value = state.value.copy(isLoading = true)
-            val patches = patchUseCases.refreshPatches()
-            _state.value = state.value.copy(isLoading = false, patches = patches)
+    private suspend fun processPatchesResult(result: Result<List<Patch>, RepositoryError>) {
+        when (result) {
+            is Result.Success -> _state.value = state.value.copy(patches = result.data)
+
+            is Result.Error -> when (result.error) {
+                RepositoryError.REMOTE_FAILED -> {
+                    val errorMessage = result.error.asUiText()
+                    eventChannel.send(Error(errorMessage))
+                }
+
+                RepositoryError.LOCAL_FAILED -> {
+                    val errorMessage = result.error.asUiText()
+                    eventChannel.send(Error(errorMessage))
+                }
+
+                RepositoryError.NO_INTERNET -> {
+                    val errorMessage = result.error.asUiText()
+                    eventChannel.send(Error(errorMessage))
+                }
+            }
         }
+        _state.value = state.value.copy(isLoading = false)
     }
 
 }
