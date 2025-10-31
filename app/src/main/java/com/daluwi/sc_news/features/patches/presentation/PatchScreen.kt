@@ -38,10 +38,11 @@ fun PatchScreen(
     val pinnedPatches = state.patches.filter { it.pinned }
     val otherPatches = state.patches.filter { !it.pinned }
 
+    // Error Snackbar
     val snackbarHostState = remember { SnackbarHostState() }
     val context = LocalContext.current
     LaunchedEffect(context) {
-        viewModel.events.collect { eventType ->
+        viewModel.errors.collect { eventType ->
             snackbarHostState.showSnackbar(eventType.message.asString(context))
         }
     }

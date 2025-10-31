@@ -10,7 +10,9 @@ import com.daluwi.sc_news.features.patches.domain.error_handling.asUiText
 import com.daluwi.sc_news.features.patches.domain.models.Patch
 import com.daluwi.sc_news.features.patches.domain.use_case.PatchUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -28,8 +30,11 @@ class PatchViewModel @Inject constructor(
     private val _state = mutableStateOf(PatchState())
     val state: State<PatchState> = _state
 
-    private val eventChannel = Channel<PatchEvent.Error>()
-    val events = eventChannel.receiveAsFlow()
+    private val errorChannel = Channel<PatchEvent.Error>(
+        capacity = 3, // Prevent infinitely long queues blocking the screen
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
+    val errors = errorChannel.receiveAsFlow()
 
     init {
         loadLocal()
@@ -52,7 +57,7 @@ class PatchViewModel @Inject constructor(
 
             is PatchEvent.Error -> {
                 viewModelScope.launch {
-                    eventChannel.send(PatchEvent.Error(event.message))
+                    errorChannel.send(PatchEvent.Error(event.message))
                 }
             }
         }
@@ -68,9 +73,16 @@ class PatchViewModel @Inject constructor(
     private fun loadRemote() {
         if (_state.value.isLoading) return
         viewModelScope.launch {
+
+            setLoading(true)
+
             _state.value = state.value.copy(isLoading = true)
             val result = patchUseCases.getRemotePatches()
             processPatchesResult(result)
+
+            delay(300)
+            setLoading(false)
+
         }
     }
 
@@ -79,7 +91,10 @@ class PatchViewModel @Inject constructor(
             is Result.Success -> _state.value = state.value.copy(patches = result.data)
             is Result.Error -> onEvent(PatchEvent.Error(result.error.asUiText()))
         }
-        _state.value = state.value.copy(isLoading = false)
+    }
+
+    private fun setLoading(isLoading: Boolean) {
+        _state.value = state.value.copy(isLoading = isLoading)
     }
 
 }

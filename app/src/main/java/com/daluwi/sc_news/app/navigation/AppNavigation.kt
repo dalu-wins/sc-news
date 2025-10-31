@@ -51,7 +51,7 @@ fun AppNavigation(modifier: Modifier = Modifier) {
                                 contentDescription = destination.contentDescription
                             )
                         },
-                        label = { Text(destination.label) }
+                        label = { Text(destination.label.asString()) }
                     )
                 }
             }

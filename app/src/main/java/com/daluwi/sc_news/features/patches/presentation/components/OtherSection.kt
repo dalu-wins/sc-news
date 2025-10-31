@@ -10,8 +10,10 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
+import com.daluwi.sc_news.R
 import com.daluwi.sc_news.core.theme.Dimensions
 import com.daluwi.sc_news.core.theme.Shapes
+import com.daluwi.sc_news.core.theme.UiText
 import com.daluwi.sc_news.features.patches.domain.models.Patch
 import com.daluwi.sc_news.features.patches.presentation.PatchEvent
 
@@ -21,7 +23,7 @@ fun LazyListScope.otherSection(
 ) {
     item {
         Text(
-            text = "Other",
+            text = UiText.StringResource(R.string.other_section).asString(),
             modifier = Modifier.padding(
                 vertical = Dimensions.VERTICAL_PADDING.dp,
                 horizontal = Dimensions.HORIZONTAL_PADDING.dp
@@ -59,7 +61,7 @@ fun LazyListScope.otherSection(
             shape = Shapes.Card.End,
             modifier = Modifier.fillMaxWidth(),
         ) {
-            Text(text = "More on Spectrum")
+            Text(text = UiText.StringResource(R.string.spectrum_button).asString())
         }
     }
 }
