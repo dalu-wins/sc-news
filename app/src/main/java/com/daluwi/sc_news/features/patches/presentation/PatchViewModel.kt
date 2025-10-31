@@ -55,7 +55,6 @@ class PatchViewModel @Inject constructor(
                     eventChannel.send(PatchEvent.Error(event.message))
                 }
             }
-
         }
     }
 
