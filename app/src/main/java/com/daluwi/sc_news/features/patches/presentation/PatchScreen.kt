@@ -21,7 +21,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.daluwi.sc_news.core.error_handling.UserEvent
 import com.daluwi.sc_news.core.theme.Dimensions
 import com.daluwi.sc_news.features.patches.presentation.components.PatchFAB
 import com.daluwi.sc_news.features.patches.presentation.components.otherSection
@@ -43,11 +42,7 @@ fun PatchScreen(
     val context = LocalContext.current
     LaunchedEffect(context) {
         viewModel.events.collect { eventType ->
-            when (eventType) {
-                is UserEvent.Error -> {
-                    snackbarHostState.showSnackbar(eventType.message.asString(context))
-                }
-            }
+            snackbarHostState.showSnackbar(eventType.message.asString(context))
         }
     }
 

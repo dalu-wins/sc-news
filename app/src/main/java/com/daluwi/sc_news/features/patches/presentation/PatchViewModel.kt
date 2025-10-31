@@ -6,8 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.daluwi.sc_news.core.error_handling.RepositoryError
 import com.daluwi.sc_news.core.error_handling.Result
-import com.daluwi.sc_news.core.error_handling.UserEvent
-import com.daluwi.sc_news.core.error_handling.UserEvent.Error
 import com.daluwi.sc_news.core.error_handling.asUiText
 import com.daluwi.sc_news.features.patches.domain.models.Patch
 import com.daluwi.sc_news.features.patches.domain.use_case.PatchUseCases
@@ -30,7 +28,7 @@ class PatchViewModel @Inject constructor(
     private val _state = mutableStateOf(PatchState())
     val state: State<PatchState> = _state
 
-    private val eventChannel = Channel<UserEvent>()
+    private val eventChannel = Channel<PatchEvent.Error>()
     val events = eventChannel.receiveAsFlow()
 
     init {
@@ -51,6 +49,13 @@ class PatchViewModel @Inject constructor(
             is PatchEvent.VisitThread -> {
                 event.uriHandler.openUri(event.threadUrl)
             }
+
+            is PatchEvent.Error -> {
+                viewModelScope.launch {
+                    eventChannel.send(PatchEvent.Error(event.message))
+                }
+            }
+
         }
     }
 
@@ -70,26 +75,10 @@ class PatchViewModel @Inject constructor(
         }
     }
 
-    private suspend fun processPatchesResult(result: Result<List<Patch>, RepositoryError>) {
+    private fun processPatchesResult(result: Result<List<Patch>, RepositoryError>) {
         when (result) {
             is Result.Success -> _state.value = state.value.copy(patches = result.data)
-
-            is Result.Error -> when (result.error) {
-                RepositoryError.REMOTE_FAILED -> {
-                    val errorMessage = result.error.asUiText()
-                    eventChannel.send(Error(errorMessage))
-                }
-
-                RepositoryError.LOCAL_FAILED -> {
-                    val errorMessage = result.error.asUiText()
-                    eventChannel.send(Error(errorMessage))
-                }
-
-                RepositoryError.NO_INTERNET -> {
-                    val errorMessage = result.error.asUiText()
-                    eventChannel.send(Error(errorMessage))
-                }
-            }
+            is Result.Error -> onEvent(PatchEvent.Error(result.error.asUiText()))
         }
         _state.value = state.value.copy(isLoading = false)
     }

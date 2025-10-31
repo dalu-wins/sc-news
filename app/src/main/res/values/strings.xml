@@ -4,5 +4,7 @@
     <string name="remote_failed">Failed to fetch remote data</string>
     <string name="local_failed">Failed to fetch local data</string>
     <string name="no_internet">You are currently offline</string>
+    <string name="cannot_retrieve_ds_var">Cannot retrieve variable from datastore</string>
+    <string name="cannot_retrieve_ds">Cannot retrieve data store</string>
 
 </resources>
