@@ -68,9 +68,15 @@ class PatchViewModel @Inject constructor(
     private fun loadRemote() {
         if (_state.value.isLoading) return
         viewModelScope.launch {
+
+            setLoading(true)
+
             _state.value = state.value.copy(isLoading = true)
             val result = patchUseCases.getRemotePatches()
             processPatchesResult(result)
+
+            setLoading(false)
+
         }
     }
 
@@ -79,7 +85,10 @@ class PatchViewModel @Inject constructor(
             is Result.Success -> _state.value = state.value.copy(patches = result.data)
             is Result.Error -> onEvent(PatchEvent.Error(result.error.asUiText()))
         }
-        _state.value = state.value.copy(isLoading = false)
+    }
+
+    private fun setLoading(isLoading: Boolean) {
+        _state.value = state.value.copy(isLoading = isLoading)
     }
 
 }
