@@ -3,14 +3,14 @@ package com.daluwi.sc_news.features.patches.data.repository
 import android.util.Log
 import androidx.room.withTransaction
 import com.daluwi.sc_news.core.connectivity.NetworkChecker
-import com.daluwi.sc_news.core.error_handling.RepositoryError
-import com.daluwi.sc_news.core.error_handling.Result
 import com.daluwi.sc_news.features.patches.data.source.local.PatchDAO
 import com.daluwi.sc_news.features.patches.data.source.local.PatchDatabase
 import com.daluwi.sc_news.features.patches.data.source.local.toDomain
 import com.daluwi.sc_news.features.patches.data.source.local.toEntity
 import com.daluwi.sc_news.features.patches.data.source.remote.PatchApi
 import com.daluwi.sc_news.features.patches.data.source.remote.toDomain
+import com.daluwi.sc_news.features.patches.domain.error_handling.RepositoryError
+import com.daluwi.sc_news.features.patches.domain.error_handling.Result
 import com.daluwi.sc_news.features.patches.domain.models.Channel
 import com.daluwi.sc_news.features.patches.domain.models.Patch
 import com.daluwi.sc_news.features.patches.domain.repository.PatchRepository

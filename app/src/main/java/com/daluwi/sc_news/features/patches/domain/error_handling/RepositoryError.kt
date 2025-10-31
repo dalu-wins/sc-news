@@ -1,8 +1,8 @@
-package com.daluwi.sc_news.core.error_handling
+package com.daluwi.sc_news.features.patches.domain.error_handling
 
 import com.daluwi.sc_news.R
-import com.daluwi.sc_news.core.error_handling.UiText.StringResource
-
+import com.daluwi.sc_news.core.theme.UiText
+import com.daluwi.sc_news.core.theme.UiText.StringResource
 
 enum class RepositoryError : Error {
     REMOTE_FAILED,

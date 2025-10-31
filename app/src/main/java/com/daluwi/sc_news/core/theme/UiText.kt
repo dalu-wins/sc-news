@@ -1,4 +1,4 @@
-package com.daluwi.sc_news.core.error_handling
+package com.daluwi.sc_news.core.theme
 
 import android.content.Context
 import androidx.annotation.StringRes

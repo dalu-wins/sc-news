@@ -1,7 +1,7 @@
 package com.daluwi.sc_news.features.patches.domain.repository
 
-import com.daluwi.sc_news.core.error_handling.RepositoryError
-import com.daluwi.sc_news.core.error_handling.Result
+import com.daluwi.sc_news.features.patches.domain.error_handling.RepositoryError
+import com.daluwi.sc_news.features.patches.domain.error_handling.Result
 import com.daluwi.sc_news.features.patches.domain.models.Channel
 import com.daluwi.sc_news.features.patches.domain.models.Patch
 

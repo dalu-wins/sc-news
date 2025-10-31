@@ -4,9 +4,9 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.daluwi.sc_news.core.error_handling.RepositoryError
-import com.daluwi.sc_news.core.error_handling.Result
-import com.daluwi.sc_news.core.error_handling.asUiText
+import com.daluwi.sc_news.features.patches.domain.error_handling.RepositoryError
+import com.daluwi.sc_news.features.patches.domain.error_handling.Result
+import com.daluwi.sc_news.features.patches.domain.error_handling.asUiText
 import com.daluwi.sc_news.features.patches.domain.models.Patch
 import com.daluwi.sc_news.features.patches.domain.use_case.PatchUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -1,7 +1,7 @@
 package com.daluwi.sc_news.features.patches.presentation
 
 import androidx.compose.ui.platform.UriHandler
-import com.daluwi.sc_news.core.error_handling.UiText
+import com.daluwi.sc_news.core.theme.UiText
 
 sealed class PatchEvent {
     object Refresh : PatchEvent()

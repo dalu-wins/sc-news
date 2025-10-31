@@ -1,4 +1,4 @@
-package com.daluwi.sc_news.core.error_handling
+package com.daluwi.sc_news.features.patches.domain.error_handling
 
 typealias RootError = Error
 
