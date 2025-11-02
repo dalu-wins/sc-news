@@ -3,9 +3,9 @@
     <string name="remote_failed">Fehler beim Laden aus externer Quelle</string>
     <string name="local_failed">Fehler beim Laden aus lokaler Quelle</string>
     <string name="no_internet">Kein Internet</string>
-    <string name="other_section">Other</string>
-    <string name="spectrum_button">More on Spectrum</string>
-    <string name="empty_patch_list">No patch notes found</string>
+    <string name="other_section">Mehr</string>
+    <string name="spectrum_button">Mehr auf Spectrum</string>
+    <string name="empty_patch_list">Keine Patch-Notes gefunden</string>
     <string name="channel_live">Live</string>
     <string name="channel_eptu">EPTU</string>
     <string name="channel_ptu">PTU</string>
@@ -17,12 +17,9 @@
     <string name="ptu_wave_4">Wave 4</string>
     <string name="ptu_all_backers">All Backers</string>
     <string name="refresh_fab">Refresh</string>
-    <string name="pinned_section">Pinned</string>
-    <string name="settings_section">Settings</string>
-    <string name="setting_dynamic_colors">Use dynamic colors</string>
-    <string name="notice_section"><![CDATA[Notice & Disclaimers]]></string>
-    <string name="fan_project_notice">This is an unofficial Star Citizen fan project, not affiliated with the Cloud Imperium group of companies. All content on this app not authored by its developers or are property of their respective owners.</string>
-    <string name="branding_notice">Star Citizen®, Roberts Space Industries® and Cloud Imperium ® are registered trademarks of Cloud Imperium Rights LLC</string>
-    <string name="nav_patch_notes">Patch Notes</string>
-    <string name="nav_settings">Settings</string>
+    <string name="pinned_section">Angeheftet</string>
+    <string name="settings_section">Einstellungen</string>
+    <string name="setting_dynamic_colors">Nutze dynamische Farben</string>
+    <string name="nav_patch_notes">Patch-Notes</string>
+    <string name="nav_settings">Einstellungen</string>
 </resources>
