@@ -1,3 +1,11 @@
+## [0.2.1](https://github.com/dalu-wins/sc-news/compare/v0.2.0...v0.2.1) (2025-11-02)
+
+
+### Bug Fixes
+
+* german translations ([9f29341](https://github.com/dalu-wins/sc-news/commit/9f29341891bb1745d4104a4b77ec90c9170a95e1))
+* timeout on fresh api scrape ([0204423](https://github.com/dalu-wins/sc-news/commit/020442320e72ab270a53fdee1fe0b62b44abf754))
+
 # [0.2.0](https://github.com/dalu-wins/sc-news/compare/v0.1.10...v0.2.0) (2025-10-31)
 
 
