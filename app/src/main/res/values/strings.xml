@@ -21,9 +21,9 @@
     <string name="pinned_section">Pinned</string>
     <string name="settings_section">Settings</string>
     <string name="setting_dynamic_colors">Use dynamic colors</string>
-    <string name="notice_section"><![CDATA[Notice & Disclaimers]]></string>
-    <string name="fan_project_notice">This is an unofficial Star Citizen fan project, not affiliated with the Cloud Imperium group of companies. All content on this app not authored by its developers or are property of their respective owners.</string>
-    <string name="branding_notice">Star Citizen®, Roberts Space Industries® and Cloud Imperium ® are registered trademarks of Cloud Imperium Rights LLC</string>
+    <string name="notice_section" translatable="false"><![CDATA[Notice & Disclaimers]]></string>
+    <string name="fan_project_notice" translatable="false">This is an unofficial Star Citizen fan project, not affiliated with the Cloud Imperium group of companies. All content on this app not authored by its developers or are property of their respective owners.</string>
+    <string name="branding_notice" translatable="false">Star Citizen®, Roberts Space Industries® and Cloud Imperium ® are registered trademarks of Cloud Imperium Rights LLC</string>
     <string name="nav_patch_notes">Patch Notes</string>
     <string name="nav_settings">Settings</string>
 
