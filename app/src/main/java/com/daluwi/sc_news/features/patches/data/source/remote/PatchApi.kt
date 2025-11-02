@@ -1,16 +1,23 @@
 package com.daluwi.sc_news.features.patches.data.source.remote
 
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
+import java.util.concurrent.TimeUnit
 
 // TODO Let users put their own URL via settings
 private const val BASE_URL = "https://sc-news.api.dalu-wins.de/"
 
 class PatchApi {
 
+    private val okHttpClient = OkHttpClient.Builder()
+        .readTimeout(30, TimeUnit.SECONDS)
+        .build()
+
     private val retrofit: Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
+        .client(okHttpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
