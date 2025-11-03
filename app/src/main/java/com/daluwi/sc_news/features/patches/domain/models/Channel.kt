@@ -6,4 +6,5 @@ sealed class Channel {
     object EPTU : Channel()
     object Hotfix : Channel()
     object Preview : Channel()
+    object Unknown : Channel()
 }

@@ -15,6 +15,7 @@ class PatchConverter {
         is Channel.Hotfix -> "Hotfix"
         is Channel.Preview -> "Preview"
         is Channel.PTU -> "PTU:${channel.wave.name}"
+        is Channel.Unknown -> "Unknown"
     }
 
     @TypeConverter

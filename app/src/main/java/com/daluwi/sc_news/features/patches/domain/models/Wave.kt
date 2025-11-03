@@ -5,5 +5,6 @@ enum class Wave {
     Two,
     Three,
     Four,
-    AllBackers
+    AllBackers,
+    Unknown
 }
