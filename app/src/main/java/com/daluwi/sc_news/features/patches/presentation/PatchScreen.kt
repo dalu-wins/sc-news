@@ -40,12 +40,10 @@ fun PatchScreen(
 ) {
     val state = viewModel.state.value
 
-    // Scroll state für LazyColumn
     val listState = rememberLazyListState()
     LaunchedEffect(state.isLoading) {
-        if (state.isLoading) {
-            listState.animateScrollToItem(0)
-        }
+        listState.scrollToItem(1)
+        listState.animateScrollToItem(0)
     }
 
     // Error Snackbar
