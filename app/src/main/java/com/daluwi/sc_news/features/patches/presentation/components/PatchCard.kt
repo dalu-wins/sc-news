@@ -8,11 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.Notes
 import androidx.compose.material3.Card
-import androidx.compose.material3.FilledTonalIconButton
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,8 +25,7 @@ import com.daluwi.sc_news.features.patches.domain.models.Patch
 import com.daluwi.sc_news.features.patches.domain.models.Wave
 import com.daluwi.sc_news.features.patches.presentation.PatchEvent
 
-private const val WAVE_BADGE_SPACING: Int = 12
-private const val WAVE_BADGE_CORNER_RADIUS: Int = 16
+// TODO fix variables...
 private const val WAVE_BADGE_HORIZONTAL_PADDING: Int = 12
 private const val WAVE_BADGE_VERTICAL_PADDING: Int = 4
 private const val WAVE_BADGE_FONT_SIZE: Int = 14
@@ -48,6 +43,7 @@ fun PatchCard(
         modifier = Modifier
             .fillMaxWidth(),
         shape = shape,
+        onClick = { onEvent(PatchEvent.VisitThread(uriHandler, patch.sourceUrl)) },
     ) {
         Row(
             modifier = Modifier
@@ -69,23 +65,45 @@ fun PatchCard(
                 Channel.Unknown -> "Unknown"
             }
 
-            Column {
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+
                 Text(
-                    text = channelName,
-                    style = MaterialTheme.typography.titleMedium
+                    "${patch.version.major}.${patch.version.minor}.${patch.version.patch}",
+                    style = MaterialTheme.typography.titleLarge
                 )
+
+                var buildText = patch.build
+                if (buildText.isEmpty()) buildText = "not found"
                 Text(
-                    text = "${patch.version.major}.${patch.version.minor}.${patch.version.patch}-${
-                        channelName.uppercase()
-                    }.${patch.build}",
-                    style = MaterialTheme.typography.bodyMedium
+                    "BUILD $buildText",
+                    style = MaterialTheme.typography.labelSmall
                 )
+
             }
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(WAVE_BADGE_SPACING.dp)
-            ) {
+
+            Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+
                 if (patch.channel is Channel.PTU) {
+
+                    Box(
+                        modifier = Modifier
+                            .background(
+                                color = MaterialTheme.colorScheme.tertiary.copy(alpha = WAVE_BADGE_BACKGROUND_ALPHA),
+                                shape = Shapes.Badge.Left
+                            )
+                            .padding(
+                                horizontal = WAVE_BADGE_HORIZONTAL_PADDING.dp,
+                                vertical = WAVE_BADGE_VERTICAL_PADDING.dp
+                            ),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = channelName,
+                            color = MaterialTheme.colorScheme.tertiary,
+                            fontSize = WAVE_BADGE_FONT_SIZE.sp
+                        )
+                    }
+
                     val waveText = when (patch.channel.wave) {
                         Wave.One -> StringResource(R.string.ptu_wave_1).asString()
                         Wave.Two -> StringResource(R.string.ptu_wave_2).asString()
@@ -101,7 +119,7 @@ fun PatchCard(
                         modifier = Modifier
                             .background(
                                 color = MaterialTheme.colorScheme.tertiary.copy(alpha = WAVE_BADGE_BACKGROUND_ALPHA),
-                                shape = RoundedCornerShape(WAVE_BADGE_CORNER_RADIUS.dp)
+                                shape = Shapes.Badge.Right
                             )
                             .padding(
                                 horizontal = WAVE_BADGE_HORIZONTAL_PADDING.dp,
@@ -111,18 +129,29 @@ fun PatchCard(
                     ) {
                         Text(
                             text = waveText,
+                            color = MaterialTheme.colorScheme.secondary,
+                            fontSize = WAVE_BADGE_FONT_SIZE.sp
+                        )
+                    }
+                } else {
+                    Box(
+                        modifier = Modifier
+                            .background(
+                                color = MaterialTheme.colorScheme.tertiary.copy(alpha = WAVE_BADGE_BACKGROUND_ALPHA),
+                                shape = Shapes.Badge.Single
+                            )
+                            .padding(
+                                horizontal = WAVE_BADGE_HORIZONTAL_PADDING.dp,
+                                vertical = WAVE_BADGE_VERTICAL_PADDING.dp
+                            ),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = channelName,
                             color = MaterialTheme.colorScheme.tertiary,
                             fontSize = WAVE_BADGE_FONT_SIZE.sp
                         )
                     }
-                }
-                FilledTonalIconButton(
-                    onClick = { onEvent(PatchEvent.VisitThread(uriHandler, patch.sourceUrl)) },
-                ) {
-                    Icon(
-                        Icons.AutoMirrored.Filled.Notes,
-                        "Visit spectrum for official patch notes."
-                    )
                 }
             }
 

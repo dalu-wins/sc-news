@@ -8,7 +8,7 @@
     <string name="spectrum_button">More on Spectrum</string>
     <string name="empty_patch_list">No patch notes found</string>
     <string name="channel_live" translatable="false">Live</string>
-    <string name="channel_eptu" translatable="false">EPTU</string>
+    <string name="channel_eptu" translatable="false">Evocati</string>
     <string name="channel_ptu" translatable="false">PTU</string>
     <string name="channel_hotfix" translatable="false">Hotfix</string>
     <string name="channel_preview" translatable="false">Preview</string>
