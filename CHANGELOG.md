@@ -1,3 +1,12 @@
+## [0.3.1](https://github.com/dalu-wins/sc-news/compare/v0.3.0...v0.3.1) (2025-11-03)
+
+
+### Bug Fixes
+
+* improve ui ([e1ba9ff](https://github.com/dalu-wins/sc-news/commit/e1ba9ff5a941194624537a1648d38e886a4082e2))
+* uncap amount of loaded patches ([93cb64f](https://github.com/dalu-wins/sc-news/commit/93cb64f7d88e6949b897fe9b1b393177e826c653))
+* use better section names ([969a320](https://github.com/dalu-wins/sc-news/commit/969a320fe53a1dbeeb9988d2751a02810b34c730))
+
 # [0.3.0](https://github.com/dalu-wins/sc-news/compare/v0.2.1...v0.3.0) (2025-11-03)
 
 
