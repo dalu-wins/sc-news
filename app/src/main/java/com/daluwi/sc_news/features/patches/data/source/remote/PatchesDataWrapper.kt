@@ -1,7 +1,7 @@
 package com.daluwi.sc_news.features.patches.data.source.remote
 
 data class PatchesDataWrapper(
+    val cacheStatus: String,
     val timestamp: String,
-    val status: String,
-    val threads: List<PatchApiObject>
+    val patches: List<PatchApiObject> = emptyList()
 )

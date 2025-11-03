@@ -28,7 +28,7 @@ class PatchApi {
             val response = service.getPatches()
 
             if (response.status == "success" && response.data != null) {
-                return response.data.threads
+                return response.data.patches
             } else {
                 throw IOException("API returned failure status: ${response.status}")
             }
