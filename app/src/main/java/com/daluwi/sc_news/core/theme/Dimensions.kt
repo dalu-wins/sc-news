@@ -5,4 +5,6 @@ object Dimensions {
     const val VERTICAL_PADDING: Int = 12
 
     const val FAB_SPACER_HEIGHT: Int = 64
+
+    const val LIST_ITEM_SPACING: Int = 6
 }

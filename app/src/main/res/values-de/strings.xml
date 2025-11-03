@@ -4,10 +4,10 @@
     <string name="local_failed">Abrufen der lokalen Daten fehlgeschlagen</string>
     <string name="no_internet">Du bist derzeit offline</string>
     <string name="other_section">Älter</string>
-    <string name="spectrum_button">Mehr auf Spectrum</string>
+    <string name="spectrum_button">Alle Patch Notes</string>
     <string name="empty_patch_list">Keine Patchnotes gefunden</string>
     <string name="refresh_fab">Aktualisieren</string>
-    <string name="pinned_section">Aktuell</string>
+    <string name="pinned_section">Aktuell spielbar</string>
     <string name="settings_section">Einstellungen</string>
     <string name="setting_dynamic_colors">Dynamische Farben verwenden</string>
     <string name="notice_section"><![CDATA[Hinweise & Haftungsausschluss]]></string>

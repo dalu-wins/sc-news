@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.daluwi.sc_news.R
@@ -49,8 +50,10 @@ fun PatchCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
-                    horizontal = Shapes.Card.HORIZONTAL_PADDING.dp,
-                    vertical = Shapes.Card.VERTICAL_PADDING.dp
+                    start = Shapes.Card.HORIZONTAL_PADDING.dp,
+                    end = Shapes.Card.HORIZONTAL_PADDING.dp,
+                    top = Shapes.Card.VERTICAL_PADDING.dp,
+                    bottom = Shapes.Card.VERTICAL_PADDING.dp
                 ),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
@@ -69,19 +72,22 @@ fun PatchCard(
 
                 Text(
                     "${patch.version.major}.${patch.version.minor}.${patch.version.patch}",
-                    style = MaterialTheme.typography.titleLarge
+                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
                 )
 
                 var buildText = patch.build
                 if (buildText.isEmpty()) buildText = "not found"
                 Text(
-                    "BUILD $buildText",
-                    style = MaterialTheme.typography.labelSmall
+                    "build: $buildText",
+                    style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Light)
                 )
 
             }
 
-            Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
 
                 if (patch.channel is Channel.PTU) {
 
@@ -153,6 +159,7 @@ fun PatchCard(
                         )
                     }
                 }
+                
             }
 
         }
