@@ -1,14 +1,11 @@
 package com.daluwi.sc_news.features.patches.presentation.components
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.unit.dp
 import com.daluwi.sc_news.R
 import com.daluwi.sc_news.core.theme.Dimensions
@@ -34,13 +31,15 @@ fun LazyListScope.otherSection(
 
     if (patches.isEmpty()) {
 
-        item { NoPatchesCard(shape = Shapes.Card.Start) }
+        item { NoPatchesCard(shape = Shapes.Card.Single) }
 
     } else {
 
         itemsIndexed(items = patches) { index, patch ->
             val shape = when (index) {
                 0 -> Shapes.Card.Start
+
+                patches.lastIndex -> Shapes.Card.End
 
                 else -> Shapes.Card.Middle
             }
@@ -54,14 +53,4 @@ fun LazyListScope.otherSection(
 
     }
 
-    item {
-        val uriHandler = LocalUriHandler.current
-        Button(
-            onClick = { onEvent(PatchEvent.VisitSpectrum(uriHandler)) },
-            shape = Shapes.Card.End,
-            modifier = Modifier.fillMaxWidth(),
-        ) {
-            Text(text = UiText.StringResource(R.string.spectrum_button).asString())
-        }
-    }
 }

@@ -4,8 +4,8 @@
     <string name="remote_failed">Failed to fetch remote data</string>
     <string name="local_failed">Failed to fetch local data</string>
     <string name="no_internet">You are currently offline</string>
-    <string name="other_section">Other</string>
-    <string name="spectrum_button">More on Spectrum</string>
+    <string name="other_section">Older</string>
+    <string name="spectrum_button">All patch notes</string>
     <string name="empty_patch_list">No patch notes found</string>
     <string name="channel_live" translatable="false">Live</string>
     <string name="channel_eptu" translatable="false">Evocati</string>
@@ -18,7 +18,7 @@
     <string name="ptu_wave_4" translatable="false">Wave 4</string>
     <string name="ptu_all_backers" translatable="false">All Backers</string>
     <string name="refresh_fab">Refresh</string>
-    <string name="pinned_section">Pinned</string>
+    <string name="pinned_section">Currently playable</string>
     <string name="settings_section">Settings</string>
     <string name="setting_dynamic_colors">Use dynamic colors</string>
     <string name="notice_section"><![CDATA[Notice & Disclaimers]]></string>

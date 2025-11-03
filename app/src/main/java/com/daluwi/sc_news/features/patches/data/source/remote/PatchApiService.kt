@@ -4,6 +4,6 @@ import retrofit2.http.GET
 
 interface PatchApiService {
 
-    @GET("?max_patches=10")
+    @GET("/")
     suspend fun getPatches(): PatchApiResponse
 }

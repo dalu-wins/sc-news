@@ -6,8 +6,8 @@ import androidx.compose.ui.unit.dp
 
 object Shapes {
     object Card {
-        private const val CORNER_RADIUS_SMALL: Int = 8
         private const val CORNER_RADIUS_BIG: Int = 24
+        private const val CORNER_RADIUS_SMALL: Int = 4
 
         const val HORIZONTAL_PADDING: Int = 24
         const val VERTICAL_PADDING: Int = 16
