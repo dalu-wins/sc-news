@@ -4,11 +4,8 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.daluwi.sc_news.features.patches.domain.error_handling.RepositoryError
 import com.daluwi.sc_news.features.patches.domain.error_handling.Result
 import com.daluwi.sc_news.features.patches.domain.error_handling.asUiText
-import com.daluwi.sc_news.features.patches.domain.models.Patch
-import com.daluwi.sc_news.features.patches.domain.use_case.PatchType
 import com.daluwi.sc_news.features.patches.domain.use_case.PatchUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.BufferOverflow
@@ -66,10 +63,17 @@ class PatchViewModel @Inject constructor(
 
     private fun loadLocal() {
         viewModelScope.launch {
-            val pinned = patchUseCases.getLocalPatches(PatchType.PINNED)
-            val other = patchUseCases.getLocalPatches(PatchType.NOT_PINNED)
-            setPinned(pinned)
-            setOther(other)
+            val patches = patchUseCases.getLocalPatches()
+            when (patches) {
+                is Result.Error -> errorChannel.send(PatchEvent.Error(patches.error.asUiText()))
+                is Result.Success -> {
+                    val pinned = patches.data.filter { it.pinned }
+                    _state.value = state.value.copy(pinnedPatches = pinned)
+
+                    val other = patches.data.filter { !it.pinned }
+                    _state.value = state.value.copy(otherPatches = other)
+                }
+            }
         }
     }
 
@@ -80,28 +84,21 @@ class PatchViewModel @Inject constructor(
             setLoading(true)
 
             _state.value = state.value.copy(isLoading = true)
-            val pinned = patchUseCases.getRemotePatches(PatchType.PINNED)
-            val other = patchUseCases.getRemotePatches(PatchType.NOT_PINNED)
-            setPinned(pinned)
-            setOther(other)
+            val patches = patchUseCases.getRemotePatches()
+            when (patches) {
+                is Result.Error -> errorChannel.send(PatchEvent.Error(patches.error.asUiText()))
+                is Result.Success -> {
+                    val pinned = patches.data.filter { it.pinned }
+                    _state.value = state.value.copy(pinnedPatches = pinned)
+
+                    val other = patches.data.filter { !it.pinned }
+                    _state.value = state.value.copy(otherPatches = other)
+                }
+            }
 
             delay(300)
             setLoading(false)
 
-        }
-    }
-
-    private fun setPinned(pinned: Result<List<Patch>, RepositoryError>) {
-        when (pinned) {
-            is Result.Success -> _state.value = state.value.copy(pinnedPatches = pinned.data)
-            is Result.Error -> onEvent(PatchEvent.Error(message = pinned.error.asUiText()))
-        }
-    }
-
-    private fun setOther(other: Result<List<Patch>, RepositoryError>) {
-        when (other) {
-            is Result.Success -> _state.value = state.value.copy(otherPatches = other.data)
-            is Result.Error -> onEvent(PatchEvent.Error(message = other.error.asUiText()))
         }
     }
 
