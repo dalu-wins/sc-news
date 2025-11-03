@@ -1,3 +1,19 @@
+# [0.3.0](https://github.com/dalu-wins/sc-news/compare/v0.2.1...v0.3.0) (2025-11-03)
+
+
+### Bug Fixes
+
+* adapt to new api naming scheme ([c3fe253](https://github.com/dalu-wins/sc-news/commit/c3fe253907c58c7be0aa3775ef09717e34a0e9c7))
+* added more german translations ([34a04ab](https://github.com/dalu-wins/sc-news/commit/34a04ab2b3ab77dbdd7fa622690f56ce4887098c))
+* doubled api calls and error messages, split pinned and !pinned in vm instead of uc's ([f5abd8f](https://github.com/dalu-wins/sc-news/commit/f5abd8f2b8a4098d8646fd16e314a1bb897b9553))
+* move pinned vs not pinned patch filtering from Screen to UseCase ([5c41d5a](https://github.com/dalu-wins/sc-news/commit/5c41d5a8fb71cfe3f74ef2476e23e7eabe575b74))
+* update ui ([5c6ee36](https://github.com/dalu-wins/sc-news/commit/5c6ee361125a69f513c74dd9d90de6a29da93eb6))
+
+
+### Features
+
+* transition to new api sided parsing ([7057b7a](https://github.com/dalu-wins/sc-news/commit/7057b7a8bb790f60a5c4ff755ed562e510664a42))
+
 ## [0.2.1](https://github.com/dalu-wins/sc-news/compare/v0.2.0...v0.2.1) (2025-11-02)
 
 
