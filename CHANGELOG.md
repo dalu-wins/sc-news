@@ -1,3 +1,10 @@
+## [0.3.2](https://github.com/dalu-wins/sc-news/compare/v0.3.1...v0.3.2) (2025-11-03)
+
+
+### Bug Fixes
+
+* choppy autoscroll on reload ([f0baaaf](https://github.com/dalu-wins/sc-news/commit/f0baaafca88433aa83637a9defce8ce4a8bcbc41))
+
 ## [0.3.1](https://github.com/dalu-wins/sc-news/compare/v0.3.0...v0.3.1) (2025-11-03)
 
 
