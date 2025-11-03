@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.daluwi.sc_news.R
 import com.daluwi.sc_news.core.theme.Shapes
-import com.daluwi.sc_news.core.theme.UiText
+import com.daluwi.sc_news.core.theme.UiText.StringResource
 import com.daluwi.sc_news.features.patches.domain.models.Channel
 import com.daluwi.sc_news.features.patches.domain.models.Patch
 import com.daluwi.sc_news.features.patches.domain.models.Wave
@@ -61,11 +61,12 @@ fun PatchCard(
         ) {
 
             val channelName = when (patch.channel) {
-                is Channel.Live -> UiText.StringResource(R.string.channel_live).asString()
-                is Channel.EPTU -> UiText.StringResource(R.string.channel_eptu).asString()
-                is Channel.PTU -> UiText.StringResource(R.string.channel_ptu).asString()
-                is Channel.Hotfix -> UiText.StringResource(R.string.channel_hotfix).asString()
-                is Channel.Preview -> UiText.StringResource(R.string.channel_preview).asString()
+                is Channel.Live -> StringResource(R.string.channel_live).asString()
+                is Channel.EPTU -> StringResource(R.string.channel_eptu).asString()
+                is Channel.PTU -> StringResource(R.string.channel_ptu).asString()
+                is Channel.Hotfix -> StringResource(R.string.channel_hotfix).asString()
+                is Channel.Preview -> StringResource(R.string.channel_preview).asString()
+                Channel.Unknown -> "Unknown"
             }
 
             Column {
@@ -86,12 +87,14 @@ fun PatchCard(
             ) {
                 if (patch.channel is Channel.PTU) {
                     val waveText = when (patch.channel.wave) {
-                        Wave.One -> UiText.StringResource(R.string.ptu_wave_1).asString()
-                        Wave.Two -> UiText.StringResource(R.string.ptu_wave_2).asString()
-                        Wave.Three -> UiText.StringResource(R.string.ptu_wave_3).asString()
-                        Wave.Four -> UiText.StringResource(R.string.ptu_wave_4).asString()
-                        Wave.AllBackers -> UiText.StringResource(R.string.ptu_all_backers)
+                        Wave.One -> StringResource(R.string.ptu_wave_1).asString()
+                        Wave.Two -> StringResource(R.string.ptu_wave_2).asString()
+                        Wave.Three -> StringResource(R.string.ptu_wave_3).asString()
+                        Wave.Four -> StringResource(R.string.ptu_wave_4).asString()
+                        Wave.AllBackers -> StringResource(R.string.ptu_all_backers)
                             .asString()
+
+                        Wave.Unknown -> "Unknown"
                     }
 
                     Box(
