@@ -8,6 +8,7 @@ import com.daluwi.sc_news.features.patches.domain.error_handling.RepositoryError
 import com.daluwi.sc_news.features.patches.domain.error_handling.Result
 import com.daluwi.sc_news.features.patches.domain.error_handling.asUiText
 import com.daluwi.sc_news.features.patches.domain.models.Patch
+import com.daluwi.sc_news.features.patches.domain.use_case.PatchType
 import com.daluwi.sc_news.features.patches.domain.use_case.PatchUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.BufferOverflow
@@ -65,8 +66,10 @@ class PatchViewModel @Inject constructor(
 
     private fun loadLocal() {
         viewModelScope.launch {
-            val result = patchUseCases.getLocalPatches()
-            processPatchesResult(result)
+            val pinned = patchUseCases.getLocalPatches(PatchType.PINNED)
+            val other = patchUseCases.getLocalPatches(PatchType.NOT_PINNED)
+            setPinned(pinned)
+            setOther(other)
         }
     }
 
@@ -77,8 +80,10 @@ class PatchViewModel @Inject constructor(
             setLoading(true)
 
             _state.value = state.value.copy(isLoading = true)
-            val result = patchUseCases.getRemotePatches()
-            processPatchesResult(result)
+            val pinned = patchUseCases.getRemotePatches(PatchType.PINNED)
+            val other = patchUseCases.getRemotePatches(PatchType.NOT_PINNED)
+            setPinned(pinned)
+            setOther(other)
 
             delay(300)
             setLoading(false)
@@ -86,10 +91,17 @@ class PatchViewModel @Inject constructor(
         }
     }
 
-    private fun processPatchesResult(result: Result<List<Patch>, RepositoryError>) {
-        when (result) {
-            is Result.Success -> _state.value = state.value.copy(patches = result.data)
-            is Result.Error -> onEvent(PatchEvent.Error(result.error.asUiText()))
+    private fun setPinned(pinned: Result<List<Patch>, RepositoryError>) {
+        when (pinned) {
+            is Result.Success -> _state.value = state.value.copy(pinnedPatches = pinned.data)
+            is Result.Error -> onEvent(PatchEvent.Error(message = pinned.error.asUiText()))
+        }
+    }
+
+    private fun setOther(other: Result<List<Patch>, RepositoryError>) {
+        when (other) {
+            is Result.Success -> _state.value = state.value.copy(otherPatches = other.data)
+            is Result.Error -> onEvent(PatchEvent.Error(message = other.error.asUiText()))
         }
     }
 

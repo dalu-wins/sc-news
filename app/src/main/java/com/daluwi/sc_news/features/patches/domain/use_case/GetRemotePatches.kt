@@ -8,7 +8,15 @@ import com.daluwi.sc_news.features.patches.domain.repository.PatchRepository
 class GetRemotePatches(
     private val repository: PatchRepository
 ) {
-    suspend operator fun invoke(): Result<List<Patch>, RepositoryError> {
-        return repository.getRemotePatches()
+    suspend operator fun invoke(type: PatchType): Result<List<Patch>, RepositoryError> {
+        val result = repository.getRemotePatches()
+        return when (result) {
+            is Result.Error -> result
+            is Result.Success -> when (type) {
+                PatchType.PINNED -> result.copy(result.data.filter { it.pinned })
+                PatchType.NOT_PINNED -> result.copy(result.data.filter { !it.pinned })
+                PatchType.ALL -> result
+            }
+        }
     }
 }

@@ -35,9 +35,6 @@ fun PatchScreen(
 ) {
     val state = viewModel.state.value
 
-    val pinnedPatches = state.patches.filter { it.pinned }
-    val otherPatches = state.patches.filter { !it.pinned }
-
     // Error Snackbar
     val snackbarHostState = remember { SnackbarHostState() }
     val context = LocalContext.current
@@ -73,7 +70,7 @@ fun PatchScreen(
             }
 
             pinnedSection(
-                patches = pinnedPatches,
+                patches = state.pinnedPatches,
                 onEvent = { event -> viewModel.onEvent(event) },
             )
 
@@ -82,7 +79,7 @@ fun PatchScreen(
             }
 
             otherSection(
-                patches = otherPatches,
+                patches = state.otherPatches,
                 onEvent = { event -> viewModel.onEvent(event) }
             )
 
