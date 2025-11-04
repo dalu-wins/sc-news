@@ -10,6 +10,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+private const val SPECTRUM_PATCH_NOTES: String =
+    "https://robertsspaceindustries.com/spectrum/community/SC/forum/190048?sort=hot&page=1"
+
 @HiltViewModel
 class MainViewModel @Inject constructor(
     repository: SettingsRepository,
@@ -27,6 +30,12 @@ class MainViewModel @Inject constructor(
                 )
             }
             Log.d("UPDATED DC", state.value.dynamicColors.toString())
+        }
+    }
+
+    fun onEvent(event: MainEvent) {
+        when (event) {
+            is MainEvent.VisitSpectrum -> event.uriHandler.openUri(SPECTRUM_PATCH_NOTES)
         }
     }
 

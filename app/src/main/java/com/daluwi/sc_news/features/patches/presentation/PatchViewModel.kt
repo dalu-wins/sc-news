@@ -1,7 +1,5 @@
 package com.daluwi.sc_news.features.patches.presentation
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.daluwi.sc_news.features.patches.domain.error_handling.Result
@@ -11,6 +9,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,13 +20,8 @@ class PatchViewModel @Inject constructor(
     private val patchUseCases: PatchUseCases,
 ) : ViewModel() {
 
-    companion object {
-        private const val SPECTRUM_PATCH_NOTES: String =
-            "https://robertsspaceindustries.com/spectrum/community/SC/forum/190048?sort=hot&page=1"
-    }
-
-    private val _state = mutableStateOf(PatchState())
-    val state: State<PatchState> = _state
+    private val _state = MutableStateFlow(PatchState())
+    val state = _state.asStateFlow()
 
     private val errorChannel = Channel<PatchEvent.Error>(
         capacity = 3, // Prevent infinitely long queues blocking the screen
@@ -45,10 +40,6 @@ class PatchViewModel @Inject constructor(
                 loadRemote()
             }
 
-            is PatchEvent.VisitSpectrum -> {
-                event.uriHandler.openUri(SPECTRUM_PATCH_NOTES)
-            }
-
             is PatchEvent.VisitThread -> {
                 event.uriHandler.openUri(event.threadUrl)
             }
@@ -64,46 +55,53 @@ class PatchViewModel @Inject constructor(
     private fun loadLocal() {
         viewModelScope.launch {
             val patches = patchUseCases.getLocalPatches()
-            when (patches) {
-                is Result.Error -> errorChannel.send(PatchEvent.Error(patches.error.asUiText()))
+            val newState = when (patches) {
+                is Result.Error -> {
+                    errorChannel.send(PatchEvent.Error(patches.error.asUiText()))
+                    state.value.copy()
+                }
+
                 is Result.Success -> {
                     val pinned = patches.data.filter { it.pinned }
-                    _state.value = state.value.copy(pinnedPatches = pinned)
-
                     val other = patches.data.filter { !it.pinned }
-                    _state.value = state.value.copy(otherPatches = other)
+                    state.value.copy(
+                        pinnedPatches = pinned,
+                        otherPatches = other
+                    )
                 }
             }
+            _state.value = newState
         }
     }
 
     private fun loadRemote() {
         if (_state.value.isLoading) return
         viewModelScope.launch {
-
-            setLoading(true)
-
             _state.value = state.value.copy(isLoading = true)
+
             val patches = patchUseCases.getRemotePatches()
-            when (patches) {
-                is Result.Error -> errorChannel.send(PatchEvent.Error(patches.error.asUiText()))
+            val newState = when (patches) {
+                is Result.Error -> {
+                    errorChannel.send(PatchEvent.Error(patches.error.asUiText()))
+                    state.value.copy(isLoading = false)
+                }
+
                 is Result.Success -> {
                     val pinned = patches.data.filter { it.pinned }
-                    _state.value = state.value.copy(pinnedPatches = pinned)
-
                     val other = patches.data.filter { !it.pinned }
-                    _state.value = state.value.copy(otherPatches = other)
+                    state.value.copy(
+                        pinnedPatches = pinned,
+                        otherPatches = other,
+                        isLoading = false
+                    )
                 }
             }
 
             delay(300)
-            setLoading(false)
 
+            _state.value = newState
         }
     }
 
-    private fun setLoading(isLoading: Boolean) {
-        _state.value = state.value.copy(isLoading = isLoading)
-    }
 
 }
