@@ -1,3 +1,10 @@
+## [0.3.3](https://github.com/dalu-wins/sc-news/compare/v0.3.2...v0.3.3) (2025-11-04)
+
+
+### Bug Fixes
+
+* pull to refresh ([e485d4d](https://github.com/dalu-wins/sc-news/commit/e485d4d07629264f7457d3050f420123ac57a6b5))
+
 ## [0.3.2](https://github.com/dalu-wins/sc-news/compare/v0.3.1...v0.3.2) (2025-11-03)
 
 
