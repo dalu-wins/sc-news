@@ -5,7 +5,6 @@ import com.daluwi.sc_news.core.theme.UiText
 
 sealed class PatchEvent {
     object Refresh : PatchEvent()
-    data class VisitSpectrum(val uriHandler: UriHandler) : PatchEvent()
     data class VisitThread(val uriHandler: UriHandler, val threadUrl: String) : PatchEvent()
     data class Error(val message: UiText) : PatchEvent()
 }

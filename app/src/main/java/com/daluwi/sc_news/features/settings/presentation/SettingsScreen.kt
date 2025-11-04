@@ -2,7 +2,6 @@ package com.daluwi.sc_news.features.settings.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
@@ -20,14 +19,14 @@ private const val ITEM_SPACING: Int = 6
 @OptIn(ExperimentalMaterial3ExpressiveApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
+    modifier: Modifier = Modifier,
     viewModel: SettingsViewModel = hiltViewModel()
 ) {
 
     val state = viewModel.state.value
 
     Scaffold(
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier = modifier,
     ) { contentPadding ->
 
         LazyColumn(
