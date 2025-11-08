@@ -1,3 +1,10 @@
+## [0.3.4](https://github.com/dalu-wins/sc-news/compare/v0.3.3...v0.3.4) (2025-11-08)
+
+
+### Bug Fixes
+
+* update to new api format ([5b4bb08](https://github.com/dalu-wins/sc-news/commit/5b4bb08616f5629ab3fba06ec65cd3e10e0ab763))
+
 ## [0.3.3](https://github.com/dalu-wins/sc-news/compare/v0.3.2...v0.3.3) (2025-11-04)
 
 
