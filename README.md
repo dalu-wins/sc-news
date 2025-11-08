@@ -3,7 +3,7 @@
   <img src="https://img.shields.io/github/v/release/dalu-wins/sc-news" alt="GitHub Release">
 </p>
 
-# <img src="assets/app_icon.svg" alt="App Icon" height="32"> Star Citizen News
+# Star Citizen News 
 An app to bundle all Star Citizen news in one place.
 
 ## ✅ Planned integrations
@@ -32,4 +32,5 @@ Imperium Rights LLC
 
 <p align="center">
   <img src="assets/MadeByTheCommunity_White.png" alt="Made By The Community Banner" height="200">
+  <img height="200" src="https://github.com/dalu-wins/sc-news/blob/main/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.webp">
 </p>
