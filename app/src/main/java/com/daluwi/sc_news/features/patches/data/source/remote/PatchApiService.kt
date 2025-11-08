@@ -4,6 +4,7 @@ import retrofit2.http.GET
 
 interface PatchApiService {
 
-    @GET("/")
+    @GET("/patch-notes/all")
     suspend fun getPatches(): PatchApiResponse
+
 }
