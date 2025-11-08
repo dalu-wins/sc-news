@@ -3,6 +3,14 @@
 
 ### Bug Fixes
 
+* rebuild app without loading error ([9844880](https://github.com/dalu-wins/sc-news/commit/98448806e9c1a88b9dd3393d92920e688614e79c))
+* show only latest pinned build per channel as currently online ([c9e90c3](https://github.com/dalu-wins/sc-news/commit/c9e90c3065519c763474b9bd26d8c5068e8e5f29))
+
+## [0.3.5](https://github.com/dalu-wins/sc-news/compare/v0.3.4...v0.3.5) (2025-11-08)
+
+
+### Bug Fixes
+
 * show only latest pinned build per channel as currently online ([c9e90c3](https://github.com/dalu-wins/sc-news/commit/c9e90c3065519c763474b9bd26d8c5068e8e5f29))
 
 ## [0.3.4](https://github.com/dalu-wins/sc-news/compare/v0.3.3...v0.3.4) (2025-11-08)
