@@ -1,3 +1,10 @@
+## [0.3.6](https://github.com/dalu-wins/sc-news/compare/v0.3.5...v0.3.6) (2025-11-08)
+
+
+### Bug Fixes
+
+* make migration destructive ([14fd5a2](https://github.com/dalu-wins/sc-news/commit/14fd5a202d41b3fa40ab2c7ac4711bcf34832762))
+
 ## [0.3.5](https://github.com/dalu-wins/sc-news/compare/v0.3.4...v0.3.5) (2025-11-08)
 
 
