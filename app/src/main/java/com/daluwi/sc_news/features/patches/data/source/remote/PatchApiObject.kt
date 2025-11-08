@@ -3,6 +3,7 @@ package com.daluwi.sc_news.features.patches.data.source.remote
 data class PatchApiObject(
     val sourceUrl: String,
     val pinned: Boolean,
+    val currentlyOnline: Boolean,
     val channel: String,
     val wave: String?,
     val version: ApiVersion,

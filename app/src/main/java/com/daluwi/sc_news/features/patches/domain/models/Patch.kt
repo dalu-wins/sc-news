@@ -6,4 +6,5 @@ data class Patch(
     val version: Version,
     val build: String,
     val pinned: Boolean,
+    val currentlyOnline: Boolean,
 )

@@ -62,10 +62,10 @@ class PatchViewModel @Inject constructor(
                 }
 
                 is Result.Success -> {
-                    val pinned = patches.data.filter { it.pinned }
-                    val other = patches.data.filter { !it.pinned }
+                    val current = patches.data.filter { it.currentlyOnline }
+                    val other = patches.data.filter { !it.currentlyOnline }
                     state.value.copy(
-                        pinnedPatches = pinned,
+                        currentPatches = current,
                         otherPatches = other
                     )
                 }
@@ -87,10 +87,10 @@ class PatchViewModel @Inject constructor(
                 }
 
                 is Result.Success -> {
-                    val pinned = patches.data.filter { it.pinned }
-                    val other = patches.data.filter { !it.pinned }
+                    val current = patches.data.filter { it.currentlyOnline }
+                    val other = patches.data.filter { !it.currentlyOnline }
                     state.value.copy(
-                        pinnedPatches = pinned,
+                        currentPatches = current,
                         otherPatches = other,
                         isLoading = false
                     )

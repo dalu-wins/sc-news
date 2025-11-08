@@ -12,4 +12,5 @@ data class PatchEntity(
     val version: Version,
     val build: String,
     val pinned: Boolean = false,
+    val currentlyOnline: Boolean = false,
 )

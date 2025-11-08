@@ -76,7 +76,7 @@ fun PatchScreen(
             ) {
 
                 pinnedSection(
-                    patches = state.pinnedPatches,
+                    patches = state.currentPatches,
                     onEvent = { event -> viewModel.onEvent(event) },
                 )
 
