@@ -34,7 +34,7 @@ object AppModule {
             app,
             PatchDatabase::class.java,
             PatchDatabase.DATABASE_NAME
-        ).build()
+        ).fallbackToDestructiveMigration(dropAllTables = true).build()
     }
 
     @Provides
