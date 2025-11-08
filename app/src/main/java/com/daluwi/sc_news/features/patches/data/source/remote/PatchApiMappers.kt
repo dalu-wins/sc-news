@@ -10,7 +10,8 @@ fun PatchApiObject.toDomain(): Patch = Patch(
     channel = parseChannel(channel, wave),
     version = parseVersion(version),
     build = build,
-    pinned = pinned
+    pinned = pinned,
+    currentlyOnline = currentlyOnline
 )
 
 private fun parseChannel(channel: String?, wave: String?): Channel {

@@ -7,7 +7,8 @@ fun PatchEntity.toDomain(): Patch = Patch(
     channel = channel,
     version = version,
     build = build,
-    pinned = pinned
+    pinned = pinned,
+    currentlyOnline = currentlyOnline
 )
 
 fun Patch.toEntity(): PatchEntity = PatchEntity(
@@ -15,5 +16,6 @@ fun Patch.toEntity(): PatchEntity = PatchEntity(
     channel = channel,
     version = version,
     build = build,
-    pinned = pinned
+    pinned = pinned,
+    currentlyOnline = currentlyOnline
 )
