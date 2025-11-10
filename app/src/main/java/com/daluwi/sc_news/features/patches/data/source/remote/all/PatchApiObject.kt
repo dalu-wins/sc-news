@@ -1,4 +1,4 @@
-package com.daluwi.sc_news.features.patches.data.source.remote
+package com.daluwi.sc_news.features.patches.data.source.remote.all
 
 data class PatchApiObject(
     val sourceUrl: String,

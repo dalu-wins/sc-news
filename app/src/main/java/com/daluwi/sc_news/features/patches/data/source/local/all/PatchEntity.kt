@@ -1,4 +1,4 @@
-package com.daluwi.sc_news.features.patches.data.source.local
+package com.daluwi.sc_news.features.patches.data.source.local.all
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -1,4 +1,4 @@
-package com.daluwi.sc_news.features.patches.data.source.remote
+package com.daluwi.sc_news.features.patches.data.source.remote.all
 
 import com.daluwi.sc_news.features.patches.domain.models.Channel
 import com.daluwi.sc_news.features.patches.domain.models.Patch

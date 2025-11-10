@@ -4,9 +4,12 @@ import android.app.Application
 import androidx.room.Room
 import com.daluwi.sc_news.core.connectivity.NetworkChecker
 import com.daluwi.sc_news.core.connectivity.NetworkCheckerImpl
+import com.daluwi.sc_news.features.patches.data.repository.PatchNotesRepositoryImpl
 import com.daluwi.sc_news.features.patches.data.repository.PatchRepositoryImpl
-import com.daluwi.sc_news.features.patches.data.source.local.PatchDatabase
-import com.daluwi.sc_news.features.patches.data.source.remote.PatchApi
+import com.daluwi.sc_news.features.patches.data.source.local.all.PatchDatabase
+import com.daluwi.sc_news.features.patches.data.source.remote.all.PatchApi
+import com.daluwi.sc_news.features.patches.data.source.remote.notes.PatchNotesApi
+import com.daluwi.sc_news.features.patches.domain.repository.PatchNotesRepository
 import com.daluwi.sc_news.features.patches.domain.repository.PatchRepository
 import com.daluwi.sc_news.features.patches.domain.use_case.GetLocalPatches
 import com.daluwi.sc_news.features.patches.domain.use_case.GetRemotePatches
@@ -45,12 +48,26 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun providePatchNotesApi(): PatchNotesApi {
+        return PatchNotesApi()
+    }
+
+    @Provides
+    @Singleton
     fun providePatchRepository(
         db: PatchDatabase,
         api: PatchApi,
         networkChecker: NetworkChecker
     ): PatchRepository {
         return PatchRepositoryImpl(db, api, networkChecker)
+    }
+
+    @Provides
+    @Singleton
+    fun providePatchNotesRepository(
+        api: PatchNotesApi,
+    ): PatchNotesRepository {
+        return PatchNotesRepositoryImpl(api)
     }
 
     @Provides

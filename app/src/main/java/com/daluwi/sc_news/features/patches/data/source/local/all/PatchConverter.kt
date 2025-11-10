@@ -1,4 +1,4 @@
-package com.daluwi.sc_news.features.patches.data.source.local
+package com.daluwi.sc_news.features.patches.data.source.local.all
 
 import androidx.room.TypeConverter
 import com.daluwi.sc_news.features.patches.domain.models.Channel
