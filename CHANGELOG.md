@@ -1,3 +1,17 @@
+# [0.4.0](https://github.com/dalu-wins/sc-news/compare/v0.3.6...v0.4.0) (2026-07-14)
+
+
+### Bug Fixes
+
+* changes ui variables ([7de4929](https://github.com/dalu-wins/sc-news/commit/7de4929f835a803643bcf7f1806cf348c42b17b3))
+* remove notes feature, as it is not ready to be implemented ([9766603](https://github.com/dalu-wins/sc-news/commit/97666038e72ca25e2cc427a604e2f7ae47a0478a))
+* ui rework ([970be25](https://github.com/dalu-wins/sc-news/commit/970be25d31c1920639e5cbfc5a6d49a9098ebee1))
+
+
+### Features
+
+* added fetch patch notes backend ([bd0c4de](https://github.com/dalu-wins/sc-news/commit/bd0c4de9c4c54486ea93bef189719baa88ff78c9))
+
 ## [0.3.6](https://github.com/dalu-wins/sc-news/compare/v0.3.5...v0.3.6) (2025-11-08)
 
 
