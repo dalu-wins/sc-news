@@ -1,10 +1,14 @@
 package com.daluwi.sc_news.features.patches.presentation.components
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.daluwi.sc_news.R
@@ -16,17 +20,25 @@ import com.daluwi.sc_news.features.patches.presentation.PatchEvent
 
 fun LazyListScope.pinnedSection(
     patches: List<Patch>,
-    onEvent: (PatchEvent) -> Unit
+    onEvent: (PatchEvent) -> Unit,
+    isBuildVisible: Boolean,
 ) {
     item {
-        Text(
-            text = UiText.StringResource(R.string.pinned_section).asString(),
-            modifier = Modifier.padding(
-                vertical = Dimensions.VERTICAL_PADDING.dp,
-                horizontal = Dimensions.HORIZONTAL_PADDING.dp
-            ),
-            style = MaterialTheme.typography.titleMedium,
-        )
+        Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
+            Text(
+                text = UiText.StringResource(R.string.pinned_section).asString(),
+                modifier = Modifier.padding(
+                    vertical = Dimensions.VERTICAL_PADDING.dp,
+                    horizontal = Dimensions.HORIZONTAL_PADDING.dp
+                ),
+                style = MaterialTheme.typography.titleMedium,
+            )
+            TextButton(onClick = { onEvent(PatchEvent.TogglePinnedBuildVisibility) }) {
+                Text("Build #")
+            }
+
+        }
+
     }
 
     if (patches.isEmpty()) {
@@ -50,6 +62,7 @@ fun LazyListScope.pinnedSection(
                 patch = patch,
                 onEvent = onEvent,
                 shape = shape,
+                showBuild = isBuildVisible
             )
         }
 

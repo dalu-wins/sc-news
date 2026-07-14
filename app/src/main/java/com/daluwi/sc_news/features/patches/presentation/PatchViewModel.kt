@@ -12,6 +12,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.time.Duration.Companion.milliseconds
@@ -49,6 +50,14 @@ class PatchViewModel @Inject constructor(
                 viewModelScope.launch {
                     errorChannel.send(PatchEvent.Error(event.message))
                 }
+            }
+
+            is PatchEvent.TogglePinnedBuildVisibility -> {
+                _state.update { it.copy(isPinnedBuildVisible = !it.isPinnedBuildVisible) }
+            }
+
+            is PatchEvent.ToggleOtherBuildVisibility -> {
+                _state.update { it.copy(isOtherBuildVisible = !it.isOtherBuildVisible) }
             }
         }
     }

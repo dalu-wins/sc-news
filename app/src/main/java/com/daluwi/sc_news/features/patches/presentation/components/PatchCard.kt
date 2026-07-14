@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
@@ -28,7 +29,7 @@ import com.daluwi.sc_news.features.patches.presentation.PatchEvent
 
 // TODO fix variables...
 private const val WAVE_BADGE_HORIZONTAL_PADDING: Int = 12
-private const val WAVE_BADGE_VERTICAL_PADDING: Int = 4
+private const val WAVE_BADGE_VERTICAL_PADDING: Int = 8
 private const val WAVE_BADGE_FONT_SIZE: Int = 14
 private const val WAVE_BADGE_BACKGROUND_ALPHA: Float = 0.1f
 
@@ -37,6 +38,7 @@ fun PatchCard(
     patch: Patch,
     onEvent: (PatchEvent) -> Unit,
     shape: RoundedCornerShape,
+    showBuild: Boolean
 ) {
     val uriHandler = LocalUriHandler.current
 
@@ -50,8 +52,8 @@ fun PatchCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
-                    start = Shapes.Card.HORIZONTAL_PADDING.dp,
-                    end = Shapes.Card.HORIZONTAL_PADDING.dp,
+                    start = Shapes.Card.VERTICAL_PADDING.dp,
+                    end = Shapes.Card.VERTICAL_PADDING.dp,
                     top = Shapes.Card.VERTICAL_PADDING.dp,
                     bottom = Shapes.Card.VERTICAL_PADDING.dp
                 ),
@@ -68,99 +70,200 @@ fun PatchCard(
                 Channel.Unknown -> "Unknown"
             }
 
-            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-
-                Text(
-                    "${patch.version.major}.${patch.version.minor}.${patch.version.patch}",
-                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
-                )
-
-                var buildText = patch.build
-                if (buildText.isEmpty()) buildText = "not found"
-                Text(
-                    "build: $buildText",
-                    style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Light)
-                )
-
-            }
-
             Row(
-                horizontalArrangement = Arrangement.spacedBy(4.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(4.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.width(80.dp)
+                ) {
 
-                if (patch.channel is Channel.PTU) {
+                    if (showBuild) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .background(
+                                    color = MaterialTheme.colorScheme.tertiary.copy(alpha = WAVE_BADGE_BACKGROUND_ALPHA),
+                                    shape = Shapes.Badge.Top
+                                )
+                                .padding(
+                                    horizontal = 10.dp,
+                                    vertical = 4.dp
+                                ),
+                            contentAlignment = Alignment.Center
+                        ) {
 
-                    Box(
-                        modifier = Modifier
-                            .background(
-                                color = MaterialTheme.colorScheme.tertiary.copy(alpha = WAVE_BADGE_BACKGROUND_ALPHA),
-                                shape = Shapes.Badge.Left
+                            Text(
+                                "${patch.version.major}.${patch.version.minor}.${patch.version.patch}",
+                                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
                             )
-                            .padding(
-                                horizontal = WAVE_BADGE_HORIZONTAL_PADDING.dp,
-                                vertical = WAVE_BADGE_VERTICAL_PADDING.dp
-                            ),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = channelName,
-                            color = MaterialTheme.colorScheme.tertiary,
-                            fontSize = WAVE_BADGE_FONT_SIZE.sp
-                        )
-                    }
-
-                    val waveText = when (patch.channel.wave) {
-                        Wave.One -> StringResource(R.string.ptu_wave_1).asString()
-                        Wave.Two -> StringResource(R.string.ptu_wave_2).asString()
-                        Wave.Three -> StringResource(R.string.ptu_wave_3).asString()
-                        Wave.Four -> StringResource(R.string.ptu_wave_4).asString()
-                        Wave.AllBackers -> StringResource(R.string.ptu_all_backers)
-                            .asString()
-
-                        Wave.Unknown -> "Unknown"
-                    }
-
-                    Box(
-                        modifier = Modifier
-                            .background(
-                                color = MaterialTheme.colorScheme.tertiary.copy(alpha = WAVE_BADGE_BACKGROUND_ALPHA),
-                                shape = Shapes.Badge.Right
+                        }
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .background(
+                                    color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.3f),
+                                    shape = Shapes.Badge.Bottom
+                                )
+                                .padding(
+                                    horizontal = WAVE_BADGE_HORIZONTAL_PADDING.dp,
+                                    vertical = 0.dp
+                                ),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            var buildText = patch.build
+                            if (buildText.isEmpty()) buildText = "not found"
+                            Text(
+                                buildText,
+                                style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Light)
                             )
-                            .padding(
-                                horizontal = WAVE_BADGE_HORIZONTAL_PADDING.dp,
-                                vertical = WAVE_BADGE_VERTICAL_PADDING.dp
-                            ),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = waveText,
-                            color = MaterialTheme.colorScheme.secondary,
-                            fontSize = WAVE_BADGE_FONT_SIZE.sp
-                        )
-                    }
-                } else {
-                    Box(
-                        modifier = Modifier
-                            .background(
-                                color = MaterialTheme.colorScheme.tertiary.copy(alpha = WAVE_BADGE_BACKGROUND_ALPHA),
-                                shape = Shapes.Badge.Single
+                        }
+                    } else {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .background(
+                                    color = MaterialTheme.colorScheme.tertiary.copy(alpha = WAVE_BADGE_BACKGROUND_ALPHA),
+                                    shape = Shapes.Badge.Single
+                                )
+                                .padding(
+                                    horizontal = 10.dp,
+                                    vertical = 10.dp
+                                ),
+                            contentAlignment = Alignment.Center
+                        ) {
+
+                            Text(
+                                "${patch.version.major}.${patch.version.minor}.${patch.version.patch}",
+                                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
                             )
-                            .padding(
-                                horizontal = WAVE_BADGE_HORIZONTAL_PADDING.dp,
-                                vertical = WAVE_BADGE_VERTICAL_PADDING.dp
-                            ),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = channelName,
-                            color = MaterialTheme.colorScheme.tertiary,
-                            fontSize = WAVE_BADGE_FONT_SIZE.sp
-                        )
+                        }
                     }
+
+
                 }
-                
+
+                Column {
+                    Text(
+                        text = channelName,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer,
+                        fontSize = WAVE_BADGE_FONT_SIZE.sp,
+                        style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
+                    )
+
+                    val secondaryText: String = "open to " + when (patch.channel) {
+                        is Channel.PTU -> {
+                            when (patch.channel.wave) {
+                                Wave.One -> StringResource(R.string.ptu_wave_1).asString()
+                                Wave.Two -> StringResource(R.string.ptu_wave_2).asString()
+                                Wave.Three -> StringResource(R.string.ptu_wave_3).asString()
+                                Wave.Four -> StringResource(R.string.ptu_wave_4).asString()
+                                Wave.AllBackers -> StringResource(R.string.ptu_all_backers)
+                                    .asString()
+
+                                Wave.Unknown -> "Unknown"
+                            }
+
+                        }
+
+                        is Channel.EPTU -> "Evocati"
+
+                        Channel.Hotfix -> "All"
+                        Channel.Live -> "All"
+                        Channel.Preview -> "Unknown"
+                        Channel.Unknown -> "Unknown"
+                    }
+                    Text(
+                        text = secondaryText,
+                        color = MaterialTheme.colorScheme.secondary,
+                        fontSize = 12.sp
+                    )
+
+                }
+
+
             }
+
+
+//            Row(
+//                horizontalArrangement = Arrangement.spacedBy(4.dp),
+//                verticalAlignment = Alignment.CenterVertically
+//            ) {
+//
+//                if (patch.channel is Channel.PTU) {
+//
+//                    Box(
+//                        modifier = Modifier
+//                            .background(
+//                                color = MaterialTheme.colorScheme.tertiary.copy(alpha = WAVE_BADGE_BACKGROUND_ALPHA),
+//                                shape = Shapes.Badge.Left
+//                            )
+//                            .padding(
+//                                horizontal = WAVE_BADGE_HORIZONTAL_PADDING.dp,
+//                                vertical = WAVE_BADGE_VERTICAL_PADDING.dp
+//                            ),
+//                        contentAlignment = Alignment.Center
+//                    ) {
+//                        Text(
+//                            text = channelName,
+//                            color = MaterialTheme.colorScheme.tertiary,
+//                            fontSize = WAVE_BADGE_FONT_SIZE.sp
+//                        )
+//                    }
+//
+//                    val waveText = when (patch.channel.wave) {
+//                        Wave.One -> StringResource(R.string.ptu_wave_1).asString()
+//                        Wave.Two -> StringResource(R.string.ptu_wave_2).asString()
+//                        Wave.Three -> StringResource(R.string.ptu_wave_3).asString()
+//                        Wave.Four -> StringResource(R.string.ptu_wave_4).asString()
+//                        Wave.AllBackers -> StringResource(R.string.ptu_all_backers)
+//                            .asString()
+//
+//                        Wave.Unknown -> "Unknown"
+//                    }
+//
+//                    Box(
+//                        modifier = Modifier
+//                            .background(
+//                                color = MaterialTheme.colorScheme.tertiary.copy(alpha = WAVE_BADGE_BACKGROUND_ALPHA),
+//                                shape = Shapes.Badge.Right
+//                            )
+//                            .padding(
+//                                horizontal = WAVE_BADGE_HORIZONTAL_PADDING.dp,
+//                                vertical = WAVE_BADGE_VERTICAL_PADDING.dp
+//                            ),
+//                        contentAlignment = Alignment.Center
+//                    ) {
+//                        Text(
+//                            text = waveText,
+//                            color = MaterialTheme.colorScheme.secondary,
+//                            fontSize = WAVE_BADGE_FONT_SIZE.sp
+//                        )
+//                    }
+//                } else {
+//                    Box(
+//                        modifier = Modifier
+//                            .background(
+//                                color = MaterialTheme.colorScheme.tertiary.copy(alpha = WAVE_BADGE_BACKGROUND_ALPHA),
+//                                shape = Shapes.Badge.Single
+//                            )
+//                            .padding(
+//                                horizontal = WAVE_BADGE_HORIZONTAL_PADDING.dp,
+//                                vertical = WAVE_BADGE_VERTICAL_PADDING.dp
+//                            ),
+//                        contentAlignment = Alignment.Center
+//                    ) {
+//                        Text(
+//                            text = channelName,
+//                            color = MaterialTheme.colorScheme.tertiary,
+//                            fontSize = WAVE_BADGE_FONT_SIZE.sp
+//                        )
+//                    }
+//                }
+//
+//            }
 
         }
     }

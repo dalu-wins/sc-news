@@ -4,5 +4,5 @@ object Dimensions {
     const val HORIZONTAL_PADDING: Int = 12
     const val VERTICAL_PADDING: Int = 12
 
-    const val LIST_ITEM_SPACING: Int = 6
+    const val LIST_ITEM_SPACING: Int = 4
 }

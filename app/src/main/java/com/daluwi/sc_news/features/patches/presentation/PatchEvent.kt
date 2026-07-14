@@ -7,4 +7,6 @@ sealed class PatchEvent {
     object Refresh : PatchEvent()
     data class VisitThread(val uriHandler: UriHandler, val threadUrl: String) : PatchEvent()
     data class Error(val message: UiText) : PatchEvent()
+    object TogglePinnedBuildVisibility : PatchEvent()
+    object ToggleOtherBuildVisibility : PatchEvent()
 }
