@@ -28,7 +28,35 @@ object Shapes {
             bottomEnd = CORNER_RADIUS_BIG.dp
         )
 
+
         val Single = RoundedCornerShape(size = CORNER_RADIUS_BIG.dp)
+    }
+
+    object Version {
+
+        private const val CORNER_RADIUS_BIG: Int = 20
+        private const val CORNER_RADIUS_SMALL: Int = 4
+
+        val TopLeft = RoundedCornerShape(
+            topStart = CORNER_RADIUS_BIG.dp,
+            topEnd = CORNER_RADIUS_SMALL.dp,
+            bottomStart = CORNER_RADIUS_SMALL.dp,
+            bottomEnd = CORNER_RADIUS_SMALL.dp
+        )
+
+        val Middle = RoundedCornerShape(
+            topStart = CORNER_RADIUS_SMALL.dp,
+            topEnd = CORNER_RADIUS_SMALL.dp,
+            bottomStart = CORNER_RADIUS_SMALL.dp,
+            bottomEnd = CORNER_RADIUS_SMALL.dp
+        )
+
+        val BottomLeft = RoundedCornerShape(
+            topStart = CORNER_RADIUS_SMALL.dp,
+            topEnd = CORNER_RADIUS_SMALL.dp,
+            bottomStart = CORNER_RADIUS_BIG.dp,
+            bottomEnd = CORNER_RADIUS_SMALL.dp
+        )
     }
 
     object Badge {

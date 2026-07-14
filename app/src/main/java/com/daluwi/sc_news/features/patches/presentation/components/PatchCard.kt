@@ -4,8 +4,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,12 +19,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.daluwi.sc_news.R
-import com.daluwi.sc_news.core.theme.Shapes
 import com.daluwi.sc_news.core.theme.UiText.StringResource
 import com.daluwi.sc_news.features.patches.domain.models.Channel
 import com.daluwi.sc_news.features.patches.domain.models.Patch
@@ -33,18 +37,23 @@ private const val WAVE_BADGE_VERTICAL_PADDING: Int = 8
 private const val WAVE_BADGE_FONT_SIZE: Int = 14
 private const val WAVE_BADGE_BACKGROUND_ALPHA: Float = 0.1f
 
+private const val VERSION_PADDING: Int = 0
+
 @Composable
 fun PatchCard(
     patch: Patch,
     onEvent: (PatchEvent) -> Unit,
     shape: RoundedCornerShape,
+    versionShape: RoundedCornerShape,
     showBuild: Boolean
 ) {
     val uriHandler = LocalUriHandler.current
 
     Card(
         modifier = Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .height(IntrinsicSize.Max)
+            .clip(shape),
         shape = shape,
         onClick = { onEvent(PatchEvent.VisitThread(uriHandler, patch.sourceUrl)) },
     ) {
@@ -52,10 +61,10 @@ fun PatchCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
-                    start = Shapes.Card.VERTICAL_PADDING.dp,
-                    end = Shapes.Card.VERTICAL_PADDING.dp,
-                    top = Shapes.Card.VERTICAL_PADDING.dp,
-                    bottom = Shapes.Card.VERTICAL_PADDING.dp
+                    start = VERSION_PADDING.dp,
+                    end = VERSION_PADDING.dp,
+                    top = VERSION_PADDING.dp,
+                    bottom = VERSION_PADDING.dp
                 ),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
@@ -72,21 +81,24 @@ fun PatchCard(
 
             Row(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Column(
-                    verticalArrangement = Arrangement.spacedBy(4.dp),
+                    verticalArrangement = Arrangement.spacedBy(0.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.width(80.dp)
+                    modifier = Modifier
+                        .width(80.dp)
+                        .fillMaxHeight()
                 ) {
+
 
                     if (showBuild) {
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
+                                .weight(1f)
                                 .background(
                                     color = MaterialTheme.colorScheme.tertiary.copy(alpha = WAVE_BADGE_BACKGROUND_ALPHA),
-                                    shape = Shapes.Badge.Top
                                 )
                                 .padding(
                                     horizontal = 10.dp,
@@ -97,7 +109,10 @@ fun PatchCard(
 
                             Text(
                                 "${patch.version.major}.${patch.version.minor}.${patch.version.patch}",
-                                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
+                                style = MaterialTheme.typography.titleMedium.copy(
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 18.sp
+                                )
                             )
                         }
                         Box(
@@ -105,7 +120,6 @@ fun PatchCard(
                                 .fillMaxWidth()
                                 .background(
                                     color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.3f),
-                                    shape = Shapes.Badge.Bottom
                                 )
                                 .padding(
                                     horizontal = WAVE_BADGE_HORIZONTAL_PADDING.dp,
@@ -123,10 +137,9 @@ fun PatchCard(
                     } else {
                         Box(
                             modifier = Modifier
-                                .fillMaxWidth()
+                                .fillMaxSize()
                                 .background(
                                     color = MaterialTheme.colorScheme.tertiary.copy(alpha = WAVE_BADGE_BACKGROUND_ALPHA),
-                                    shape = Shapes.Badge.Single
                                 )
                                 .padding(
                                     horizontal = 10.dp,
@@ -137,15 +150,19 @@ fun PatchCard(
 
                             Text(
                                 "${patch.version.major}.${patch.version.minor}.${patch.version.patch}",
-                                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
+                                style = MaterialTheme.typography.titleMedium.copy(
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 18.sp
+                                )
                             )
                         }
+
                     }
 
 
                 }
 
-                Column {
+                Column(modifier = Modifier.padding(vertical = 8.dp)) {
                     Text(
                         text = channelName,
                         color = MaterialTheme.colorScheme.onSecondaryContainer,
@@ -265,6 +282,10 @@ fun PatchCard(
 //
 //            }
 
+
         }
+
     }
+
+
 }
