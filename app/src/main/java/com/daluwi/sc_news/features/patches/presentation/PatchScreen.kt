@@ -78,6 +78,7 @@ fun PatchScreen(
                 pinnedSection(
                     patches = state.currentPatches,
                     onEvent = { event -> viewModel.onEvent(event) },
+                    isBuildVisible = state.isPinnedBuildVisible,
                 )
 
 
@@ -87,7 +88,8 @@ fun PatchScreen(
 
                 otherSection(
                     patches = state.otherPatches,
-                    onEvent = { event -> viewModel.onEvent(event) }
+                    onEvent = { event -> viewModel.onEvent(event) },
+                    isBuildVisible = state.isOtherBuildVisible,
                 )
 
                 item {

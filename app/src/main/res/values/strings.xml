@@ -8,15 +8,15 @@
     <string name="spectrum_button" translatable="false">Spectrum</string>
     <string name="empty_patch_list">No patch notes found</string>
     <string name="channel_live" translatable="false">Live</string>
-    <string name="channel_eptu" translatable="false">Evocati</string>
-    <string name="channel_ptu" translatable="false">PTU</string>
+    <string name="channel_eptu" translatable="false">Evocati Testing</string>
+    <string name="channel_ptu" translatable="false">Player Test Universe</string>
     <string name="channel_hotfix" translatable="false">Hotfix</string>
     <string name="channel_preview" translatable="false">Preview</string>
     <string name="ptu_wave_1" translatable="false">Wave 1</string>
     <string name="ptu_wave_2" translatable="false">Wave 2</string>
     <string name="ptu_wave_3" translatable="false">Wave 3</string>
     <string name="ptu_wave_4" translatable="false">Wave 4</string>
-    <string name="ptu_all_backers" translatable="false">All Backers</string>
+    <string name="ptu_all_backers" translatable="false">All</string>
     <string name="refresh_fab">Refresh</string>
     <string name="pinned_section">Currently playable</string>
     <string name="settings_section">Settings</string>

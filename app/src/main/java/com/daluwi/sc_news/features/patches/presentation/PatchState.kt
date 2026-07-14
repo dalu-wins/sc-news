@@ -5,5 +5,7 @@ import com.daluwi.sc_news.features.patches.domain.models.Patch
 data class PatchState(
     var isLoading: Boolean = false,
     val currentPatches: List<Patch> = emptyList(),
-    val otherPatches: List<Patch> = emptyList()
+    val otherPatches: List<Patch> = emptyList(),
+    var isPinnedBuildVisible: Boolean = false,
+    val isOtherBuildVisible: Boolean = true
 )

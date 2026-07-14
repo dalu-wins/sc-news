@@ -7,7 +7,7 @@ import androidx.compose.ui.unit.dp
 object Shapes {
     object Card {
         private const val CORNER_RADIUS_BIG: Int = 24
-        private const val CORNER_RADIUS_SMALL: Int = 4
+        private const val CORNER_RADIUS_SMALL: Int = 6
 
         const val HORIZONTAL_PADDING: Int = 24
         const val VERTICAL_PADDING: Int = 16
@@ -32,7 +32,7 @@ object Shapes {
     }
 
     object Badge {
-        private const val CORNER_RADIUS_BIG: Int = 24
+        private const val CORNER_RADIUS_BIG: Int = 16
         private const val CORNER_RADIUS_SMALL: Int = 2
 
         val Single = RoundedCornerShape(size = CORNER_RADIUS_BIG.dp)
@@ -48,6 +48,20 @@ object Shapes {
             topStart = CORNER_RADIUS_SMALL.dp,
             topEnd = CORNER_RADIUS_BIG.dp,
             bottomStart = CORNER_RADIUS_SMALL.dp,
+            bottomEnd = CORNER_RADIUS_BIG.dp
+        )
+
+        val Top = RoundedCornerShape(
+            topStart = CORNER_RADIUS_BIG.dp,
+            topEnd = CORNER_RADIUS_BIG.dp,
+            bottomStart = CORNER_RADIUS_SMALL.dp,
+            bottomEnd = CORNER_RADIUS_SMALL.dp
+        )
+
+        val Bottom = RoundedCornerShape(
+            topStart = CORNER_RADIUS_SMALL.dp,
+            topEnd = CORNER_RADIUS_SMALL.dp,
+            bottomStart = CORNER_RADIUS_BIG.dp,
             bottomEnd = CORNER_RADIUS_BIG.dp
         )
 

@@ -7,7 +7,7 @@ import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 // TODO Let users put their own URL via settings
-private const val BASE_URL = "https://sc-news.api.dalu-wins.de/"
+private const val BASE_URL = "https://sc-news.dalu-wins.de/"
 
 class PatchApi {
 

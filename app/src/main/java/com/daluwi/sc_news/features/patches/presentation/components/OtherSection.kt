@@ -1,5 +1,8 @@
 package com.daluwi.sc_news.features.patches.presentation.components
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -16,17 +19,23 @@ import com.daluwi.sc_news.features.patches.presentation.PatchEvent
 
 fun LazyListScope.otherSection(
     patches: List<Patch>,
-    onEvent: (PatchEvent) -> Unit
+    onEvent: (PatchEvent) -> Unit,
+    isBuildVisible: Boolean
 ) {
     item {
-        Text(
-            text = UiText.StringResource(R.string.other_section).asString(),
-            modifier = Modifier.padding(
-                vertical = Dimensions.VERTICAL_PADDING.dp,
-                horizontal = Dimensions.HORIZONTAL_PADDING.dp
-            ),
-            style = MaterialTheme.typography.titleMedium,
-        )
+        Row(horizontalArrangement = Arrangement.SpaceBetween, modifier = Modifier.fillMaxWidth()) {
+            Text(
+                text = UiText.StringResource(R.string.other_section).asString(),
+                modifier = Modifier.padding(
+                    vertical = Dimensions.VERTICAL_PADDING.dp,
+                    horizontal = Dimensions.HORIZONTAL_PADDING.dp
+                ),
+                style = MaterialTheme.typography.titleMedium,
+            )
+//            TextButton(onClick = { onEvent(PatchEvent.ToggleOtherBuildVisibility) }) {
+//                Text("Build")
+//            }
+        }
     }
 
     if (patches.isEmpty()) {
@@ -48,6 +57,7 @@ fun LazyListScope.otherSection(
                 patch = patch,
                 onEvent = { event: PatchEvent -> onEvent(event) },
                 shape = shape,
+                showBuild = isBuildVisible
             )
         }
 
