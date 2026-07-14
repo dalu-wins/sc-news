@@ -1,4 +1,4 @@
-package com.daluwi.sc_news.features.patches.data.source.remote.notes
+package com.daluwi.sc_news.features.patches.data.source.remote
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit
 // TODO Let users put their own URL via settings
 private const val BASE_URL = "https://sc-news.api.dalu-wins.de/"
 
-class PatchNotesApi {
+class PatchApi {
 
     private val okHttpClient = OkHttpClient.Builder()
         .readTimeout(30, TimeUnit.SECONDS)
@@ -21,14 +21,14 @@ class PatchNotesApi {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    private val service: PatchNotesApiService = retrofit.create(PatchNotesApiService::class.java)
+    private val service: PatchApiService = retrofit.create(PatchApiService::class.java)
 
-    suspend fun getPatchNotes(urlBase64: String): Map<String, String> {
+    suspend fun getPatches(): List<PatchApiObject> {
         try {
-            val response = service.getPatchNotes(urlBase64)
+            val response = service.getPatches()
 
             if (response.status == "success" && response.data != null) {
-                return response.data.notes
+                return response.data.patches
             } else {
                 throw IOException("API returned failure status: ${response.status}")
             }

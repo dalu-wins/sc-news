@@ -1,4 +1,4 @@
-package com.daluwi.sc_news.features.patches.data.source.local.all
+package com.daluwi.sc_news.features.patches.data.source.local
 
 import androidx.room.Dao
 import androidx.room.Delete

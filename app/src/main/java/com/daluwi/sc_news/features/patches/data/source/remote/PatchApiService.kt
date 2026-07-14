@@ -1,4 +1,4 @@
-package com.daluwi.sc_news.features.patches.data.source.remote.all
+package com.daluwi.sc_news.features.patches.data.source.remote
 
 import retrofit2.http.GET
 

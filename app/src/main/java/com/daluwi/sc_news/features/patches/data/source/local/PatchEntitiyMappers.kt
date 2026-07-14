@@ -1,4 +1,4 @@
-package com.daluwi.sc_news.features.patches.data.source.local.all
+package com.daluwi.sc_news.features.patches.data.source.local
 
 import com.daluwi.sc_news.features.patches.domain.models.Patch
 
