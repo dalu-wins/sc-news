@@ -1,6 +1,5 @@
 package com.daluwi.sc_news.features.patches.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.daluwi.sc_news.features.patches.domain.error_handling.Result
@@ -15,6 +14,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.time.Duration.Companion.milliseconds
 
 @HiltViewModel
 class PatchViewModel @Inject constructor(
@@ -98,7 +98,7 @@ class PatchViewModel @Inject constructor(
                 }
             }
 
-            delay(300)
+            delay(300.milliseconds)
 
             _state.value = newState
         }
