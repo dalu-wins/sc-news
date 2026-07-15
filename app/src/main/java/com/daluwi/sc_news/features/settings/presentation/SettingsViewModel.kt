@@ -18,28 +18,48 @@ class SettingsViewModel @Inject constructor(
     val state: State<SettingsState> = _state
 
     init {
-        loadDynamicColor()
+        loadDynamicColorSetting()
+        loadBuildSetting()
     }
 
     fun onEvent(event: SettingsEvent) {
         when (event) {
             is SettingsEvent.UseDynamicColors -> {
-                updateDynamicColor(event.dynamicColors)
+                updateDynamicColorSetting(event.dynamicColors)
+            }
+
+            is SettingsEvent.ShowBuild -> {
+                updateBuildSetting(event.build)
             }
         }
     }
 
-    fun updateDynamicColor(dynamicColor: Boolean) {
+    fun updateDynamicColorSetting(dynamicColor: Boolean) {
         viewModelScope.launch {
             useCases.setDynamicColorUseCase(dynamicColor)
             _state.value = state.value.copy(dynamicColors = dynamicColor)
         }
     }
 
-    fun loadDynamicColor() {
+    fun loadDynamicColorSetting() {
         viewModelScope.launch {
             useCases.getDynamicColorUseCase().collect { dynamicColor ->
                 _state.value = _state.value.copy(dynamicColors = dynamicColor)
+            }
+        }
+    }
+
+    fun updateBuildSetting(build: Boolean) {
+        viewModelScope.launch {
+            useCases.setBuildSettingUseCase(build)
+            _state.value = state.value.copy(build = build)
+        }
+    }
+
+    fun loadBuildSetting() {
+        viewModelScope.launch {
+            useCases.getBuildSettingUseCase().collect { build ->
+                _state.value = _state.value.copy(build = build)
             }
         }
     }

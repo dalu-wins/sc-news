@@ -12,7 +12,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
-import com.daluwi.sc_news.core.theme.Shapes
 
 @Composable
 fun SwitchCard(
@@ -30,16 +29,20 @@ fun SwitchCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
-                    horizontal = Shapes.Card.HORIZONTAL_PADDING.dp,
-                    vertical = Shapes.Card.VERTICAL_PADDING.dp
+                    horizontal = 16.dp,
+                    vertical = 8.dp
                 ),
-            horizontalArrangement = Arrangement.SpaceBetween,
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text(name)
+            Text(
+                text = name,
+                modifier = Modifier.weight(1f)
+            )
             Switch(
                 checked = checked,
-                onCheckedChange = { isSet -> setSwitch(isSet) })
+                onCheckedChange = { isSet -> setSwitch(isSet) }
+            )
         }
     }
 }

@@ -53,20 +53,11 @@ fun LazyListScope.otherSection(
                 else -> Shapes.Card.Middle
             }
 
-            val versionShape = when (index) {
-                0 -> Shapes.Version.TopLeft
-
-                patches.lastIndex -> Shapes.Version.BottomLeft
-
-                else -> Shapes.Version.Middle
-            }
-
             PatchCard(
                 patch = patch,
                 onEvent = { event: PatchEvent -> onEvent(event) },
                 shape = shape,
                 showBuild = isBuildVisible,
-                versionShape = versionShape
             )
         }
 

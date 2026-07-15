@@ -44,7 +44,6 @@ fun PatchCard(
     patch: Patch,
     onEvent: (PatchEvent) -> Unit,
     shape: RoundedCornerShape,
-    versionShape: RoundedCornerShape,
     showBuild: Boolean
 ) {
     val uriHandler = LocalUriHandler.current
@@ -170,7 +169,7 @@ fun PatchCard(
                         style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
                     )
 
-                    val secondaryText: String = "open to " + when (patch.channel) {
+                    val secondaryText: String = "Open to " + when (patch.channel) {
                         is Channel.PTU -> {
                             when (patch.channel.wave) {
                                 Wave.One -> StringResource(R.string.ptu_wave_1).asString()

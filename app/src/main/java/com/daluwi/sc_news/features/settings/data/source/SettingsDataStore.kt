@@ -19,15 +19,25 @@ class SettingsDataStore @Inject constructor(
 
     companion object {
         private val DYNAMIC_COLORS = booleanPreferencesKey("dynamic_colors")
+        private val SHOW_BUILD = booleanPreferencesKey("show_build")
     }
 
     val settingsFlow: Flow<Settings> = context.dataStore.data.map { prefs ->
-        Settings(dynamicColors = prefs[DYNAMIC_COLORS] ?: true)
+        Settings(
+            dynamicColors = prefs[DYNAMIC_COLORS] ?: true,
+            build = prefs[SHOW_BUILD] ?: false
+        )
     }
 
     suspend fun setDynamicColors(enabled: Boolean) {
         context.dataStore.edit { prefs ->
             prefs[DYNAMIC_COLORS] = enabled
+        }
+    }
+
+    suspend fun setBuildSetting(enabled: Boolean) {
+        context.dataStore.edit { prefs ->
+            prefs[SHOW_BUILD] = enabled
         }
     }
 }

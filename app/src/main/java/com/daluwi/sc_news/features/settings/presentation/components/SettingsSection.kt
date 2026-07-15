@@ -1,15 +1,15 @@
 package com.daluwi.sc_news.features.settings.presentation.components
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.daluwi.sc_news.R
 import com.daluwi.sc_news.core.theme.Dimensions
 import com.daluwi.sc_news.core.theme.Shapes
-import com.daluwi.sc_news.core.theme.UiText
 import com.daluwi.sc_news.features.settings.presentation.SettingsEvent
 import com.daluwi.sc_news.features.settings.presentation.SettingsState
 
@@ -19,7 +19,7 @@ fun LazyListScope.settingsSection(
 ) {
     item {
         Text(
-            text = UiText.StringResource(R.string.settings_section).asString(),
+            text = "Theme",
             modifier = Modifier.padding(
                 vertical = Dimensions.VERTICAL_PADDING.dp,
                 horizontal = Dimensions.HORIZONTAL_PADDING.dp
@@ -30,12 +30,47 @@ fun LazyListScope.settingsSection(
 
     item {
         SwitchCard(
-            name = UiText.StringResource(R.string.setting_dynamic_colors).asString(),
+            name = "Dynamic Colors",
             checked = state.dynamicColors,
             setSwitch = { useDynamicColors ->
                 onEvent(
                     SettingsEvent.UseDynamicColors(
                         useDynamicColors
+                    )
+                )
+            },
+            shape = Shapes.Card.Single,
+        )
+    }
+
+    item {
+        Column(
+            modifier = Modifier.padding(
+                vertical = Dimensions.VERTICAL_PADDING.dp,
+                horizontal = Dimensions.HORIZONTAL_PADDING.dp
+            ),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            Text(
+                text = "Startup Behavior",
+                style = MaterialTheme.typography.titleMedium,
+            )
+            Text(
+                text = "Changes in this section will take effect on restart of the app.",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.outline,
+            )
+        }
+
+    }
+
+    item {
+        SwitchCard(
+            name = "Show Build of Current Patches", checked = state.build,
+            setSwitch = { showBuild ->
+                onEvent(
+                    SettingsEvent.ShowBuild(
+                        showBuild
                     )
                 )
             },

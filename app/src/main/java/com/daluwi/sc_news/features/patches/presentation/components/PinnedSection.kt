@@ -56,22 +56,13 @@ fun LazyListScope.pinnedSection(
                 else -> Shapes.Card.Middle
             }
 
-            val versionShape = when (index) {
-                0 -> Shapes.Version.TopLeft
-
-                patches.lastIndex -> Shapes.Version.BottomLeft
-
-                else -> Shapes.Version.Middle
-            }
-
             if (patches.size == 1) shape = Shapes.Card.Single
 
             PatchCard(
                 patch = patch,
                 onEvent = onEvent,
                 shape = shape,
-                showBuild = isBuildVisible,
-                versionShape = versionShape
+                showBuild = isBuildVisible
             )
         }
 
