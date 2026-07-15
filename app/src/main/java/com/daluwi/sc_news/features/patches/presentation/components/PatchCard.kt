@@ -4,8 +4,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,12 +19,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.daluwi.sc_news.R
-import com.daluwi.sc_news.core.theme.Shapes
 import com.daluwi.sc_news.core.theme.UiText.StringResource
 import com.daluwi.sc_news.features.patches.domain.models.Channel
 import com.daluwi.sc_news.features.patches.domain.models.Patch
@@ -33,6 +37,8 @@ private const val WAVE_BADGE_VERTICAL_PADDING: Int = 8
 private const val WAVE_BADGE_FONT_SIZE: Int = 14
 private const val WAVE_BADGE_BACKGROUND_ALPHA: Float = 0.1f
 
+private const val VERSION_PADDING: Int = 0
+
 @Composable
 fun PatchCard(
     patch: Patch,
@@ -44,7 +50,9 @@ fun PatchCard(
 
     Card(
         modifier = Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .height(IntrinsicSize.Max)
+            .clip(shape),
         shape = shape,
         onClick = { onEvent(PatchEvent.VisitThread(uriHandler, patch.sourceUrl)) },
     ) {
@@ -52,10 +60,10 @@ fun PatchCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
-                    start = Shapes.Card.VERTICAL_PADDING.dp,
-                    end = Shapes.Card.VERTICAL_PADDING.dp,
-                    top = Shapes.Card.VERTICAL_PADDING.dp,
-                    bottom = Shapes.Card.VERTICAL_PADDING.dp
+                    start = VERSION_PADDING.dp,
+                    end = VERSION_PADDING.dp,
+                    top = VERSION_PADDING.dp,
+                    bottom = VERSION_PADDING.dp
                 ),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
@@ -72,21 +80,24 @@ fun PatchCard(
 
             Row(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Column(
-                    verticalArrangement = Arrangement.spacedBy(4.dp),
+                    verticalArrangement = Arrangement.spacedBy(0.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.width(80.dp)
+                    modifier = Modifier
+                        .width(80.dp)
+                        .fillMaxHeight()
                 ) {
+
 
                     if (showBuild) {
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
+                                .weight(1f)
                                 .background(
                                     color = MaterialTheme.colorScheme.tertiary.copy(alpha = WAVE_BADGE_BACKGROUND_ALPHA),
-                                    shape = Shapes.Badge.Top
                                 )
                                 .padding(
                                     horizontal = 10.dp,
@@ -97,7 +108,10 @@ fun PatchCard(
 
                             Text(
                                 "${patch.version.major}.${patch.version.minor}.${patch.version.patch}",
-                                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
+                                style = MaterialTheme.typography.titleMedium.copy(
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 18.sp
+                                )
                             )
                         }
                         Box(
@@ -105,7 +119,6 @@ fun PatchCard(
                                 .fillMaxWidth()
                                 .background(
                                     color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.3f),
-                                    shape = Shapes.Badge.Bottom
                                 )
                                 .padding(
                                     horizontal = WAVE_BADGE_HORIZONTAL_PADDING.dp,
@@ -123,10 +136,9 @@ fun PatchCard(
                     } else {
                         Box(
                             modifier = Modifier
-                                .fillMaxWidth()
+                                .fillMaxSize()
                                 .background(
                                     color = MaterialTheme.colorScheme.tertiary.copy(alpha = WAVE_BADGE_BACKGROUND_ALPHA),
-                                    shape = Shapes.Badge.Single
                                 )
                                 .padding(
                                     horizontal = 10.dp,
@@ -137,15 +149,19 @@ fun PatchCard(
 
                             Text(
                                 "${patch.version.major}.${patch.version.minor}.${patch.version.patch}",
-                                style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
+                                style = MaterialTheme.typography.titleMedium.copy(
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 18.sp
+                                )
                             )
                         }
+
                     }
 
 
                 }
 
-                Column {
+                Column(modifier = Modifier.padding(vertical = 8.dp)) {
                     Text(
                         text = channelName,
                         color = MaterialTheme.colorScheme.onSecondaryContainer,
@@ -153,7 +169,8 @@ fun PatchCard(
                         style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
                     )
 
-                    val secondaryText: String = "open to " + when (patch.channel) {
+                    val secondaryText: String = StringResource(R.string.open_to).asString() +
+                            ": " + when (patch.channel) {
                         is Channel.PTU -> {
                             when (patch.channel.wave) {
                                 Wave.One -> StringResource(R.string.ptu_wave_1).asString()
@@ -163,17 +180,17 @@ fun PatchCard(
                                 Wave.AllBackers -> StringResource(R.string.ptu_all_backers)
                                     .asString()
 
-                                Wave.Unknown -> "Unknown"
+                                Wave.Unknown -> StringResource(R.string.unknown).asString()
                             }
 
                         }
 
-                        is Channel.EPTU -> "Evocati"
+                        is Channel.EPTU -> StringResource(R.string.evocati).asString()
 
-                        Channel.Hotfix -> "All"
-                        Channel.Live -> "All"
-                        Channel.Preview -> "Unknown"
-                        Channel.Unknown -> "Unknown"
+                        Channel.Hotfix -> StringResource(R.string.unknown).asString()
+                        Channel.Live -> StringResource(R.string.ptu_all_backers).asString()
+                        Channel.Preview -> StringResource(R.string.unknown).asString()
+                        Channel.Unknown -> StringResource(R.string.unknown).asString()
                     }
                     Text(
                         text = secondaryText,
@@ -186,85 +203,9 @@ fun PatchCard(
 
             }
 
-
-//            Row(
-//                horizontalArrangement = Arrangement.spacedBy(4.dp),
-//                verticalAlignment = Alignment.CenterVertically
-//            ) {
-//
-//                if (patch.channel is Channel.PTU) {
-//
-//                    Box(
-//                        modifier = Modifier
-//                            .background(
-//                                color = MaterialTheme.colorScheme.tertiary.copy(alpha = WAVE_BADGE_BACKGROUND_ALPHA),
-//                                shape = Shapes.Badge.Left
-//                            )
-//                            .padding(
-//                                horizontal = WAVE_BADGE_HORIZONTAL_PADDING.dp,
-//                                vertical = WAVE_BADGE_VERTICAL_PADDING.dp
-//                            ),
-//                        contentAlignment = Alignment.Center
-//                    ) {
-//                        Text(
-//                            text = channelName,
-//                            color = MaterialTheme.colorScheme.tertiary,
-//                            fontSize = WAVE_BADGE_FONT_SIZE.sp
-//                        )
-//                    }
-//
-//                    val waveText = when (patch.channel.wave) {
-//                        Wave.One -> StringResource(R.string.ptu_wave_1).asString()
-//                        Wave.Two -> StringResource(R.string.ptu_wave_2).asString()
-//                        Wave.Three -> StringResource(R.string.ptu_wave_3).asString()
-//                        Wave.Four -> StringResource(R.string.ptu_wave_4).asString()
-//                        Wave.AllBackers -> StringResource(R.string.ptu_all_backers)
-//                            .asString()
-//
-//                        Wave.Unknown -> "Unknown"
-//                    }
-//
-//                    Box(
-//                        modifier = Modifier
-//                            .background(
-//                                color = MaterialTheme.colorScheme.tertiary.copy(alpha = WAVE_BADGE_BACKGROUND_ALPHA),
-//                                shape = Shapes.Badge.Right
-//                            )
-//                            .padding(
-//                                horizontal = WAVE_BADGE_HORIZONTAL_PADDING.dp,
-//                                vertical = WAVE_BADGE_VERTICAL_PADDING.dp
-//                            ),
-//                        contentAlignment = Alignment.Center
-//                    ) {
-//                        Text(
-//                            text = waveText,
-//                            color = MaterialTheme.colorScheme.secondary,
-//                            fontSize = WAVE_BADGE_FONT_SIZE.sp
-//                        )
-//                    }
-//                } else {
-//                    Box(
-//                        modifier = Modifier
-//                            .background(
-//                                color = MaterialTheme.colorScheme.tertiary.copy(alpha = WAVE_BADGE_BACKGROUND_ALPHA),
-//                                shape = Shapes.Badge.Single
-//                            )
-//                            .padding(
-//                                horizontal = WAVE_BADGE_HORIZONTAL_PADDING.dp,
-//                                vertical = WAVE_BADGE_VERTICAL_PADDING.dp
-//                            ),
-//                        contentAlignment = Alignment.Center
-//                    ) {
-//                        Text(
-//                            text = channelName,
-//                            color = MaterialTheme.colorScheme.tertiary,
-//                            fontSize = WAVE_BADGE_FONT_SIZE.sp
-//                        )
-//                    }
-//                }
-//
-//            }
-
         }
+
     }
+
+
 }

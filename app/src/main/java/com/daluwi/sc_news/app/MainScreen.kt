@@ -11,19 +11,22 @@ fun MainScreen(
     viewModel: MainViewModel = hiltViewModel(),
     deactivateSplashScreen: () -> Unit
 ) {
-
     val state = viewModel.state.value
 
     val dynamicColors = state.dynamicColors
+    val themeColor = state.themeColor
 
-    LaunchedEffect(dynamicColors) {
-        if (dynamicColors != null) {
+    LaunchedEffect(dynamicColors, themeColor) {
+        if (dynamicColors != null && themeColor != null) {
             deactivateSplashScreen()
         }
     }
 
-    dynamicColors?.let { dc ->
-        SCNewsTheme(dynamicColor = dc) {
+    if (dynamicColors != null && themeColor != null) {
+        SCNewsTheme(
+            dynamicColor = dynamicColors,
+            themeColor = themeColor
+        ) {
             AppNavigation()
         }
     }

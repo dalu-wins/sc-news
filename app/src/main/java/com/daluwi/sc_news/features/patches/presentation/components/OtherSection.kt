@@ -33,7 +33,7 @@ fun LazyListScope.otherSection(
                 style = MaterialTheme.typography.titleMedium,
             )
 //            TextButton(onClick = { onEvent(PatchEvent.ToggleOtherBuildVisibility) }) {
-//                Text("Build")
+//                Text("Build #")
 //            }
         }
     }
@@ -57,7 +57,7 @@ fun LazyListScope.otherSection(
                 patch = patch,
                 onEvent = { event: PatchEvent -> onEvent(event) },
                 shape = shape,
-                showBuild = isBuildVisible
+                showBuild = isBuildVisible,
             )
         }
 

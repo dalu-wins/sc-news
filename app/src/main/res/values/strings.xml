@@ -16,7 +16,7 @@
     <string name="ptu_wave_2" translatable="false">Wave 2</string>
     <string name="ptu_wave_3" translatable="false">Wave 3</string>
     <string name="ptu_wave_4" translatable="false">Wave 4</string>
-    <string name="ptu_all_backers" translatable="false">All</string>
+    <string name="ptu_all_backers">All</string>
     <string name="refresh_fab">Refresh</string>
     <string name="pinned_section">Currently playable</string>
     <string name="settings_section">Settings</string>
@@ -26,5 +26,13 @@
     <string name="branding_notice">Star Citizen®, Roberts Space Industries® and Cloud Imperium ® are registered trademarks of Cloud Imperium Rights LLC</string>
     <string name="nav_patch_notes">Patch Notes</string>
     <string name="nav_settings">Settings</string>
+    <string name="theme" translatable="false">Theme</string>
+    <string name="theme_color">Fallback Color</string>
+    <string name="startup_behavior">Startup Behavior</string>
+    <string name="build_setting">Build-Number for Current Patches</string>
+    <string name="startup_changes_message">Changes in this section will take effect on restart of the app.</string>
+    <string name="open_to">Open to</string>
+    <string name="unknown">Unknown</string>
+    <string name="evocati" translatable="false">Evocati</string>
 
 </resources>

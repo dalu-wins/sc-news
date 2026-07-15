@@ -1,6 +1,5 @@
 package com.daluwi.sc_news.app
 
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -26,10 +25,11 @@ class MainViewModel @Inject constructor(
             repository.getSettings().collect { settings ->
                 _state.value = state.value.copy(
                     isLoadingSettings = false,
-                    dynamicColors = settings.dynamicColors
+                    dynamicColors = settings.dynamicColors,
+                    themeColor = settings.colorHex
                 )
             }
-            Log.d("UPDATED DC", state.value.dynamicColors.toString())
+
         }
     }
 

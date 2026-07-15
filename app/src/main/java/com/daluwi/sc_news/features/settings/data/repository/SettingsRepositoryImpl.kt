@@ -14,6 +14,8 @@ class SettingsRepositoryImpl @Inject constructor(
 
     override suspend fun setSettings(settings: Settings) {
         dataStore.setDynamicColors(settings.dynamicColors)
+        dataStore.setThemeColors(settings.colorHex)
+        dataStore.setBuildSetting(settings.build)
     }
 
     override fun getSettings(): Flow<Settings> {

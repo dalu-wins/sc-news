@@ -8,15 +8,15 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.core.graphics.toColorInt
 import com.materialkolor.dynamicColorScheme
-
-private val RSI_BLUE = Color(red = 10, green = 29, blue = 41)
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun SCNewsTheme(
     dynamicColor: Boolean,
     darkTheme: Boolean = isSystemInDarkTheme(),
+    themeColor: String,
     content: @Composable () -> Unit
 ) {
     val context = LocalContext.current
@@ -26,10 +26,10 @@ fun SCNewsTheme(
 
     val colorScheme =
         if (darkTheme) dynamicColorScheme(
-            primary = RSI_BLUE,
+            primary = Color(themeColor.toColorInt()),
             isDark = true
         ) else dynamicColorScheme(
-            primary = RSI_BLUE,
+            primary = Color(themeColor.toColorInt()),
             isDark = false
         )
 
