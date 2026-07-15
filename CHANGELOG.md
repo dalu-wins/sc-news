@@ -1,3 +1,17 @@
+# [0.5.0](https://github.com/dalu-wins/sc-news/compare/v0.4.0...v0.5.0) (2026-07-15)
+
+
+### Bug Fixes
+
+* add german translations ([dada219](https://github.com/dalu-wins/sc-news/commit/dada219370ddd641848e0841bcb30166dfd47bb8))
+* ui rework (2) ([0254558](https://github.com/dalu-wins/sc-news/commit/0254558cc9be4cb693fe36d47a9041a97443e9fb))
+
+
+### Features
+
+* added color selection when opting out of dynamic colors ([d3af79d](https://github.com/dalu-wins/sc-news/commit/d3af79de3de0efe2c0983b774f141b8ca150eb09))
+* added startup behaviour setting for showing build numbers for current patches ([478eb30](https://github.com/dalu-wins/sc-news/commit/478eb308faeb14a3950a022c5f1f19c01a4aecbe))
+
 # [0.4.0](https://github.com/dalu-wins/sc-news/compare/v0.3.6...v0.4.0) (2026-07-14)
 
 
