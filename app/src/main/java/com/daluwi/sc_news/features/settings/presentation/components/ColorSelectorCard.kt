@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -39,7 +40,7 @@ fun ColorSelectorCard(
                 .fillMaxWidth()
                 .padding(
                     horizontal = 16.dp,
-                    vertical = 8.dp
+                    vertical = 16.dp
                 ),
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalAlignment = Alignment.CenterVertically,
@@ -47,7 +48,7 @@ fun ColorSelectorCard(
             Text(
                 text = name,
                 modifier = Modifier.weight(1f),
-                style = MaterialTheme.typography.bodyLarge
+                style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Medium)
             )
 
             Row(

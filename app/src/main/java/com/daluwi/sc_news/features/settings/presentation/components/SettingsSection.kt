@@ -6,10 +6,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.daluwi.sc_news.R
 import com.daluwi.sc_news.core.theme.BLUE
 import com.daluwi.sc_news.core.theme.Dimensions
 import com.daluwi.sc_news.core.theme.GOLD
 import com.daluwi.sc_news.core.theme.Shapes
+import com.daluwi.sc_news.core.theme.UiText
 import com.daluwi.sc_news.features.settings.presentation.SettingsEvent
 import com.daluwi.sc_news.features.settings.presentation.SettingsState
 
@@ -19,7 +21,7 @@ fun LazyListScope.settingsSection(
 ) {
     item {
         Text(
-            text = "Theme",
+            text = UiText.StringResource(R.string.theme).asString(),
             modifier = Modifier.padding(
                 vertical = Dimensions.VERTICAL_PADDING.dp,
                 horizontal = Dimensions.HORIZONTAL_PADDING.dp
@@ -30,7 +32,7 @@ fun LazyListScope.settingsSection(
 
     item {
         SwitchCard(
-            name = "Dynamic Colors",
+            name = UiText.StringResource(R.string.setting_dynamic_colors).asString(),
             checked = state.dynamicColors,
             setSwitch = { useDynamicColors ->
                 onEvent(
@@ -46,7 +48,7 @@ fun LazyListScope.settingsSection(
     item {
         val colors = listOf(BLUE, GOLD)
         ColorSelectorCard(
-            name = "Theme Color",
+            name = UiText.StringResource(R.string.theme_color).asString(),
             selectedColor = state.color,
             availableColors = colors,
             onColorSelected = { color -> onEvent(SettingsEvent.SetCustomColor(color)) },
@@ -55,21 +57,20 @@ fun LazyListScope.settingsSection(
     }
 
     item {
-
         Text(
-            text = "Startup Behavior",
+            text = UiText.StringResource(R.string.startup_behavior).asString(),
             style = MaterialTheme.typography.titleMedium,
             modifier = Modifier.padding(
                 vertical = Dimensions.VERTICAL_PADDING.dp,
                 horizontal = Dimensions.HORIZONTAL_PADDING.dp
             ),
         )
-
     }
 
     item {
         SwitchCard(
-            name = "Show Build of Current Patches", checked = state.build,
+            name = UiText.StringResource(R.string.build_setting).asString(),
+            checked = state.build,
             setSwitch = { showBuild ->
                 onEvent(
                     SettingsEvent.ShowBuild(
@@ -83,7 +84,7 @@ fun LazyListScope.settingsSection(
 
     item {
         Text(
-            text = "Changes in this section will take effect on restart of the app.",
+            text = UiText.StringResource(R.string.startup_changes_message).asString(),
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.outline,
             modifier = Modifier.padding(
