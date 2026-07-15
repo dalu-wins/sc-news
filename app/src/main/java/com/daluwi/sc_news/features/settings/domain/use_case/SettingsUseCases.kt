@@ -5,4 +5,6 @@ data class SettingsUseCases(
     val getDynamicColorUseCase: GetDynamicColorUseCase,
     val setBuildSettingUseCase: SetBuildSettingUseCase,
     val getBuildSettingUseCase: GetBuildSettingUseCase,
+    val setThemeColorUseCase: SetThemeColorUseCase,
+    val getThemeColorUseCase: GetThemeColorUseCase,
 )

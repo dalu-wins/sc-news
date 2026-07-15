@@ -16,8 +16,10 @@ import com.daluwi.sc_news.features.settings.data.source.SettingsDataStore
 import com.daluwi.sc_news.features.settings.domain.repository.SettingsRepository
 import com.daluwi.sc_news.features.settings.domain.use_case.GetBuildSettingUseCase
 import com.daluwi.sc_news.features.settings.domain.use_case.GetDynamicColorUseCase
+import com.daluwi.sc_news.features.settings.domain.use_case.GetThemeColorUseCase
 import com.daluwi.sc_news.features.settings.domain.use_case.SetBuildSettingUseCase
 import com.daluwi.sc_news.features.settings.domain.use_case.SetDynamicColorUseCase
+import com.daluwi.sc_news.features.settings.domain.use_case.SetThemeColorUseCase
 import com.daluwi.sc_news.features.settings.domain.use_case.SettingsUseCases
 import dagger.Module
 import dagger.Provides
@@ -83,7 +85,9 @@ object AppModule {
             setDynamicColorUseCase = SetDynamicColorUseCase(repository),
             getDynamicColorUseCase = GetDynamicColorUseCase(repository),
             setBuildSettingUseCase = SetBuildSettingUseCase(repository),
-            getBuildSettingUseCase = GetBuildSettingUseCase(repository)
+            getBuildSettingUseCase = GetBuildSettingUseCase(repository),
+            setThemeColorUseCase = SetThemeColorUseCase(repository),
+            getThemeColorUseCase = GetThemeColorUseCase(repository),
         )
     }
 

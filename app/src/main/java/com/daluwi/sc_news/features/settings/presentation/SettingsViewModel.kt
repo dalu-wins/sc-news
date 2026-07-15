@@ -2,9 +2,12 @@ package com.daluwi.sc_news.features.settings.presentation
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.graphics.Color
+import androidx.core.graphics.toColorInt
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.daluwi.sc_news.features.settings.domain.use_case.SettingsUseCases
+import com.materialkolor.ktx.toHex
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,6 +23,7 @@ class SettingsViewModel @Inject constructor(
     init {
         loadDynamicColorSetting()
         loadBuildSetting()
+        loadThemeColor()
     }
 
     fun onEvent(event: SettingsEvent) {
@@ -30,6 +34,10 @@ class SettingsViewModel @Inject constructor(
 
             is SettingsEvent.ShowBuild -> {
                 updateBuildSetting(event.build)
+            }
+
+            is SettingsEvent.SetCustomColor -> {
+                updateThemeColor(event.color)
             }
         }
     }
@@ -45,6 +53,21 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch {
             useCases.getDynamicColorUseCase().collect { dynamicColor ->
                 _state.value = _state.value.copy(dynamicColors = dynamicColor)
+            }
+        }
+    }
+
+    fun updateThemeColor(color: Color) {
+        viewModelScope.launch {
+            useCases.setThemeColorUseCase(color.toHex())
+            _state.value = state.value.copy(color = color)
+        }
+    }
+
+    fun loadThemeColor() {
+        viewModelScope.launch {
+            useCases.getThemeColorUseCase().collect { colorHex ->
+                _state.value = _state.value.copy(color = Color(colorHex.toColorInt()))
             }
         }
     }
