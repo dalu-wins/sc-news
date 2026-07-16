@@ -1,11 +1,11 @@
 package com.daluwi.sc_news.features.settings.data.source
 
 import android.content.Context
-import androidx.compose.ui.graphics.Color
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.daluwi.sc_news.core.theme.BLUE
 import com.daluwi.sc_news.features.settings.domain.models.Settings
 import com.materialkolor.ktx.toHex
 import kotlinx.coroutines.flow.Flow
@@ -30,7 +30,7 @@ class SettingsDataStore @Inject constructor(
         Settings(
             dynamicColors = prefs[DYNAMIC_COLORS] ?: true,
             build = prefs[SHOW_BUILD] ?: false,
-            colorHex = prefs[THEME_COLOR] ?: Color.Blue.toHex()
+            colorHex = prefs[THEME_COLOR] ?: BLUE.toHex()
         )
     }
 
