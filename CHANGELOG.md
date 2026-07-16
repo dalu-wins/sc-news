@@ -1,3 +1,10 @@
+## [0.5.1](https://github.com/dalu-wins/sc-news/compare/v0.5.0...v0.5.1) (2026-07-16)
+
+
+### Bug Fixes
+
+* set correct blue tone as default fallback color closes [#63](https://github.com/dalu-wins/sc-news/issues/63) ([12970f9](https://github.com/dalu-wins/sc-news/commit/12970f9699e5d13cb3ebb765e67728e683c87227))
+
 # [0.5.0](https://github.com/dalu-wins/sc-news/compare/v0.4.0...v0.5.0) (2026-07-15)
 
 
